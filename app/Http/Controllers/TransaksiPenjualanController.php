@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class TransaksiPenjualanController extends Controller
+
+
 {
     // Menampilkan daftar transaksi penjualan
     public function index()

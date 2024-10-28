@@ -9,16 +9,5 @@ class Product extends Model
 {
     use HasFactory;
 
-    /**
-     * fillable
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'image',
-        'title',
-        'description',
-        'price',
-        'stock',
-    ];
+    protected $fillable = ['name', 'price']; // sesuaikan dengan kolom di tabel 'products'
 }
