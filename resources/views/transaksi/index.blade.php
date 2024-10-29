@@ -43,7 +43,7 @@
                         <tr>
                             <td>{{ $t->id }}</td>
                             <td>{{ $t->tanggal_transaksi }}</td>
-                            <td>Rp{{ number_format($t->total, 0, ',', '.') }}</td>
+                            <td>Rp{{ number_format($t->total, 2, ',', '.') }}</td>
                             <td>
                                 <a href="{{ route('transaksi.show', $t->id) }}" class="btn btn-info btn-sm">Lihat</a>
                                 <a href="{{ route('transaksi.edit', $t->id) }}" class="btn btn-warning btn-sm">Edit</a>

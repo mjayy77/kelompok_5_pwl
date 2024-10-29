@@ -2,74 +2,145 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Supplier;
 use Illuminate\Http\Request;
+use App\Models\Supplier;
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class SupplierController extends Controller
 {
-    // Menampilkan daftar supplier
-    public function index()
+    /**
+     * index
+     * 
+     * @return void
+     */
+
+    public function index() : View
     {
-        $suppliers = Supplier::all();
+        //get all suppliers
+        // $suppliers = Supplier::select("suppliers.*")
+        //                     ->latest()
+        //                     ->paginate(10);
+
+        $supplier = new Supplier;
+        $suppliers = $supplier->get_supplier()
+                            ->latest()
+                            ->paginate(10);
+        //render view with suppliers
         return view('suppliers.index', compact('suppliers'));
     }
 
-    // Menampilkan form untuk membuat supplier baru
-    public function create()
+    /**
+     * create
+     * 
+     * @return View
+     */
+
+    public function create():View
     {
-        return view('suppliers.create');
+        $supplier = new Supplier;
+        
+        $data['suppliers'] = $supplier->get_supplier()->get();
+ 
+        return view('suppliers.create', compact('data'));
     }
 
-    // Menyimpan supplier baru
-    public function store(Request $request)
+    /**
+     * store
+     * 
+     * @param mixed $request
+     * @return RedirectResponse
+     */
+
+    public function store(Request $request):RedirectResponse
     {
-        $request->validate([
-            'nama' => 'required|string|max:255',
-            'email' => 'nullable|email|unique:suppliers,email',
-            'telepon' => 'nullable|string|max:20',
-            'alamat' => 'nullable|string',
+        //validate from
+        $validatedData = $request->validate([
+            'nama_supplier'         => 'required|min:5',
+            'alamat_supplier'       => 'required|min:5',
+            'pic_supplier'          => 'required|min:5',
+            'no_hp_pic_supplier'    => 'required|min:1|max:30',
         ]);
 
-        Supplier::create($request->all());
-
-        return redirect()->route('suppliers.index')
-                         ->with('success', 'Supplier berhasil ditambahkan.');
+            //create Product
+        Supplier::create([
+            'nama_supplier'         => $request->nama_supplier,
+            'alamat_supplier'       => $request->alamat_supplier,
+            'pic_supplier'          => $request->pic_supplier,
+            'no_hp_pic_supplier'    => $request->no_hp_pic_supplier,
+        ]);
+ 
+        return redirect()->route('suppliers.index')->with(['success' => 'Data berhasil disimpan!']);
     }
 
-    // Menampilkan detail supplier
-    public function show(Supplier $supplier)
+    /**
+     * Show
+     *
+     * @param string $id
+     * @return View
+     */
+    public function show(string $id): View 
     {
+        // Get supplier data by ID
+        $supplier = Supplier::findOrFail($id);
+
         return view('suppliers.show', compact('supplier'));
     }
 
-    // Menampilkan form untuk mengedit supplier
-    public function edit(Supplier $supplier)
+    /**
+     * edit
+     * 
+     * @param mixed $id
+     * @return View
+     */
+
+    public function edit(string $id): View
     {
+        //get product by id
+        $supplier = Supplier::findOrFail($id);
+
         return view('suppliers.edit', compact('supplier'));
     }
-
-    // Memperbarui data supplier
-    public function update(Request $request, Supplier $supplier)
+ 
+    /**
+      * update
+      * 
+      * @param mixed $request
+      * @param mixed $id
+      * @return RedirectResponse
+      */
+ 
+    public function update(Request $request, $id): RedirectResponse
     {
+        //validate form
         $request->validate([
-            'nama' => 'required|string|max:255',
-            'email' => 'nullable|email|unique:suppliers,email,' . $supplier->id,
-            'telepon' => 'nullable|string|max:20',
-            'alamat' => 'nullable|string',
+            'nama_supplier'         => 'required|min:5',
+            'alamat_supplier'       => 'required|min:5',
+            'pic_supplier'          => 'required|min:5',
+            'no_hp_pic_supplier'    => 'required|min:10|max:13',
         ]);
+ 
+        //get product by id
+        $supplier = Supplier::findOrFail($id);
+ 
+            $supplier->update([
+                'nama_supplier'         => $request->nama_supplier,
+                'alamat_supplier'       => $request->alamat_supplier,
+                'pic_supplier'          => $request->pic_supplier,
+                'no_hp_pic_supplier'    => $request->no_hp_pic_supplier,
+            ]);
 
-        $supplier->update($request->all());
+            return redirect()->route('suppliers.index')->with(['success' => 'Data Berhasil Diubah!']);
+        }
 
-        return redirect()->route('suppliers.index')
-                         ->with('success', 'Supplier berhasil diperbarui.');
-    }
 
-    // Menghapus supplier
+    /**
+     * 
+     */
     public function destroy(Supplier $supplier)
     {
         $supplier->delete();
 
-        return redirect()->route('suppliers.index')
-                         ->with('success', 'Supplier berhasil dihapus.');
+        return redirect()->route('suppliers.show')->with('success', 'Supplier deleted successfully.');
     }
 }

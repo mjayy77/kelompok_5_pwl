@@ -9,6 +9,18 @@ class Supplier extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nama', 'alamat', 'telepon', 'email'];
-}
+    protected $table = 'suppliers'; 
+    
+    protected $fillable = [
+        'nama_supplier',
+        'alamat_supplier',
+        'pic_supplier',
+        'no_hp_pic_supplier',
+    ]; 
 
+    
+    public function get_supplier()
+    {
+        return $this->select("suppliers.*"); 
+    }
+}

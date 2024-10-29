@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 /* Reset beberapa gaya dasar */
 * {
@@ -97,3 +98,8 @@ tr:hover {
         font-size: 0.85em;
     }
 }
+=======
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+>>>>>>> cee96777ac577bf48a14c60ba5ad9537f0901cf5

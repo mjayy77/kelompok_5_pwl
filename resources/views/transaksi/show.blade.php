@@ -52,9 +52,9 @@
                         @foreach($transaksi->details as $detail)
                         <tr>
                             <td>{{ $detail->product->title }}</td>
-                            <td>{{ $detail->product->price }}</td>
+                            <td>Rp{{ number_format($detail->product->price, 2, ',', '.') }}</td>
                             <td>{{ $detail->jumlah_pembelian }}</td>
-                            <td>{{ $detail->jumlah_pembelian*$detail->product->price }}</td>
+                            <td>Rp{{ number_format($detail->jumlah_pembelian*$detail->product->price, 2, ',', '.') }}</td>
                         </tr>
                         @endforeach
                     </tbody>
