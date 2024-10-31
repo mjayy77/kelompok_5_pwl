@@ -164,4 +164,16 @@ class TransaksiPenjualanController extends Controller
             'details.*.jumlah_pembelian' => 'required|integer|min:1',
         ]);
     }
+
+    public function sendEmail($to, $id)
+     {
+         $transaksi = TransaksiPenjualan::with('details.product')->findOrFail($id);
+ 
+         Mail::send('transaksi.show', ['transaksi' => $transaksi], function ($message) use ($to, $transaksi) {
+             $message->to($to)
+                     ->subject("Detail Transaksi: {$transaksi->id} - Total Tagihan Rp " . number_format($transaksi->total, 2, ',', '.'));
+         });
+ 
+         return response()->json(['message' => 'Email sent successfully!']);
+     }
 }
