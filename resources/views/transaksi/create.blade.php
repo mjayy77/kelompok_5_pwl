@@ -73,6 +73,11 @@
                     <form action="{{ route('transaksi.store') }}" method="POST">
         @csrf
         <div class="form-group">
+            <label for="email">Email Pembeli</label>
+            <input type="email" name="email" class="form-control" id="email" required>
+        </div>
+    
+        <div class="form-group">
             <label for="tanggal">Tanggal Transaksi</label>
             <input type="date" name="tanggal_transaksi" class="form-control" id="tanggal" required>
         </div>

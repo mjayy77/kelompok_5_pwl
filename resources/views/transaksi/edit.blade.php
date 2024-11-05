@@ -73,6 +73,11 @@
                     <div class="card-body">
                     <form action="{{ route('transaksi.update', $transaksi->id) }}" method="POST">
         @csrf
+        <div class="form-group">
+            <label for="email">Email Pembeli</label>
+            <input type="email" name="email" class="form-control" id="email" required>
+        </div>
+
         @method('PUT')
         <div class="form-group">
             <label for="tanggal">Tanggal Transaksi</label>

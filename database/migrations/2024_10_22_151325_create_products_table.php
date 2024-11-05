@@ -40,6 +40,7 @@ return new class extends Migration
 
         Schema::create('transaksi_penjualans', function (Blueprint $table) {
             $table->id();
+            
             $table->string('nama_kasir');
             $table->timestamp('tanggal_transaksi'); 
             $table->timestamps(); 
@@ -48,7 +49,7 @@ return new class extends Migration
         Schema::create('detail_transaksi_penjualans', function (Blueprint $table) {
             $table->id();
             $table->integer('jumlah_pembelian');
-            $table->foreignId('transaksi_penjualan_id')->nullable()->index();
+            $table->foreignId('transaksi_penjualan_id')->constrained('transaksi_penjualans')->nullable()->index();
             $table->foreignId('product_id')->nullable()->index();
             $table->timestamps();
         });

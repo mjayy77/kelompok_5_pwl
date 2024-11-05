@@ -12,3 +12,4 @@ Route::get('/', function () {
 Route::resource('/products', \App\Http\Controllers\ProductController::class);
 Route::resource('/suppliers', SupplierController::class);
 Route::resource('/transaksi', TransaksiPenjualanController::class);
+Route::get('/send-email/{to}/{id}', [TransaksiPenjualanController::class, 'sendEmail']);
