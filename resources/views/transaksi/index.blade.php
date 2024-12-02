@@ -11,13 +11,15 @@
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,200;0,300;0,400;1,300;1,500;1,800;1,900&family=Poppins:wght@400;600&family=Rancho&display=swap');
-        body {
+
+    body {
           font-family: "Poppins", sans-serif;
           background: #DDDDDD;
         }
 
-        .navbar {
-            padding: 10px 5%;
+    /* Navbar */
+    .navbar {
+            padding: 5px 5%;
             position: fixed;
             top: 0;
             left: 0;
@@ -31,19 +33,13 @@
             transition: all ease-in-out 0.3s;
         }
 
-        .navbar-brand {
-            font-weight: bold;
-            font-size: 2rem;
-            color: black;
-        }
-
-        .navbar-brand span {
-            color: #FF6347;
+        .bg-transparent {
+            transition: all ease-in-out 0.3s;
         }
 
         .navbar-brand:hover {
-        color: black; 
-        text-decoration: none;
+            color: black;
+            text-decoration: none;
         }
 
         .nav-link {
@@ -58,48 +54,114 @@
             font-size: 1.2rem;
         }
 
+        #btn {
+            background: #10375C;
+            color: white;
+            transition: 0.1s;
+        }
+
+        #btn:hover {
+            background: #FF6347;
+        }
+
+        #show {
+            background: #394867;
+            color: white;
+            transition: 0.2s;
+        }
+
+        #show:hover {
+            background: #212A3E;
+        }
+
+        /* Sidebar */
+        .sidebar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 250px;
+                background-color: #FF6347;
+                height: 100%;
+                padding-top: 20px;
+                z-index: 1000;
+            }
+
+            .sidebar .navbar-brand {
+                font-weight: bold;
+                font-size: 1.8rem;
+                padding: 15px 20px;
+                color: black;
+                text-align: center;
+            }
+
+            .sidebar .navbar-brand span {
+                color: white;
+            }
+
+            .sidebar .navbar-brand:hover {
+                color: white;
+            }
+
+            .sidebar .nav-link {
+                display: block;
+                padding: 10px 20px;
+                font-size: 1.2rem;
+                color: white;
+            }
+
+            .sidebar .nav-link:hover {
+                background-color: #ffffff;
+                color: black;
+            }
+
         #hero {
         background-image: url(storage/public/images/transaksi.jpg);
         height: 60vh;
         width: 100%;
         background-size: cover;
         background-position: top 25% right 0;
-        padding: 0 80px;
+        padding: 0 330px;
         justify-content: center;
         align-items: center; 
         display: flex;
         flex-direction: column;
         color: black;
         text-align: center;
-        }
+    }
 
-        #hero::before {
-        content: "";
+    #hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height:60vh;
+    background-color: rgba(0, 0, 0, 0.2); 
+    z-index: 1; 
+
+    }
+
+    #hero h3 {
         position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        height:60vh;
-        background-color: rgba(0, 0, 0, 0.2); 
-        z-index: 1; 
-
+        font-size: 80px;
+        z-index: 2; /* Agar teks muncul di atas overlay */
+    }
+   
+    .transaksi-list {
+            padding: 0 80px 0 300px;
         }
 
-        #hero h3 {
-            position: relative;
-            font-size: 80px;
-            z-index: 2; /* Agar teks muncul di atas overlay */
+    #list-transaksi {
+            padding: 0 0 0 200px;
         }
 
+    #title {
+        color: white;
+        font-weight: 700;
+        padding-left: 250px
+    }
 
-        .transaksi-list {
-            padding: 10px 7%;
-
-        }
-
-
-        
     #card {
         background-color: white;
     }
@@ -137,8 +199,8 @@
     }
 
     #btn{
-        color: black;
-        border: 2px solid black;
+        color: white;
+        border: none;
         margin-bottom: 10px;
         transition: 0.2s;
     }
@@ -164,8 +226,6 @@
         color: white;
         background-color: #6A5ACD;
         transition: 0.2s;
-        margin-left:10px;
-        transition: 0.2s;
         border:none;
     }
 
@@ -179,50 +239,51 @@
         color: white;
         background: #FF7F50;
         transition: 0.2s;
-        margin-left: 10px;
         border:none;
         
     }
 
     #hapus:hover {
         border: none;
-        background:  #FF6347;
+        background: #FF6347;
     }
 
-
-    
 </style>
+<body>
 
+<!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-transparent" id="navbar">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">5th <span>Apparrel</span></a>
-           
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link " aria-current="page" href="{{ route('products.index') }}">Product</a>
+                        <a class="nav-link" href="#">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('suppliers.index') }}">Supplier</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('transaksi.index') }}">Transaksi</a>
+                        <a class="nav-link" href="#">Sign Up</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <section id="hero">
-        <h3 id="typing" style="color:white; font-weight: 700;"></h3>
-    </section>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <a class="navbar-brand" href="{{ route('products.index') }}">5th <span>Apparel</span></a>
+        <a class="nav-link" href="{{ route('products.index') }}">Product</a>
+        <a class="nav-link" href="{{ route('suppliers.index') }}">Supplier</a>
+        <a class="nav-link" href="{{ route('transaksi.index') }}">Transaksi</a>
+    </div>
 
+    <section id="hero">
+        <h3 id="title">TRANSAKSI</h3>
+    </section>
 
     <section class="transaksi-list">
         <h3>Our Transaction List</h3>
     </section>
 
-<div class="container mt-5">
+<div class="container mt-5" id="list-transaksi">
     <div class="row">
         <div class="col-md-12">
             <div class="card border-0 shadow-sm rounded">
@@ -267,8 +328,8 @@
 
 <script>
        document.addEventListener("DOMContentLoaded", function () {
-        new TypeIt("#typing", {
-        strings: ["TRANSAKSI"],
+        new TypeIt("#title", {
+        strings: [],
         speed: 50
         }).go();
 
