@@ -42,6 +42,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama_kasir');
             $table->timestamp('tanggal_transaksi'); 
+            $table->string('email_pembeli');
             $table->timestamps(); 
         });
 
