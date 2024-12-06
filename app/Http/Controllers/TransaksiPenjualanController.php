@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\StatusPemesanan;
 use Illuminate\Http\Request;
 use App\Models\TransaksiPenjualan;
 use App\Models\DetailTransaksiPenjualan;
@@ -32,7 +33,8 @@ class TransaksiPenjualanController extends Controller
     public function create(): View
     {
         $products = Product::all();
-        return view('transaksi.create', compact('products'));
+        $statuses = StatusPemesanan::all();
+        return view('transaksi.create', compact('products', 'statuses'));
     }
 
     /**
@@ -46,26 +48,31 @@ class TransaksiPenjualanController extends Controller
         $validatedData = $this->validateTransaction($request);
 
         $transaksi = DB::transaction(function () use ($validatedData) {
+            // Create transaction with status_pemesanan_id
             $transaksi = TransaksiPenjualan::create([
                 'tanggal_transaksi' => $validatedData['tanggal_transaksi'],
                 'email_pembeli' => $validatedData['email_pembeli'],
                 'total' => 0,
+                'status_pemesanan_id' => $validatedData['status_pemesanan_id'],  // Added status_pemesanan_id here
             ]);
 
             $total = 0;
 
-            foreach ($validatedData['details'] as $detail) {
-                $product = Product::findOrFail($detail['product_id']);
-                $subtotal = $product->price * $detail['jumlah_pembelian'];
-                $total += $subtotal;
+            // Create details for the transaction
+                foreach ($validatedData['details'] as $detail) {
+                    $product = Product::findOrFail($detail['product_id']);
+                    $finalPrice = $product->price * (1 - ($product->discount / 100));
+                    $subtotal = $finalPrice * $detail['jumlah_pembelian'];
+                    $total += $subtotal;
 
-                DetailTransaksiPenjualan::create([
-                    'transaksi_penjualan_id' => $transaksi->id,
-                    'product_id' => $detail['product_id'],
-                    'harga' => $product->price,
-                    'jumlah_pembelian' => $detail['jumlah_pembelian'],
-                ]);
-            }
+                    DetailTransaksiPenjualan::create([
+                        'transaksi_penjualan_id' => $transaksi->id,
+                        'product_id' => $detail['product_id'],
+                        'harga' => $finalPrice,
+                        'jumlah_pembelian' => $detail['jumlah_pembelian'],
+                    ]);
+                }
+
             $transaksi->update(['total' => $total]);
 
             return $transaksi;
@@ -99,7 +106,8 @@ class TransaksiPenjualanController extends Controller
     {
         $transaksi->load('details');
         $products = Product::all();
-        return view('transaksi.edit', compact('transaksi', 'products'));
+        $statuses = StatusPemesanan::all();
+        return view('transaksi.edit', compact('transaksi', 'products', 'statuses'));
     }
 
     /**
@@ -116,7 +124,8 @@ class TransaksiPenjualanController extends Controller
         DB::transaction(function () use ($validatedData, $transaksi) {
             $transaksi->update([
                 'tanggal_transaksi' => $validatedData['tanggal_transaksi'],
-                'email_pembeli' => $validatedData['email_pembeli'], // Update email if it has changed
+                'email_pembeli' => $validatedData['email_pembeli'],
+                'status_pemesanan_id' => $validatedData['status_pemesanan_id'],  // Added status_pemesanan_id here
             ]);
 
             // Clear existing details
@@ -127,16 +136,18 @@ class TransaksiPenjualanController extends Controller
             // Add updated details
             foreach ($validatedData['details'] as $detail) {
                 $product = Product::findOrFail($detail['product_id']);
-                $subtotal = $product->price * $detail['jumlah_pembelian'];
+                $finalPrice = $product->price * (1 - ($product->discount / 100));
+                $subtotal = $finalPrice * $detail['jumlah_pembelian'];
                 $total += $subtotal;
 
                 DetailTransaksiPenjualan::create([
                     'transaksi_penjualan_id' => $transaksi->id,
                     'product_id' => $detail['product_id'],
-                    'harga' => $product->price,
+                    'harga' => $finalPrice,
                     'jumlah_pembelian' => $detail['jumlah_pembelian'],
                 ]);
             }
+
             $transaksi->update(['total' => $total]);
         });
 
@@ -170,6 +181,7 @@ class TransaksiPenjualanController extends Controller
         return $request->validate([
             'tanggal_transaksi' => 'required|date',
             'email_pembeli' => 'required|min:1',
+            'status_pemesanan_id' => 'required|integer|exists:status_pemesanan,id',
             'details.*.product_id' => 'required|integer|exists:products,id',
             'details.*.jumlah_pembelian' => 'required|integer|min:1',
         ]);

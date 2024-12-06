@@ -243,30 +243,30 @@
         <a class="nav-link" href="{{ route('products.index') }}">Product</a>
         <a class="nav-link" href="{{ route('suppliers.index') }}">Supplier</a>
         <a class="nav-link" href="{{ route('transaksi.index') }}">Transaksi</a>
+        <a class="nav-link" href="{{ route('categories.index') }}">Category</a>
     </div>
 
     
     <!-- Hero Section -->
     <section id="hero">
-        <h2 id="typing1">Temukan Gaya Unikmu di <br>Setiap Langkah!</h2>
-        <p id="typing2">Jaket dan T-Shirt Berkualitas untuk Setiap Kesempatan!</p>
+        <h2 id="typing1">DASHBOARD</h2>
+        <p id="typing2">5th Apparel</p>
     </section>
     
     <!-- Product List Section -->
     <section id="list-product">
         <div class="container">
             <div class="d-flex justify-content-between align-items-center mb-3">
-                <h1 class="our-product">Our Products</h1>
+                <h1 class="our-product">Your Products</h1>
                 <a href="{{ route('products.create') }}" class="btn btn-md font-semibold" id="btn">ADD PRODUCT</a>
             </div>
             <div class="product-grid" >
-                <!-- Looping Products -->
-                @foreach($products as $product)
+                @forelse($products as $product)
                 <div class="product-card" data-aos="flip-left" data-aos-duration="1000" onclick="window.location='{{ route('products.show', $product->id) }}'" style="cursor: pointer;">
                     <img src="{{ 'storage/public/images/' . $product->image }}" alt="Product Image">
                     <div class="card-body">
                         <h3 class="product-title">{{ $product->title }}</h3>
-                        <p class="product-price">Rp. {{ number_format($product->price, 2, ',', '.') }}</p>
+                        <p class="product-price">Rp. {{ number_format($product->final_price, 2, ',', '.') }}</p>
                         <p class="product-stock">Stock: {{ $product->stock }}</p>
 
                         <form onsubmit="return confirm('Apakah Anda Yakin ?')" action="{{ route('products.destroy', $product->id) }}" method="POST">
@@ -277,7 +277,11 @@
                         </form>
                     </div>
                 </div>
-                @endforeach
+                @empty
+                    <div class="alert alert-danger">
+                        Data Produk belum Tersedia.
+                    </div>
+                @endforelse
             </div>
         </div>
     </section>

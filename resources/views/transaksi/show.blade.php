@@ -32,7 +32,8 @@
         </div>
         <div class="card-body">
             <p><strong>Tanggal:</strong> {{ $transaksi->tanggal_transaksi }}</p>
-            <p><strong>Total:</strong> {{ number_format($transaksi->total, 0, ',', '.') }}</p>
+            <p><strong>Total:</strong> {{ number_format($transaksi->total, 2, ',', '.') }}</p>
+            <p><strong>Status Pemesanan:</strong> {{ $transaksi->statusPemesanan->status_pemesanan ?? 'N/A' }}</p>
 
             <h4>Detail Produk</h4>
             @if($transaksi->details->isEmpty())
@@ -43,6 +44,7 @@
                         <tr>
                             <th>Produk</th>
                             <th>Harga</th>
+                            <th>Diskon</th>
                             <th>Jumlah Pembelian</th>
                             <th>Subtotal</th>
                         </tr>
@@ -53,8 +55,9 @@
                         <tr>
                             <td>{{ $detail->product->title }}</td>
                             <td>Rp{{ number_format($detail->product->price, 2, ',', '.') }}</td>
+                            <td>{{ $detail->product->discount }}%</td>
                             <td>{{ $detail->jumlah_pembelian }}</td>
-                            <td>Rp{{ number_format($detail->jumlah_pembelian*$detail->product->price, 2, ',', '.') }}</td>
+                            <td>Rp{{ number_format($detail->jumlah_pembelian*$detail->harga, 2, ',', '.') }}</td>
                         </tr>
                         @endforeach
                     </tbody>

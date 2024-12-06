@@ -55,6 +55,16 @@
             border: none;
         }
 
+        .btn-warning {
+            font-weight: bold;
+            padding: 10px 20px;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            border: none;
+        }
+
         .form-group {
             margin-bottom: 15px;
         }
@@ -87,8 +97,8 @@
                         </div>
 
                         <div class="form-group mb-3">
-                            <label for="product_category_id">Product Category</label>
-                            <select class="form-control" id="product_category_id" name="product_category_id">
+                            <label for="category_product_id">Product Category</label>
+                            <select class="form-control" id="category_product_id" name="category_product_id">
                                 <option value="">-- Select Category Product --</option>
                                 @foreach ($data['categories'] as $c)
                                     <option value="{{$c->id}}">{{$c->product_category_name}}</option>
@@ -123,7 +133,15 @@
                                     <input type="number" class="form-control @error('price') is-invalid @enderror" name="price" placeholder="Masukan Price Product">
                                 </div>
                             </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label class="font-weight-bold">DISCOUNT</label>
+                                    <input type="number" class="form-control @error('price') is-invalid @enderror" name="discount" placeholder="Masukan Discount Product">
+                                </div>
+                            </div>
 
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
                                     <label class="font-weight-bold">STOCK</label>
@@ -142,7 +160,6 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
     <script src="https://unpkg.com/typeit@8.7.1/dist/index.umd.js"></script>
 
     <script>
@@ -156,20 +173,7 @@
        
 
          });
-         CKEDITOR.replace('description');
-
-         function resetform() {
-            // Reset semua nilai input dalam form
-            document.getElementById('productsForm').reset();
-
-            // Reset CKEditor content to empty
-            for (var instance in CKEDITOR.instances) {
-                CKEDITOR.instances[instance].setData(''); // Kosongkan CKEditor
-            }
-
-            // Reset preview gambar menjadi kosong
-            document.getElementById('imagePreview').src = "mug.jpeg";
-        }
+         
         document.addEventListener("DOMContentLoaded", function () {
             new TypeIt(".title", {
             strings: [],

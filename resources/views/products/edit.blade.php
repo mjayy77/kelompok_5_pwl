@@ -60,6 +60,16 @@
             color: #FFFFFF;
             border: none;
         }
+
+        .btn-warning {
+            font-weight: bold;
+            padding: 10px 20px;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            border: none;
+        }
     </style>
 </head>
 <body>
@@ -90,12 +100,12 @@
                         </div>
 
                         <div class="form-group mb-3">
-                            <label for="product_category_id">Product Category</label>
-                            <select class="form-control" name="product_category_id" id="product_category_id">
+                            <label for="category_product_id">Product Category</label>
+                            <select class="form-control" name="category_product_id" id="category_product_id">
                                 <option value="">-- Select Category Product --</option>
                                 @foreach ($data['categories'] as $category)
                                     <option value="{{ $category->id }}" 
-                                    @if(old('product_category_id', $data['product']->product_category_id) == $category->id) selected @endif>
+                                    @if(old('category_product_id', $data['product']->category_product_id) == $category->id) selected @endif>
                                     {{ $category->product_category_name }}</option>
                                 @endforeach
                             </select>
@@ -130,6 +140,15 @@
                                     <input type="number" class="form-control @error('price') is-invalid @enderror" name="price" value="{{ old('price', $data['product']->price) }}" placeholder="Masukkan Harga Product">
                                 </div>
                             </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label class="font-weight-bold">DISCOUNT</label>
+                                    <input type="number" class="form-control @error('discount') is-invalid @enderror" name="discount" value="{{ old('discount', $data['product']->discount) }}" placeholder="Masukkan Discount Product">
+                                </div>
+                            </div>
+
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
                                     <label class="font-weight-bold">STOCK</label>
@@ -148,7 +167,6 @@
 
     <script src="https://unpkg.com/typeit@8.7.1/dist/index.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
     
     <script>
           document.addEventListener("DOMContentLoaded", function () {
@@ -158,10 +176,7 @@
         }).go();
 
     });
-        // CKEditor Initialization
-        CKEDITOR.replace('descriptionEditor');
 
-        // Preview Image Saat User Memilih Gambar Baru
         document.getElementById('imageInput').addEventListener('change', function(event) {
             const [file] = event.target.files;
             if (file) {
@@ -169,10 +184,8 @@
             }
         });
 
-        // Function untuk Reset Form dan Mengembalikan Isi Default
         function resetform() {
             document.getElementById('productsForm').reset();
-            CKEDITOR.instances['descriptionEditor'].setData('{{ old('description', $data['product']->description) }}');
             document.getElementById('imagePreview').src = "{{ $data['product']->image ? asset('storage/' . $data['product']->image) : 'mug.jpeg' }}";
         }
     </script>

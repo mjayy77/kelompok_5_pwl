@@ -4,12 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Data Suppliers</title>
+    <title>Data Kategori</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,200;0,300;0,400;1,300;1,500;1,800;1,900&family=Poppins:wght@400;600&family=Rancho&display=swap');
-
+    @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,200;0,300;0,400;1,300;1,500;1,800;1,900&family=Poppins:wght@400;600&family=Rancho&display=swap');
     body {
           font-family: "Poppins", sans-serif;
           background: #DDDDDD;
@@ -113,7 +112,7 @@
             }
 
         #hero {
-        background-image: url(storage/public/images/suppliers.jpg);
+        background-image: url(storage/public/images/categories.jpg);
         height: 60vh;
         width: 100%;
         background-size: cover;
@@ -146,11 +145,11 @@
         z-index: 2; /* Agar teks muncul di atas overlay */
     }
    
-    .supplier-list {
+    .category-list {
             padding: 0 80px 0 300px;
         }
 
-    #list-supplier {
+    #list-category {
             padding: 0 0 0 200px;
         }
 
@@ -277,40 +276,36 @@
     </div>
 
     <section id="hero">
-        <h3 id="title">SUPPLIERS</h3>
+        <h3 id="title">CATEGORIES</h3>
     </section>
 
-    <section class="supplier-list">
-        <h3>Your Suppliers List</h3>
+    <section class="category-list">
+        <h3>Your Category List</h3>
     </section>
 
-    <div class="container mt-5" id="list-supplier">
+    <div class="container mt-5" id="list-category">
         <div class="row">
             <div class="col-md-12">
                 <div class="card border-0 shadow-sm rounded" id="card">
                     <div class="card-body" >
-                        <a href="{{ route('suppliers.create') }}" class="btn btn-md  mb-3" id="btn">ADD SUPPLIER</a>
+                        <a href="{{ route('categories.create') }}" class="btn btn-md  mb-3" id="btn">ADD CATEGORY</a>
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th scope="col" id="type1">Nama Supplier</th>
-                                    <th scope="col" id="type2">Alamat Supplier</th>
-                                    <th scope="col" id="type3">PIC SUPPLIER</th>
-                                    <th scope="col" id="type4">No Hp PIC Supplier</th>
+                                    <th scope="col" id="type1">ID</th>
+                                    <th scope="col" id="type2">Nama Kategori</th>
                                     <th scope="col" style="width: 20%" id="type5">ACTIONS</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($suppliers as $supplier)
+                                @forelse ($categories as $category)
                                 <tr>
-                                    <td>{{ $supplier->nama_supplier }}</td>
-                                    <td>{{ $supplier->alamat_supplier }}</td> 
-                                    <td>{{ $supplier->pic_supplier }}</td>
-                                    <td>{{ $supplier->no_hp_pic_supplier }}</td>
+                                    <td>{{ $category->id }}</td>
+                                    <td>{{ $category->product_category_name }}</td>
                                     <td class="text-center">
                                         <form>
-                                            <a href="{{ route('suppliers.show', $supplier->id) }}" class="btn btn-sm btn-dark" id="show">SHOW</a><br>
-                                            <a href="{{ route('suppliers.edit', $supplier->id) }}" class="btn btn-sm btn-primary" id="edit">EDIT</a><br>
+                                            <a href="{{ route('categories.show', $category->id) }}" class="btn btn-sm btn-dark" id="show">SHOW</a><br>
+                                            <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-sm btn-primary" id="edit">EDIT</a><br>
                                             @csrf
                                             <button type="submit" class="btn btn-sm" id="hapus">HAPUS</button>
                                         </form>
@@ -318,12 +313,12 @@
                                 </tr>
                             @empty
                                 <div class="alert alert-danger">
-                                    Data Suppliers belum Tersedia.
+                                    Data Kategori belum Tersedia.
                                 </div>
                                 @endforelse
                             </tbody>
                         </table>
-                        {{ $suppliers->links() }}
+                        {{ $categories->links() }}
                     </div>
                 </div>
             </div>
@@ -351,22 +346,7 @@
         speed: 200
         }).go();
 
-        new TypeIt("#type3", {
-        strings: [],
-        speed: 200
-
-        }).go();
-        new TypeIt("#type4", {
-        strings: [],
-        speed: 200
-        }).go();
-
-        new TypeIt("#type5", {
-        strings: [],
-        speed: 200
-        }).go();
-
-        new TypeIt(".supplier-list", {
+        new TypeIt(".category-list", {
         strings: [],
         speed: 50
         }).go();

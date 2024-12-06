@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +9,10 @@
 </head>
 
 <style>
+    body {
+        background: #f8f9fa;
+    }
+
     .judul h1 {
         text-align: center;
         font-weight: 700;
@@ -58,7 +61,7 @@
     }
 
 </style>
-<body style="background:  #f8f9fa">
+<body>
 
     <section class="judul">
             <h1>Add Transaction</h1>
@@ -85,6 +88,16 @@
                     @enderror
         </div>
 
+        <div class="form-group mb-3">
+            <label>Status Pemesanan</label>
+            <select name="status_pemesanan_id" class="form-control" required>
+                <option value="">Pilih Status Pemesanan</option>
+                    @foreach($statuses as $status)
+                        <option value="{{ $status->id }}">{{ $status->status_pemesanan }}</option>
+                    @endforeach
+            </select>
+        </div>
+
         <h4 class="mt-4">Detail Transaksi</h4>
         <div id="details">
             <div class="detail-item mb-3">
@@ -103,13 +116,13 @@
                         <input type="number" name="details[0][jumlah_pembelian]" class="form-control" min="1" required>
                     </div>
                     <div class="col-1 d-flex align-items-end">
-                        <button type="button" class="btn  remove-detail" id="hapus">Hapus</button>
+                        <button type="button" class="btn remove-detail" id="hapus">Hapus</button>
                     </div>
                 </div>
             </div>
         </div>
-        <button type="button" id="add-detail" class="btn  mt-3">Tambah Detail</button>
-        <button type="submit" id="simpan" class="btn  mt-3" id="simpan">Simpan</button>
+        <button type="button" id="add-detail" class="btn mt-3">Tambah Detail</button>
+        <button type="submit" id="simpan" class="btn mt-3">Simpan</button>
     </form>
 </div>
 </div>
@@ -118,7 +131,6 @@
 </div>
 <script src="https://unpkg.com/typeit@8.7.1/dist/index.umd.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -150,7 +162,7 @@
                     <input type="number" name="details[${detailIndex}][jumlah_pembelian]" class="form-control" min="1" required>
                 </div>
                 <div class="col-1 d-flex align-items-end">
-                    <button type="button" class="btn btn-danger remove-detail">Hapus</button>
+                    <button type="button" class="btn remove-detail" id="hapus">Hapus</button>
                 </div>
             </div>
         `;
@@ -158,9 +170,9 @@
         detailIndex++;
     });
 
-    document.getElementById('details').addEventListener('click', function(e) {
-        if(e.target && e.target.classList.contains('remove-detail')) {
-            e.target.closest('.detail-item').remove();
+    document.getElementById('details').addEventListener('click', function(event) {
+        if (event.target.classList.contains('remove-detail')) {
+            event.target.closest('.detail-item').remove();
         }
     });
 </script>

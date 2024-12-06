@@ -280,7 +280,7 @@
     </section>
 
     <section class="transaksi-list">
-        <h3>Our Transaction List</h3>
+        <h3>Your Transaction List</h3>
     </section>
 
 <div class="container mt-5" id="list-transaksi">
@@ -295,15 +295,19 @@
                                 <th id="id">ID</th>
                                 <th id="tanggal">Tanggal</th>
                                 <th id="total">Total</th>
+                                <th id="status">Status</th>
                                 <th id="aksi">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach($transaksi as $t)
+                        @forelse($transaksi as $t)
                         <tr>
                             <td>{{ $t->id }}</td>
                             <td>{{ $t->tanggal_transaksi }}</td>
                             <td>Rp{{ number_format($t->total, 2, ',', '.') }}</td>
+                            <td>
+                                <span>{{ $t->statusPemesanan->status_pemesanan }}</span>
+                            </td>
                             <td>
                                 <a href="{{ route('transaksi.show', $t->id) }}" class="btn btn-info btn-sm" id="show">Lihat</a>
                                 <a href="{{ route('transaksi.edit', $t->id) }}" class="btn btn-warning btn-sm" id="edit">Edit</a>
@@ -314,7 +318,11 @@
                                 </form>
                             </td>
                         </tr>
-                        @endforeach
+                        @empty
+                                <div class="alert alert-danger">
+                                    Data Transaksi belum Tersedia.
+                                </div>
+                        @endforelse
                         </tbody>
                     </table>
                 </div>
@@ -353,42 +361,17 @@
         speed: 100
         }).go();
 
+        new TypeIt("#status", {
+        strings: [],
+        speed: 100
+        }).go();
+
         new TypeIt("#aksi", {
         strings: [],
         speed: 100
         }).go();
 
     });
-
-
-    const navbar = document.getElementsByTagName('nav')[0];
-        window.addEventListener('scroll', function() {
-            if (window.scrollY > 1) {
-                navbar.classList.replace('bg-transparent', 'nav-color')
-            } else if (this.window.scrollY <= 0) {
-                navbar.classList.replace('nav-color', 'bg-transparent')
-            }
-        })
-
-    //message with sweetalert
-    @if(session('success'))
-    Swal.fire({
-        icon: "success",
-        title: "BERHASIL",
-        text: "{{ session('success') }}",
-        showConfirmButton: false,
-        timer: 2000
-    });
-    @elseif(session('error'))
-    Swal.fire({
-        icon: "error",
-        title: "GAGAL!",
-        text: "{{ session('error') }}",
-        showConfirmButton: false,
-        timer: 2000
-    });
-    @endif
-
 </script>
 
 </body>

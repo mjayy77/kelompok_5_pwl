@@ -54,14 +54,17 @@
                             <hr/>
                             <p id="typing3">Supplier : {{ $product->nama_supplier }}</p>
                             <hr/>
-                            <p id="typing4">{{ "Rp " . number_format($product->price,2,',','.') }}</p>
-                            <code id="typing5">
-                                <p>{!! $product->description !!}</p>
-                            </code>
+                            <p id="typing5">Description : {!! $product->description !!}</p>
+                            <hr/>
+                            <p id="typing4">Price : {{ "Rp " . number_format($product->price,2,',','.') }}</p>
+                            <hr/>
+                            <p id="typing7">Discount : {{ $product->discount }}%</p>
+                            <hr/>
+                            <p id="typing8">Final Price : {{ "Rp " . number_format($product->final_price,2,',','.') }}</p>
                             <hr/>
                             <p id="typing6">Stock : {{ $product->stock }}</p>
                             <hr/>
-                            <a href="{{ route('products.index') }}" class="btn ">Kembali</a>
+                            <a href="{{ route('products.index') }}" class="btn">Kembali</a>
                         </div>
                     </div>
                 </div>
@@ -106,8 +109,17 @@
         strings: [],
         speed: 50
         }).go();
-
         
+        new TypeIt("#typing7", {
+        strings: [],
+        speed: 50
+        }).go();
+
+        new TypeIt("#typing8", {
+        strings: [],
+        speed: 50
+        }).go();
+
         });
     </script>
 </body>

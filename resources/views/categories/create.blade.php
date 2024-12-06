@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Add New Suppliers</title>
+    <title>Add New Category</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,200;0,300;0,400;1,300;1,500;1,800;1,900&family=Poppins:wght@400;600&family=Rancho&display=swap');
@@ -29,7 +29,7 @@
         }
 
         /* Heading styling */
-        h4 {
+        h3 {
             font-size: 28px;
             font-weight: bold;
             color: #333;
@@ -97,8 +97,6 @@
         .text-supplier {
             color: #000000;
         }
-
-
     </style>
 </head>
 
@@ -106,49 +104,24 @@
     <div class="container mt-5 mb-5">
         <div class="row">
             <div class="col-md-12">
-                <h3 class="title">
-                    <span class="text-add">Add</span> 
-                    <span class="text-supplier">Supplier</span>
-                </h3>                
+                <h3 class="title">Add Category</h3>
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">
-                        <form id="supplierForm" action="{{ route('suppliers.store') }}" method="POST" enctype="multipart/form-data">
+                        <form id="supplierForm" action="{{ route('categories.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group mb-3">
-                                <label>Nama Supplier</label>
-                                <input type="text" class="form-control @error('nama_supplier') is-invalid @enderror" id="supplier_name" name="nama_supplier" placeholder=" ">
-                                @error('nama_supplier')
+                                <label>Kategori Produk</label>
+                                <input type="text" class="form-control @error('product_category_name') is-invalid @enderror" id="product_category_name" name="product_category_name" placeholder=" ">
+                                @error('product_category_name')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                            
                             <div class="form-group mb-3">
-                                <label>Alamat Supplier</label>
-                                <input type="text" class="form-control @error('alamat_supplier') is-invalid @enderror" id="alamat_supplier" name="alamat_supplier" placeholder=" ">
-                                @error('alamat_supplier')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
+                                <label class="font-weight-bold">Deskripsi</label>
+                                <textarea class="form-control @error('description') is-invalid @enderror" name="description" rows="5" placeholder="Masukan Deskripsi Product"></textarea>
                             </div>
-                            
-                            <div class="form-group mb-3">
-                                <label>P.I.C Name</label>
-                                <input type="text" class="form-control @error('pic_supplier') is-invalid @enderror" id="pic_supplier" name="pic_supplier" placeholder=" ">
-                                @error('pic_supplier')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            
-                            <div class="form-group mb-3">
-                                <label>Nomor HP P.I.C</label>
-                                <input type="text" class="form-control @error('no_hp_pic_supplier') is-invalid @enderror" id="no_hp_pic_supplier" name="no_hp_pic_supplier" placeholder=" ">
-                                @error('no_hp_pic_supplier')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-
                             <button type="submit" class="btn btn-primary">Add Details</button>
-                        </form>
                     </div>
                 </div>
             </div>
@@ -179,10 +152,7 @@
                 type();
             }
 
-            typePlaceholder(document.getElementById("supplier_name"), "Masukkan Nama Supplier", 100);
-            typePlaceholder(document.getElementById("alamat_supplier"), "Masukkan Alamat Supplier", 100);
-            typePlaceholder(document.getElementById("pic_supplier"), "Masukkan Nama P.I.C", 100);
-            typePlaceholder(document.getElementById("no_hp_pic_supplier"), "Masukkan Nomor HP", 100);
+            typePlaceholder(document.getElementById("product_category_name"), "Masukkan Kategori Produk", 100);
         });
     </script>
 </body>
