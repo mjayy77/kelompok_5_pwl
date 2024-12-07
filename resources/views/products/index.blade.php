@@ -39,6 +39,10 @@
         #list-product {
             padding: 0 80px 0 300px;
         }
+
+        .our-product {
+            font-weight: bold;
+        }
        
         /* Card styling */
         .product-card {
@@ -94,108 +98,11 @@
             }
         }
 
-        /* Navbar */
-        .navbar {
-            padding: 5px 5%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            color: black;
-        }
-
-        .nav-color {
-            background-color: white;
-            transition: all ease-in-out 0.3s;
-        }
-
-        .bg-transparent {
-            transition: all ease-in-out 0.3s;
-        }
-
-        .navbar-brand:hover {
-            color: black;
-            text-decoration: none;
-        }
-
-        .nav-link {
-            color: black;
-            margin: 16px;
-            font-size: 1.2rem;
-        }
-
-        .nav-link:hover {
-            color: #FF6347;
-            margin: 16px;
-            font-size: 1.2rem;
-        }
-
-        #btn {
-            background: #10375C;
-            color: white;
-            transition: 0.1s;
-        }
-
-        #btn:hover {
-            background: #FF6347;
-        }
-
-        #show {
-            background: #394867;
-            color: white;
-            transition: 0.2s;
-        }
-
-        #show:hover {
-            background: #212A3E;
-        }
-
-    /* Sidebar */
-    .sidebar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 250px;
-            background-color: #FF6347;
-            height: 100%;
-            padding-top: 20px;
-            z-index: 1000;
-        }
-
-        .sidebar .navbar-brand {
-            font-weight: bold;
-            font-size: 1.8rem;
-            padding: 15px 20px;
-            color: black;
-            text-align: center;
-        }
-
-        .sidebar .navbar-brand span {
-            color: white;
-        }
-
-        .sidebar .navbar-brand:hover {
-            color: white;
-        }
-
-        .sidebar .nav-link {
-            display: block;
-            padding: 10px 20px;
-            font-size: 1.2rem;
-            color: white;
-        }
-
-        .sidebar .nav-link:hover {
-            background-color: #ffffff;
-            color: black;
-        }
-
     /* Button */
     #edit {
         color: white;
         background-color: #6A5ACD;
-        transition: 0.2s;
+        t,ransition: 0.2s;
         margin-left:10px;
         transition: 0.2s;
     }
@@ -222,30 +129,10 @@
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-transparent" id="navbar">
-        <div class="container-fluid">
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Sign Up</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <x-navbar />
 
     <!-- Sidebar -->
-    <div class="sidebar">
-        <a class="navbar-brand" href="{{ route('products.index') }}">5th <span>Apparel</span></a>
-        <a class="nav-link" href="{{ route('products.index') }}">Product</a>
-        <a class="nav-link" href="{{ route('suppliers.index') }}">Supplier</a>
-        <a class="nav-link" href="{{ route('transaksi.index') }}">Transaksi</a>
-        <a class="nav-link" href="{{ route('categories.index') }}">Category</a>
-    </div>
-
+    <x-sidebar />
     
     <!-- Hero Section -->
     <section id="hero">
