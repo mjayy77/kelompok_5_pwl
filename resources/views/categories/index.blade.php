@@ -195,11 +195,13 @@
                                     <td>{{ $category->id }}</td>
                                     <td>{{ $category->product_category_name }}</td>
                                     <td class="text-center">
-                                        <form>
+                                        <form action="{{ route('categories.destroy', $category->id) }}" method="POST" onsubmit="return confirm('Apakah Anda Yakin ?')">
+                                            @csrf
+                                            @method('DELETE')
+
                                             <a href="{{ route('categories.show', $category->id) }}" class="btn btn-sm btn-dark" id="show">SHOW</a><br>
                                             <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-sm btn-primary" id="edit">EDIT</a><br>
-                                            @csrf
-                                            <button type="submit" class="btn btn-sm" id="hapus">HAPUS</button>
+                                            <button type="submit" class="btn btn-sm btn-danger" id="hapus">HAPUS</button>
                                         </form>
                                     </td>
                                 </tr>

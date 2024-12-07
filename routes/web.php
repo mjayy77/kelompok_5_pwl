@@ -17,8 +17,8 @@ Route::resource('/suppliers', SupplierController::class);
 Route::resource('/transaksi', TransaksiPenjualanController::class);
 Route::resource('/categories', CategoryProductController::class);
 
-//route for send email
-Route::get('/send-email/{to}/{id}', [TransaksiPenjualanController::class, 'sendEmail']);
+//routes for send email
+Route::post('/send-transaction-email/{id}', [TransaksiPenjualanController::class, 'sendTransaksiEmail']);
 
 Auth::routes();
 

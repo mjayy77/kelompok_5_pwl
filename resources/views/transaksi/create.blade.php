@@ -234,7 +234,7 @@
                     <label>Jumlah Pembelian</label>
                     <input type="number" name="details[${detailIndex}][jumlah_pembelian]" class="form-control" min="1" required>
                 </div>
-                <div class="col-1 d-flex align-items-end">
+                c
                     <button type="button" class="btn remove-detail" id="hapus">Hapus</button>
                 </div>
             </div>

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\TransaksiEmail;
 
 class TransaksiPenjualanController extends Controller
 {
@@ -78,7 +79,7 @@ class TransaksiPenjualanController extends Controller
             return $transaksi;
         });
 
-        $this->sendEmail($transaksi->email_pembeli, $transaksi->id);
+        $this->sendTransaksiEmail($transaksi->email_pembeli, $transaksi->id);
 
         return redirect()->route('transaksi.index')
                         ->with('success', 'Transaksi penjualan berhasil ditambahkan dan email telah dikirim.');
@@ -151,7 +152,7 @@ class TransaksiPenjualanController extends Controller
             $transaksi->update(['total' => $total]);
         });
 
-        $this->sendEmail($transaksi->email_pembeli, $transaksi->id);
+        $this->sendTransaksiEmail($transaksi->email_pembeli, $transaksi->id);
 
         return redirect()->route('transaksi.index')
                         ->with('success', 'Transaksi penjualan berhasil diperbarui dan email telah dikirim.');
@@ -187,14 +188,20 @@ class TransaksiPenjualanController extends Controller
         ]);
     }
 
-    // send email
-    public function sendEmail($to, $id)
-    {
-        $transaksi = TransaksiPenjualan::with('details.product')->findOrFail($id);
-        Mail::send('transaksi.show', ['transaksi' => $transaksi], function ($message) use ($to, $transaksi) {
-            $message->to($to)
-                    ->subject("Detail Transaksi: {$transaksi->id} - Total Tagihan Rp " . number_format($transaksi->total, 2, ',', '.'));
-        });
-        return response()->json(['message' => 'Email sent successfully!']);
+    // send email transaksi
+    public function sendTransaksiEmail($to, $id)
+{
+    $transaksi = TransaksiPenjualan::with('details.product', 'statusPemesanan')->findOrFail($id);
+
+    foreach ($transaksi->details as $detail) {
+        $product = $detail->product;
+        $detail->final_price = $product->price * (1 - ($product->discount / 100)); // Calculate the final price after discount
+        $detail->discount = $product->discount; // Store discount
     }
+
+    Mail::to($to)->send(new TransaksiEmail($transaksi));
+
+    return response()->json(['message' => 'Email sent successfully!']);
+}
+
 }

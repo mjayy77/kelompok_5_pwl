@@ -129,6 +129,6 @@ class CategoryProductController extends Controller
     {
         $category->delete();
 
-        return redirect()->route('categories.show')->with('success', 'Category deleted successfully.');
+        return redirect()->route('categories.index')->with('success', 'Category deleted successfully.');
     }
 }

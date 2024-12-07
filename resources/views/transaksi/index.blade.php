@@ -200,11 +200,13 @@
                                 <span>{{ $t->statusPemesanan->status_pemesanan }}</span>
                             </td>
                             <td class="text-center">
-                                <form>
+                                <form action="{{ route('transaksi.destroy', $t->id) }}" method="POST" onsubmit="return confirm('Apakah Anda Yakin ?')">
+                                    @csrf
+                                    @method('DELETE')
+
                                     <a href="{{ route('transaksi.show', $t->id) }}" class="btn btn-sm btn-dark" id="show">SHOW</a>
                                     <a href="{{ route('transaksi.edit', $t->id) }}" class="btn btn-sm btn-primary" id="edit">EDIT</a>
-                                    @csrf
-                                    <button type="submit" onclick="return confirm('Apakah Anda yakin?')" class="btn btn-sm" id="hapus">HAPUS</button>
+                                    <button type="submit" class="btn btn-sm btn-danger" id="hapus">HAPUS</button>
                                 </form>
                             </td>
                         </tr>
@@ -262,6 +264,34 @@
         }).go();
 
     });
+
+    const navbar = document.getElementsByTagName('nav')[0];
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 1) {
+                navbar.classList.replace('bg-transparent', 'nav-color')
+            } else if (this.window.scrollY <= 0) {
+                navbar.classList.replace('nav-color', 'bg-transparent')
+            }
+        })
+        
+    // message with sweetalert
+    @if(session('success'))
+        Swal.fire({
+            icon: 'success',
+            title: 'BERHASIL',
+            text: "{{ session('success') }}",
+            showConfirmButton: false,
+            timer: 2000
+        });
+    @elseif(session('error'))
+        Swal.fire({
+            icon: 'error',
+            title: 'GAGAL',
+            text: "{{ session('error') }}",
+            showConfirmButton: false,
+            timer: 2000
+        });
+    @endif
 </script>
 
 </body>

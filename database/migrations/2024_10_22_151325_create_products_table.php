@@ -65,7 +65,7 @@ return new class extends Migration
         });
 
         DB::table('status_pemesanan')->insert([
-            ['status_pemesanan' => 'On Progress'],
+            ['status_pemesanan' => 'On Process'],
             ['status_pemesanan' => 'Delivered'],
             ['status_pemesanan' => 'Arrived'],
             ['status_pemesanan' => 'Canceled'],
