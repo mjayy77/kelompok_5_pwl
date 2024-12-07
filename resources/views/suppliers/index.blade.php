@@ -107,16 +107,14 @@
     text-align: center;
     }
 
-    #btn{
+    #btn {
+        background: #10375C;
         color: white;
-        border: none;
-        margin-bottom: 10px;
-        transition: 0.2s;
+        transition: 0.1s;
     }
 
-    #btn:hover{
-        color: white;
-        background: black;
+    #btn:hover {
+        background: #FF6347;
     }
 
     #show {

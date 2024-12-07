@@ -10,7 +10,7 @@
         z-index: 1000;
     }
 
-    .sidebar .navbar-brand {
+    .navbar-brand {
         font-weight: 600;
         font-size: 1.8rem;
         padding: 15px 20px;
@@ -18,31 +18,32 @@
         text-align: center;
     }
 
-    .sidebar .navbar-brand span {
+    .navbar-brand span {
         color: white;
     }
 
-    .sidebar .navbar-brand:hover {
+    .navbar-brand:hover {
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     }
 
-    .sidebar .navbar-brand:hover span {
+    .navbar-brand:hover span {
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     }
 
-    .sidebar .navbar-brand: span {
+    .navbar-brand: span {
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     }
 
-    .sidebar .nav-link {
+    .nav-link {
         display: block;
+        margin: 16px 0;
         padding: 10px 20px;
         font-size: 1.2rem;
         font-weight: normal;
         color: white;
     }
 
-    .sidebar .nav-link:hover {
+    .nav-link:hover {
         background-color: #ffffff;
         color: black;
         font-weight: bold;

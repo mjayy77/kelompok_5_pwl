@@ -18,26 +18,19 @@
         transition: all ease-in-out 0.3s;
     }
 
-    .nav-link {
+    #logout {
+        background: none;
+        border: none;
+        padding: 0;
         color: black;
         margin: 16px 0;
         font-size: 1.2rem;
         font-weight: bold;
     }
 
-    .nav-link:hover {
+    #logout:hover {
         color: #FF6347;
         font-size: 1.2rem;
-    }
-
-    #btn {
-        background: #10375C;
-        color: white;
-        transition: 0.1s;
-    }
-
-    #btn:hover {
-        background: #FF6347;
     }
 
     #show {
@@ -56,7 +49,12 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Logout</a>
+                @auth
+                    <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+                        @csrf
+                        <button type="submit" id="logout">Logout</button>
+                    </form>
+                @endauth
                 </li>
             </ul>
         </div>

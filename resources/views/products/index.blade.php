@@ -99,6 +99,16 @@
         }
 
     /* Button */
+    #btn {
+        background: #10375C;
+        color: white;
+        transition: 0.1s;
+    }
+
+    #btn:hover {
+        background: #FF6347;
+    }
+    
     #edit {
         color: white;
         background-color: #6A5ACD;
