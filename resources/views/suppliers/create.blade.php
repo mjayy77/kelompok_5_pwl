@@ -10,7 +10,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,200;0,300;0,400;1,300;1,500;1,800;1,900&family=Poppins:wght@400;600&family=Rancho&display=swap');
         body {
-            background: #DDDDDD;
+            background: #DDDDDD
         }
 
         /* Container styling */
@@ -29,7 +29,7 @@
         }
 
         /* Heading styling */
-        h4 {
+        h3 {
             font-size: 28px;
             font-weight: bold;
             color: #333;
@@ -97,8 +97,6 @@
         .text-supplier {
             color: #000000;
         }
-
-
     </style>
 </head>
 
@@ -107,8 +105,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h3 class="title">
-                    <span class="text-add">Add</span> 
-                    <span class="text-supplier">Supplier</span>
+                    Add Supplier
                 </h3>                
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">

@@ -50,23 +50,14 @@
             color: rgb(252, 252, 252);
             background: rgb(171, 0, 0);
         }
-
-        .text-show {
-            color: #ff6347;
-        }
-
-        .text-supplier {
-            color: #000000;
-        }
-    </style>
+</style>
 </head>
 
 <body class="bg">
     <div class="container mt-5 mb-5">
         <div class="row">
             <h3 class="title">
-                <span class="text-show">Show</span> 
-                <span class="text-supplier">Supplier</span>
+                Show Supplier
             </h3>
             <hr>
             <div class="col-md-4">

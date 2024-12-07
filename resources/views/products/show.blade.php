@@ -8,8 +8,15 @@
 </head>
 <style>
     .bg {
-        background: #f8f9fa;
+        background: #DDDDDD;
     }
+
+    h3 {
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
 
     #card-img  {
         background: white;
@@ -37,7 +44,6 @@
     <div class="container mt-5 mb-5">
         <div class="row">
             <h3 style="color: black">Show Product</h3>
-            <hr>
             <div class="col-md-4">
                 <div class="card border-0 shadow-5m rounded">
                     <div class="card-body">

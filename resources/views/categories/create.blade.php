@@ -93,10 +93,6 @@
         .text-add {
             color: #ff6347;
         }
-
-        .text-supplier {
-            color: #000000;
-        }
     </style>
 </head>
 

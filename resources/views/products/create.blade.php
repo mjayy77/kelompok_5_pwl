@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background: #f8f9fa;
+            background: #DDDDDD;
         }
 
         .container {

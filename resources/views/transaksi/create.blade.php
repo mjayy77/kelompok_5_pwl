@@ -9,16 +9,94 @@
 </head>
 
 <style>
-    body {
-        background: #f8f9fa;
-    }
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,200;0,300;0,400;1,300;1,500;1,800;1,900&family=Poppins:wght@400;600&family=Rancho&display=swap');
+        body {
+            background: #DDDDDD
+        }
 
-    .judul h1 {
-        text-align: center;
-        font-weight: 700;
-        color: black;
-        margin-top: 20px;
-    }
+        /* Container styling */
+        .container {
+            max-width: 900px;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Card styling */
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Heading styling */
+        h3 {
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        h4 {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Label styling */
+        label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Form controls */
+        .form-control {
+            border: 1px solid #ced4da;
+            padding: 10px;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        /* Primary button styling */
+        .btn-primary {
+            background-color: #333;
+            border-color: #333;
+            color: #FFFFFF;
+            font-weight: bold;
+            padding: 10px 20px;
+            border: none;
+        }
+
+        /* Hover effect for primary button */
+        .btn-primary:hover {
+            background-color: #555;
+            color: #FFFFFF;
+            border: none;
+        }
+
+        /* Form group margin */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        /* Image preview styling */
+        .image-preview {
+            width: 100%;
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        /* Additional styling if required */
+        .btn-warning {
+            color: #ffffff;
+            background-color: #f0ad4e;
+            font-weight: bold;
+            padding: 10px 20px;
+        }
+
+        .btn-warning:hover {
+            background-color: #ec971f;
+        }
 
     #add-detail {
         background: #394867;
@@ -28,13 +106,13 @@
     }
 
     #add-detail:hover {
-           background: #212A3E;
+        background: #212A3E;
         border:none;
     }
 
     #simpan {
         color: white;
-        background-color: #6A5ACD;
+        background-color: #FF7F50;
         transition: 0.2s;
         margin-left:10px;
         transition: 0.2s;
@@ -42,88 +120,83 @@
     }
 
     #simpan:hover {
-        background-color: #4B0082;
+        background-color: #FF6347;
         border: none;
     }
 
     #hapus {
         color: white;
-        background: #FF7F50;
+        background: #b70000;
         transition: 0.2s;
-        margin-left: 10px;
         border:none;
         
     }
 
     #hapus:hover {
         border: none;
-        background:  #FF6347;
+        background: #980000;
     }
 
 </style>
 <body>
-
-    <section class="judul">
-            <h1>Add Transaction</h1>
-        </section>
-
-
     <div class="container mt-5 mb-5">
         <div class="row">
             <div class="col-md-12">
-                <div class="card border-0 shadow-sm rounded">
-                    <div class="card-body">
-                    <form action="{{ route('transaksi.store') }}" method="POST">
-        @csrf
-        <div class="form-group">
-            <label for="tanggal">Tanggal Transaksi</label>
-            <input type="date" name="tanggal_transaksi" class="form-control" id="tanggal" required>
-        </div>
+                <h3 class="title">Add Transaction</h3>
+                    <div class="card border-0 shadow-sm rounded">
+                        <div class="card-body">
+                        <form action="{{ route('transaksi.store') }}" method="POST">
+            @csrf
+            <div class="form-group">
+                <label for="tanggal">Tanggal Transaksi</label>
+                <input type="date" name="tanggal_transaksi" class="form-control" id="tanggal" required>
+            </div>
 
-        <div class="form-group mb-3">
-            <label>Email</label>
-                <input type="email" class="form-control @error('email_pembeli') is-invalid @enderror" id="email_pembeli" name="email_pembeli" placeholder="Masukkan Email Anda">
-                    @error('email_pembeli')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
-        </div>
+            <div class="form-group mb-3">
+                <label>Email</label>
+                    <input type="email" class="form-control @error('email_pembeli') is-invalid @enderror" id="email_pembeli" name="email_pembeli" placeholder="Masukkan Email Anda">
+                        @error('email_pembeli')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+            </div>
 
-        <div class="form-group mb-3">
-            <label>Status Pemesanan</label>
-            <select name="status_pemesanan_id" class="form-control" required>
-                <option value="">Pilih Status Pemesanan</option>
-                    @foreach($statuses as $status)
-                        <option value="{{ $status->id }}">{{ $status->status_pemesanan }}</option>
-                    @endforeach
-            </select>
-        </div>
+            <div class="form-group mb-3">
+                <label>Status Pemesanan</label>
+                <select name="status_pemesanan_id" class="form-control" required>
+                    <option value="">Pilih Status Pemesanan</option>
+                        @foreach($statuses as $status)
+                            <option value="{{ $status->id }}">{{ $status->status_pemesanan }}</option>
+                        @endforeach
+                </select>
+            </div>
 
-        <h4 class="mt-4">Detail Transaksi</h4>
-        <div id="details">
-            <div class="detail-item mb-3">
-                <div class="row">
-                    <div class="col">
-                        <label>Product</label>
-                        <select name="details[0][product_id]" class="form-control" required>
-                            <option value="">Pilih Produk</option>
-                            @foreach($products as $product)
-                                <option value="{{ $product->id }}">{{ $product->title }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="col">
-                        <label>Jumlah Pembelian</label>
-                        <input type="number" name="details[0][jumlah_pembelian]" class="form-control" min="1" required>
-                    </div>
-                    <div class="col-1 d-flex align-items-end">
-                        <button type="button" class="btn remove-detail" id="hapus">Hapus</button>
+            <h4 class="mt-4">Detail Transaksi</h4>
+            <div id="details">
+                <div class="detail-item mb-3">
+                    <div class="row">
+                        <div class="col">
+                            <label>Product</label>
+                            <select name="details[0][product_id]" class="form-control" required>
+                                <option value="">Pilih Produk</option>
+                                @foreach($products as $product)
+                                    <option value="{{ $product->id }}">{{ $product->title }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label>Jumlah Pembelian</label>
+                            <input type="number" name="details[0][jumlah_pembelian]" class="form-control" min="1" required>
+                        </div>
+                        <div class="col-1">
+                            <label></label>
+                            <button type="button" class="btn remove-detail" id="hapus">Hapus</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <button type="button" id="add-detail" class="btn mt-3">Tambah Detail</button>
-        <button type="submit" id="simpan" class="btn mt-3">Simpan</button>
-    </form>
+            <button type="button" id="add-detail" class="btn mt-3">Tambah Detail</button>
+            <button type="submit" id="simpan" class="btn mt-3">Simpan</button>
+        </form>
 </div>
 </div>
 </div>
@@ -134,7 +207,7 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        new TypeIt(".judul", {
+        new TypeIt(".title", {
         strings: [],
         speed: 50
         }).go();

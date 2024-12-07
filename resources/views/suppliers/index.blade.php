@@ -202,7 +202,7 @@
                                             <a href="{{ route('suppliers.show', $supplier->id) }}" class="btn btn-sm btn-dark" id="show">SHOW</a><br>
                                             <a href="{{ route('suppliers.edit', $supplier->id) }}" class="btn btn-sm btn-primary" id="edit">EDIT</a><br>
                                             @csrf
-                                            <button type="submit" class="btn btn-sm" id="hapus">HAPUS</button>
+                                            <button type="submit" onclick="return confirm('Apakah Anda yakin?')" class="btn btn-sm" id="hapus">HAPUS</button>
                                         </form>
                                     </td>
                                 </tr>

@@ -8,6 +8,7 @@
         height: 100%;
         padding-top: 20px;
         z-index: 1000;
+        box-shadow: 1px 0 5px 2px rgba(0, 0, 0, 0.3);
     }
 
     .navbar-brand {
@@ -27,13 +28,9 @@
     }
 
     .navbar-brand:hover span {
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
     }
-
-    .navbar-brand: span {
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    }
-
+    
     .nav-link {
         display: block;
         margin: 16px 0;

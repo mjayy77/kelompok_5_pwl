@@ -154,6 +154,10 @@
         background: #FF6347;
     }
 
+    #aksi {
+        text-align: center;
+    }
+
 </style>
 <body>
     <!-- Navbar -->
@@ -183,7 +187,7 @@
                                 <th id="tanggal">Tanggal</th>
                                 <th id="total">Total</th>
                                 <th id="status">Status</th>
-                                <th id="aksi">Aksi</th>
+                                <th id="aksi">ACTIONS</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -195,13 +199,12 @@
                             <td>
                                 <span>{{ $t->statusPemesanan->status_pemesanan }}</span>
                             </td>
-                            <td>
-                                <a href="{{ route('transaksi.show', $t->id) }}" class="btn btn-info btn-sm" id="show">Lihat</a>
-                                <a href="{{ route('transaksi.edit', $t->id) }}" class="btn btn-warning btn-sm" id="edit">Edit</a>
-                                <form action="{{ route('transaksi.destroy', $t->id) }}" method="POST" style="display:inline;">
+                            <td class="text-center">
+                                <form>
+                                    <a href="{{ route('transaksi.show', $t->id) }}" class="btn btn-sm btn-dark" id="show">SHOW</a>
+                                    <a href="{{ route('transaksi.edit', $t->id) }}" class="btn btn-sm btn-primary" id="edit">EDIT</a>
                                     @csrf
-                                    @method('DELETE')
-                                    <button type="submit" onclick="return confirm('Apakah Anda yakin?')" class="btn btn-danger btn-sm" id="hapus">Hapus</button>
+                                    <button type="submit" onclick="return confirm('Apakah Anda yakin?')" class="btn btn-sm" id="hapus">HAPUS</button>
                                 </form>
                             </td>
                         </tr>

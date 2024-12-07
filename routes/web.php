@@ -8,7 +8,7 @@ use App\Http\Controllers\CategoryProductController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/products');
 });
 
 //route resource for products

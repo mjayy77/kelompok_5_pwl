@@ -8,6 +8,18 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <style>
+    h3 {
+        font-size: 28px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    h4 {
+        font-weight: bold;
+        color: #333;
+    }
+
    #kembali {
         background: #394867;
         color: white;
@@ -25,14 +37,14 @@
 
 <div class="container mt-5 mb-5">
 <div class="container">
-    <h1>Detail Transaksi Penjualan</h1>
+    <h3>Detail Transaksi</h3>
     <div class="card">
         <div class="card-header">
             Transaksi ID: {{ $transaksi->id }}
         </div>
         <div class="card-body">
             <p><strong>Tanggal:</strong> {{ $transaksi->tanggal_transaksi }}</p>
-            <p><strong>Total:</strong> {{ number_format($transaksi->total, 2, ',', '.') }}</p>
+            <p><strong>Total:</strong> Rp{{ number_format($transaksi->total, 2, ',', '.') }}</p>
             <p><strong>Status Pemesanan:</strong> {{ $transaksi->statusPemesanan->status_pemesanan ?? 'N/A' }}</p>
 
             <h4>Detail Produk</h4>
