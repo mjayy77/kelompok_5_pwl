@@ -52,6 +52,28 @@
         color: #FF6347;
         font-size: 1.2rem;
     }
+
+    #navbarDropdownMenu {
+        background-color: white;
+        border: 1px solid #DDDDDD;
+        border-radius: 0;
+    }
+
+    .dropdown-item {
+        margin: 0;
+        padding: 10px 20px;
+        color: black;
+    }
+
+    .dropdown-item:hover {
+        background-color: #DDDDDD;
+        color: black;
+    }
+
+    #delete:hover {
+        background-color: #b70000;
+        color: white;
+    }
 </style>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
@@ -76,8 +98,8 @@
                         {{ Auth::user()->name }}
                     </a>
 
-                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ route('logout') }}"
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" id="navbarDropdownMenu">
+                        <a class="dropdown-item" id="logout" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
@@ -86,6 +108,16 @@
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                             @csrf
                         </form>
+
+                        <a class="dropdown-item" id="delete" href="{{ route('users.destroy') }}" 
+                            onclick="event.preventDefault(); if (confirm('Apakah Anda Yakin ?')) document.getElementById('delete-form').submit();">
+                            {{ __('Delete Account') }}
+                        </a>
+
+                        <form id="delete-form" action="{{ route('users.destroy') }}" method="POST" class="d-none">
+                            @csrf
+                            @method('DELETE')
+                        </form>    
                     </div>
                 </li>
             @endguest

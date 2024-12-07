@@ -6,6 +6,8 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\TransaksiPenjualanController;
 use App\Http\Controllers\CategoryProductController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\UserController;
+use App\Mail\RegistrationConfirmationEmail;
 
 Route::get('/', function () {
     return redirect('/products');
@@ -23,3 +25,4 @@ Route::post('/send-transaction-email/{id}', [TransaksiPenjualanController::class
 Auth::routes();
 
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+Route::delete('/user/destroy', [UserController::class, 'destroy'])->name('users.destroy');

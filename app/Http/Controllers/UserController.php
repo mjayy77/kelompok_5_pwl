@@ -68,12 +68,18 @@ class UserController extends Controller
     }
 
     // Menghapus user berdasarkan id
-    public function destroy($id)
+    public function destroy()
     {
-        $user = User::find($id);
-        if (!$user) return response()->json(['message' => 'User not found'], 404);
+        $user = auth()->user();
+
+        if (!$user) {
+            return response()->json(['message' => 'User not found'], 404);
+        }
 
         $user->delete();
-        return response()->json(null, 204);
+
+        auth()->logout();
+
+        return redirect('/login');
     }
 }

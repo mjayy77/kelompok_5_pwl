@@ -86,7 +86,7 @@
         display: flex;
         justify-content: space-between;
         align-items: baseline;
-        margin-top: 7.5px;
+        margin-top: 0;
     }
 </style>
 

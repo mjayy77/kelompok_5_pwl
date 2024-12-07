@@ -25,7 +25,7 @@
     /* form */
     .box {
         width: 50%;
-        height: 60vh;
+        height: 65vh;
         justify-content: center;
         margin: 25%;
         padding: 0;
@@ -65,7 +65,7 @@
         color: white;
         transition: 0.1s;
         padding: 7.5px 15px;
-        margin: 7.5px 0;
+        margin: 0;
     }
 
     #btn:hover {
