@@ -11,6 +11,10 @@
         box-shadow: 1px 0 5px 2px rgba(0, 0, 0, 0.3);
     }
 
+    .sidebar a {
+        text-decoration: none;
+    }
+
     .navbar-brand {
         font-weight: 600;
         font-size: 1.8rem;
@@ -48,7 +52,8 @@
 </style>
 
 <div class="sidebar">
-    <a class="navbar-brand" href="{{ route('products.index') }}">5th <span>Apparel</span></a>
+    <a class="navbar-brand" href="{{ route('dashboard') }}">5th <span>Apparel</span></a>
+    <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
     <a class="nav-link" href="{{ route('products.index') }}">Product</a>
     <a class="nav-link" href="{{ route('suppliers.index') }}">Supplier</a>
     <a class="nav-link" href="{{ route('transaksi.index') }}">Transaksi</a>

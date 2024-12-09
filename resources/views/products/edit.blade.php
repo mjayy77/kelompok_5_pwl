@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie-edge">
     <title>Edit Product</title>
+    <link rel="icon" href="{{ asset('storage/public/images/favicon.ico') }}" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -73,7 +74,7 @@
     </style>
 </head>
 <body>
-
+<x-scrollbar />
     <div class="container mt-5 mb-5">
         <h4>Edit Product</h4>
         <div class="card">

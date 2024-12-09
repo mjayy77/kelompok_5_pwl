@@ -8,7 +8,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', '5th Apparel') }}</title>
-
+    <link rel="icon" href="{{ asset('storage/public/images/favicon.ico') }}" type="image/x-icon">
+    
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -77,6 +78,43 @@
     .navbar-brand span {
         color: white;
     }
+
+    #navbarDropdown {
+        background: none;
+        border: none;
+        padding: 0;
+        color: black;
+        margin: 16px 0;
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+
+    #navbarDropdown:hover {
+        color: #FF6347;
+        font-size: 1.2rem;
+    }
+
+    #navbarDropdownMenu {
+        background-color: white;
+        border: 1px solid #DDDDDD;
+        border-radius: 0;
+    }
+
+    .dropdown-item {
+        margin: 0;
+        padding: 10px 20px;
+        color: black;
+    }
+
+    .dropdown-item:hover {
+        background-color: #DDDDDD;
+        color: black;
+    }
+
+    #delete:hover {
+        background-color: #b70000;
+        color: white;
+    }
 </style>
 
 <body>
@@ -110,23 +148,33 @@
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Auth::user()->name }}
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" id="navbarDropdownMenu">
+                                <a class="dropdown-item" id="logout" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
+                                <a class="dropdown-item" id="delete" href="{{ route('users.destroy') }}" 
+                                    onclick="event.preventDefault(); if (confirm('Apakah Anda Yakin ?')) document.getElementById('delete-form').submit();">
+                                    {{ __('Delete Account') }}
+                                </a>
+
+                                <form id="delete-form" action="{{ route('users.destroy') }}" method="POST" class="d-none">
+                                    @csrf
+                                    @method('DELETE')
+                                </form>    
+                            </div>
+                        </li>
                         @endguest
                     </ul>
                 </div>

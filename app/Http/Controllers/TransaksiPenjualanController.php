@@ -22,7 +22,9 @@ class TransaksiPenjualanController extends Controller
      */
     public function index(): View
     {
-        $transaksi = TransaksiPenjualan::with('details.product')->get();
+        $transaksi = TransaksiPenjualan::with('details.product')
+                    ->orderBy('created_at', 'desc')
+                    ->get();
         return view('transaksi.index', compact('transaksi'));
     }
 
@@ -54,7 +56,7 @@ class TransaksiPenjualanController extends Controller
                 'tanggal_transaksi' => $validatedData['tanggal_transaksi'],
                 'email_pembeli' => $validatedData['email_pembeli'],
                 'total' => 0,
-                'status_pemesanan_id' => $validatedData['status_pemesanan_id'],  // Added status_pemesanan_id here
+                'status_pemesanan_id' => $validatedData['status_pemesanan_id'],
             ]);
 
             $total = 0;
@@ -126,7 +128,7 @@ class TransaksiPenjualanController extends Controller
             $transaksi->update([
                 'tanggal_transaksi' => $validatedData['tanggal_transaksi'],
                 'email_pembeli' => $validatedData['email_pembeli'],
-                'status_pemesanan_id' => $validatedData['status_pemesanan_id'],  // Added status_pemesanan_id here
+                'status_pemesanan_id' => $validatedData['status_pemesanan_id'],
             ]);
 
             // Clear existing details
