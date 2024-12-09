@@ -111,6 +111,7 @@
         background: #10375C;
         color: white;
         transition: 0.1s;
+        margin-bottom: 10px;
     }
 
     #btn:hover {
@@ -187,7 +188,6 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th id="id">ID</th>
                                 <th id="tanggal">Tanggal</th>
                                 <th id="total">Total</th>
                                 <th id="status">Status</th>
@@ -197,7 +197,6 @@
                         <tbody>
                         @forelse($transaksi as $t)
                         <tr>
-                            <td>{{ $t->id }}</td>
                             <td>{{ $t->tanggal_transaksi }}</td>
                             <td>Rp{{ number_format($t->total, 2, ',', '.') }}</td>
                             <td>
@@ -240,11 +239,6 @@
         new TypeIt("#transaksi-list", {
         strings: [],
         speed: 50
-        }).go();
-
-        new TypeIt("#id", {
-        strings: [],
-        speed: 100
         }).go();
 
         new TypeIt("#tanggal", {

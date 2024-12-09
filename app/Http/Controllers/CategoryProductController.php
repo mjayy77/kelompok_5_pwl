@@ -18,13 +18,13 @@ class CategoryProductController extends Controller
     public function index() : View
     {
         //get all categories
-        // $categories = Supplier::select("categories.*")
+        // $categories = CategoryProduct::select("categories.*")
         //                     ->latest()
         //                     ->paginate(10);
 
         $category = new CategoryProduct;
         $categories = $category->get_category_product()
-                            ->latest()
+                            ->orderBy('product_category_name', 'asc')
                             ->paginate(10);
         //render view with categories
         return view('categories.index', compact('categories'));

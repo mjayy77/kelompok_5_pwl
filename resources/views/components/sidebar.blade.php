@@ -55,7 +55,7 @@
     <a class="navbar-brand" href="{{ route('dashboard') }}">5th <span>Apparel</span></a>
     <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
     <a class="nav-link" href="{{ route('products.index') }}">Product</a>
+    <a class="nav-link" href="{{ route('categories.index') }}">Category</a>
     <a class="nav-link" href="{{ route('suppliers.index') }}">Supplier</a>
     <a class="nav-link" href="{{ route('transaksi.index') }}">Transaksi</a>
-    <a class="nav-link" href="{{ route('categories.index') }}">Category</a>
 </div>

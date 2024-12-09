@@ -77,7 +77,7 @@
 
         /* Form group margin */
         .form-group {
-            margin-bottom: 15px;
+            margin: 10px 0;
         }
 
         /* Image preview styling */
@@ -100,22 +100,22 @@
         }
 
     #add-detail {
-        background: #394867;
+        background: #10375C;
         color: white;
-        transition: 0.2s;
-        border:none;
+        transition: 0.1s;
+        margin-bottom: 10px;
+        border: none
     }
 
     #add-detail:hover {
-        background: #212A3E;
-        border:none;
+        background: darkslategrey;
+        color: white;
+        border: none;
     }
 
     #simpan {
-        color: white;
+        color: black;
         background-color: #FF7F50;
-        transition: 0.2s;
-        margin-left:10px;
         transition: 0.2s;
         border:none;
     }
@@ -191,13 +191,12 @@
                         </div>
                         <div class="col-1">
                             <label></label>
-                            <button type="button" class="btn remove-detail" id="hapus">Hapus</button>
+                            <button type="button" id="add-detail" class="btn">Add</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <button type="button" id="add-detail" class="btn mt-3">Tambah Detail</button>
-            <button type="submit" id="simpan" class="btn mt-3">Simpan</button>
+            <button type="submit" id="simpan" class="btn">Simpan</button>
         </form>
 </div>
 </div>
@@ -236,7 +235,8 @@
                     <label>Jumlah Pembelian</label>
                     <input type="number" name="details[${detailIndex}][jumlah_pembelian]" class="form-control" min="1" required>
                 </div>
-                c
+                <div class="col-1">
+                    <label></label>
                     <button type="button" class="btn remove-detail" id="hapus">Hapus</button>
                 </div>
             </div>

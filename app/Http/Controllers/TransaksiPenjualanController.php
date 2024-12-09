@@ -23,7 +23,7 @@ class TransaksiPenjualanController extends Controller
     public function index(): View
     {
         $transaksi = TransaksiPenjualan::with('details.product')
-                    ->orderBy('created_at', 'desc')
+                    ->latest()
                     ->get();
         return view('transaksi.index', compact('transaksi'));
     }

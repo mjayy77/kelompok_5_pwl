@@ -98,23 +98,22 @@
             background-color: #ec971f;
         }
 
-    #add-detail {
-        background: #394867;
+        #add-detail {
+        background: #10375C;
         color: white;
-        transition: 0.2s;
-        border:none;
+        transition: 0.1s;
+        border: none
     }
 
     #add-detail:hover {
-        background: #212A3E;
-        border:none;
+        background: darkslategrey;
+        color: white;
+        border: none;
     }
 
     #simpan {
-        color: white;
+        color: black;
         background-color: #FF7F50;
-        transition: 0.2s;
-        margin-left:10px;
         transition: 0.2s;
         border:none;
     }
@@ -129,7 +128,6 @@
         background: #b70000;
         transition: 0.2s;
         border:none;
-        
     }
 
     #hapus:hover {
@@ -203,8 +201,8 @@
                 </div>
             @endforeach
         </div>
-        <button type="button" id="add-detail" class="btn mt-3">Tambah Detail</button>
-        <button type="submit" id="simpan" class="btn mt-3">Simpan</button>
+        <button type="button" id="add-detail" class="btn">Tambah Detail</button>
+        <button type="submit" id="simpan" class="btn">Simpan</button>
     </form>
 </div>
 </div>

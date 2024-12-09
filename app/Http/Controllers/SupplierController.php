@@ -13,7 +13,7 @@ class SupplierController extends Controller
     {
         $supplier = new Supplier;
         $suppliers = $supplier->get_supplier()
-                            ->orderBy('id', 'asc')
+                            ->orderBy('nama_supplier', 'asc')
                             ->paginate(10);
         //render view with suppliers
         return view('suppliers.index', compact('suppliers'));

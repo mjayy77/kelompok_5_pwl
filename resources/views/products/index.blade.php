@@ -93,7 +93,7 @@
         }
 
         .product-card .product-price {
-            font-size: 1rem;
+            font-size: 1.2rem;
             color: #FF6347;
             margin-bottom: 5px;
             font-weight: bold;

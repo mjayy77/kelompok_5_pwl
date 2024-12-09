@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Admin Dashboard</title>
+    <title>Dashboard</title>
     <link rel="icon" href="{{ asset('storage/public/images/favicon.ico') }}" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -120,7 +120,7 @@
                 </div>
                 <div class="card">
                     <h5>This Month Revenue</h5>
-                    <p>Rp {{ number_format($monthlyRevenue, 2) }}</p>
+                    <p>Rp {{ number_format($monthlyRevenue, 2, ",", ".") }}</p>
                 </div>
             </div>
         </div>
@@ -150,7 +150,7 @@
 
                 <div class="card">
                     <h5>Total Revenue</h5>
-                    <p>Rp {{ number_format($totalRevenue, 2) }}</p>
+                    <p>Rp {{ number_format($totalRevenue, 2, ",", ".") }}</p>
                 </div>
             </div>
         </div>

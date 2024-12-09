@@ -188,16 +188,16 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th scope="col" id="type1">ID</th>
-                                    <th scope="col" id="type2">Nama Kategori</th>
+                                    <th scope="col" id="type1">Nama Kategori</th>
+                                    <th scope="col" id="type2">Deskripsi</th>
                                     <th scope="col" style="width: 20%" id="type3">ACTIONS</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @forelse ($categories as $category)
                                 <tr>
-                                    <td>{{ $category->id }}</td>
                                     <td>{{ $category->product_category_name }}</td>
+                                    <td>{{ $category->description }}</td>
                                     <td class="text-center">
                                         <form action="{{ route('categories.destroy', $category->id) }}" method="POST" onsubmit="return confirm('Apakah Anda Yakin ?')">
                                             @csrf
@@ -285,8 +285,5 @@
         @endif
 
     </script>
-
-   
-
 </body>
 </html>
