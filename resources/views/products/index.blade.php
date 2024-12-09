@@ -22,7 +22,7 @@
             width: 100%;
             background-size: cover;
             background-position: top 25% right 0;
-            padding: 0 80px;
+            padding: 0 0 0 330px;
             justify-content: center;
             align-items: flex-start;
             display: flex;
@@ -30,14 +30,15 @@
             color: black;
         }
 
-      
-
         #hero h2 {
             font-weight: 700;
             font-size: 50px;
             color: #FF6347;
         }
 
+        #list-product {
+            padding: 0 80px 0 300px;
+        }
        
         /* Card styling */
         .product-card {
@@ -93,8 +94,9 @@
             }
         }
 
+        /* Navbar */
         .navbar {
-            padding: 10px 5%;
+            padding: 5px 5%;
             position: fixed;
             top: 0;
             left: 0;
@@ -112,19 +114,9 @@
             transition: all ease-in-out 0.3s;
         }
 
-        .navbar-brand {
-            font-weight: bold;
-            font-size: 2rem;
-            color: black;
-        }
-
-        .navbar-brand span {
-            color: #FF6347;
-        }
-
         .navbar-brand:hover {
-        color: black; 
-        text-decoration: none;
+            color: black;
+            text-decoration: none;
         }
 
         .nav-link {
@@ -143,26 +135,63 @@
             background: #10375C;
             color: white;
             transition: 0.1s;
-            
         }
 
         #btn:hover {
             background: #FF6347;
-            
         }
 
         #show {
-        background: #394867;
-        color: white;
-        transition: 0.2s;
-    }
+            background: #394867;
+            color: white;
+            transition: 0.2s;
+        }
 
-    #show:hover {
-        background: #212A3E;
-    }
+        #show:hover {
+            background: #212A3E;
+        }
 
+    /* Sidebar */
+    .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            background-color: #FF6347;
+            height: 100%;
+            padding-top: 20px;
+            z-index: 1000;
+        }
 
+        .sidebar .navbar-brand {
+            font-weight: bold;
+            font-size: 1.8rem;
+            padding: 15px 20px;
+            color: black;
+            text-align: center;
+        }
 
+        .sidebar .navbar-brand span {
+            color: white;
+        }
+
+        .sidebar .navbar-brand:hover {
+            color: white;
+        }
+
+        .sidebar .nav-link {
+            display: block;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            color: white;
+        }
+
+        .sidebar .nav-link:hover {
+            background-color: #ffffff;
+            color: black;
+        }
+
+    /* Button */
     #edit {
         color: white;
         background-color: #6A5ACD;
@@ -176,7 +205,6 @@
         border: none;
     }
 
-
     #hapus {
         color: white;
         background: #FF7F50;
@@ -187,7 +215,7 @@
 
     #hapus:hover {
         border: none;
-        background:  #FF6347;
+        background: #FF6347;
     }
     </style>
 </head>
@@ -196,23 +224,27 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-transparent" id="navbar">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">5th <span>Apparrel</span></a>
-           
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link " aria-current="page" href="{{ route('products.index') }}">Product</a>
+                        <a class="nav-link" href="#">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('suppliers.index') }}">Supplier</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('transaksi.index') }}">Transaksi</a>
+                        <a class="nav-link" href="#">Sign Up</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <a class="navbar-brand" href="{{ route('products.index') }}">5th <span>Apparel</span></a>
+        <a class="nav-link" href="{{ route('products.index') }}">Product</a>
+        <a class="nav-link" href="{{ route('suppliers.index') }}">Supplier</a>
+        <a class="nav-link" href="{{ route('transaksi.index') }}">Transaksi</a>
+    </div>
+
     
     <!-- Hero Section -->
     <section id="hero">
@@ -221,35 +253,34 @@
     </section>
     
     <!-- Product List Section -->
-    <!-- Product List Section -->
-<section id="list-product">
-    <div class="container">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h1 class="our-product">Our Products</h1>
-            <a href="{{ route('products.create') }}" class="btn btn-md font-semibold" id="btn">ADD PRODUCT</a>
-        </div>
-        <div class="product-grid" >
-            <!-- Looping Products -->
-            @foreach($products as $product)
-            <div class="product-card" data-aos="flip-left" data-aos-duration="1000" onclick="window.location='{{ route('products.show', $product->id) }}'" style="cursor: pointer;">
-                <img src="{{ 'storage/public/images/' . $product->image }}" alt="Product Image">
-                <div class="card-body">
-                    <h3 class="product-title">{{ $product->title }}</h3>
-                    <p class="product-price">Rp. {{ number_format($product->price, 2, ',', '.') }}</p>
-                    <p class="product-stock">Stock: {{ $product->stock }}</p>
-
-                    <form onsubmit="return confirm('Apakah Anda Yakin ?')" action="{{ route('products.destroy', $product->id) }}" method="POST">
-                        <a href="{{ route('products.edit', $product->id) }}" class="btn btn-sm " id="edit">EDIT</a>
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-sm " id="hapus">HAPUS</button>
-                    </form>
-                </div>
+    <section id="list-product">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h1 class="our-product">Our Products</h1>
+                <a href="{{ route('products.create') }}" class="btn btn-md font-semibold" id="btn">ADD PRODUCT</a>
             </div>
-            @endforeach
+            <div class="product-grid" >
+                <!-- Looping Products -->
+                @foreach($products as $product)
+                <div class="product-card" data-aos="flip-left" data-aos-duration="1000" onclick="window.location='{{ route('products.show', $product->id) }}'" style="cursor: pointer;">
+                    <img src="{{ 'storage/public/images/' . $product->image }}" alt="Product Image">
+                    <div class="card-body">
+                        <h3 class="product-title">{{ $product->title }}</h3>
+                        <p class="product-price">Rp. {{ number_format($product->price, 2, ',', '.') }}</p>
+                        <p class="product-stock">Stock: {{ $product->stock }}</p>
+
+                        <form onsubmit="return confirm('Apakah Anda Yakin ?')" action="{{ route('products.destroy', $product->id) }}" method="POST">
+                            <a href="{{ route('products.edit', $product->id) }}" class="btn btn-sm " id="edit">EDIT</a>
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm " id="hapus">HAPUS</button>
+                        </form>
+                    </div>
+                </div>
+                @endforeach
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
 
     <script src="https://unpkg.com/typeit@8.7.1/dist/index.umd.js"></script>

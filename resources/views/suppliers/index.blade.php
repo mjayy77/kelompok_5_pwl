@@ -15,8 +15,9 @@
           background: #DDDDDD;
         }
 
+    /* Navbar */
     .navbar {
-            padding: 10px 5%;
+            padding: 5px 5%;
             position: fixed;
             top: 0;
             left: 0;
@@ -25,29 +26,18 @@
             color: black;
         }
 
-        .supplier-list {
-            padding: 10px 7%;
-
-        }
-
         .nav-color {
             background-color: white;
             transition: all ease-in-out 0.3s;
         }
 
-        .navbar-brand {
-            font-weight: bold;
-            font-size: 2rem;
-            color: black;
-        }
-
-        .navbar-brand span {
-            color: #FF6347;
+        .bg-transparent {
+            transition: all ease-in-out 0.3s;
         }
 
         .navbar-brand:hover {
-        color: black; 
-        text-decoration: none;
+            color: black;
+            text-decoration: none;
         }
 
         .nav-link {
@@ -62,13 +52,73 @@
             font-size: 1.2rem;
         }
 
+        #btn {
+            background: #10375C;
+            color: white;
+            transition: 0.1s;
+        }
+
+        #btn:hover {
+            background: #FF6347;
+        }
+
+        #show {
+            background: #394867;
+            color: white;
+            transition: 0.2s;
+        }
+
+        #show:hover {
+            background: #212A3E;
+        }
+
+        /* Sidebar */
+        .sidebar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 250px;
+                background-color: #FF6347;
+                height: 100%;
+                padding-top: 20px;
+                z-index: 1000;
+            }
+
+            .sidebar .navbar-brand {
+                font-weight: bold;
+                font-size: 1.8rem;
+                padding: 15px 20px;
+                color: black;
+                text-align: center;
+            }
+
+            .sidebar .navbar-brand span {
+                color: white;
+            }
+
+            .sidebar .navbar-brand:hover {
+                color: white;
+            }
+
+            .sidebar .nav-link {
+                display: block;
+                padding: 10px 20px;
+                font-size: 1.2rem;
+                color: white;
+            }
+
+            .sidebar .nav-link:hover {
+                background-color: #ffffff;
+                color: black;
+            }
+
         #hero {
         background-image: url(storage/public/images/suppliers.jpg);
         height: 60vh;
         width: 100%;
         background-size: cover;
         background-position: top 25% right 0;
-        padding: 0 80px;
+        padding: 0 330px;
         justify-content: center;
         align-items: center; 
         display: flex;
@@ -91,14 +141,24 @@
     }
 
     #hero h3 {
-        position: relative;
+        position: absolute;
         font-size: 80px;
         z-index: 2; /* Agar teks muncul di atas overlay */
     }
-
-        
    
+    .supplier-list {
+            padding: 0 80px 0 300px;
+        }
 
+    #list-supplier {
+            padding: 0 0 0 200px;
+        }
+
+    #title {
+        color: white;
+        font-weight: 700;
+        padding-left: 250px
+    }
 
     #card {
         background-color: white;
@@ -137,8 +197,8 @@
     }
 
     #btn{
-        color: black;
-        border: 2px solid black;
+        color: white;
+        border: none;
         margin-bottom: 10px;
         transition: 0.2s;
     }
@@ -164,7 +224,7 @@
         color: white;
         background-color: #6A5ACD;
         transition: 0.2s;
-        margin-left:10px;
+        margin-top:3px;
         transition: 0.2s;
         border:none;
     }
@@ -179,49 +239,52 @@
         color: white;
         background: #FF7F50;
         transition: 0.2s;
-        margin-left: 10px;
+        margin-top: 3px;
         border:none;
         
     }
 
     #hapus:hover {
         border: none;
-        background:  #FF6347;
+        background: #FF6347;
     }
     
 </style>
 <body>
 
+<!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-transparent" id="navbar">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">5th <span>Apparrel</span></a>
-           
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link " aria-current="page" href="{{ route('products.index') }}">Product</a>
+                        <a class="nav-link" href="#">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('suppliers.index') }}">Supplier</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('transaksi.index') }}">Transaksi</a>
+                        <a class="nav-link" href="#">Sign Up</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <section id="hero">
-        <h3 id="typing" style="color:white; font-weight: 700;"></h3>
-    </section>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <a class="navbar-brand" href="{{ route('products.index') }}">5th <span>Apparel</span></a>
+        <a class="nav-link" href="{{ route('products.index') }}">Product</a>
+        <a class="nav-link" href="{{ route('suppliers.index') }}">Supplier</a>
+        <a class="nav-link" href="{{ route('transaksi.index') }}">Transaksi</a>
+    </div>
 
+    <section id="hero">
+        <h3 id="title">SUPPLIERS</h3>
+    </section>
 
     <section class="supplier-list">
         <h3>Our Suppliers List</h3>
     </section>
 
-    <div class="container mt-5">
+    <div class="container mt-5" id="list-supplier">
         <div class="row">
             <div class="col-md-12">
                 <div class="card border-0 shadow-sm rounded" id="card">
@@ -230,7 +293,6 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    
                                     <th scope="col" id="type1">Nama Supplier</th>
                                     <th scope="col" id="type2">Alamat Supplier</th>
                                     <th scope="col" id="type3">PIC SUPPLIER</th>
@@ -246,12 +308,10 @@
                                     <td>{{ $supplier->pic_supplier }}</td>
                                     <td>{{ $supplier->no_hp_pic_supplier }}</td>
                                     <td class="text-center">
-                                    
                                         <form>
-                                            <a href="{{ route('suppliers.show', $supplier->id) }}" class="btn btn-sm btn-dark" id="show">SHOW</a>
-                                            <a href="{{ route('suppliers.edit', $supplier->id) }}" class="btn btn-sm btn-primary" id="edit">EDIT</a>
+                                            <a href="{{ route('suppliers.show', $supplier->id) }}" class="btn btn-sm btn-dark" id="show">SHOW</a><br>
+                                            <a href="{{ route('suppliers.edit', $supplier->id) }}" class="btn btn-sm btn-primary" id="edit">EDIT</a><br>
                                             @csrf
-
                                             <button type="submit" class="btn btn-sm" id="hapus">HAPUS</button>
                                         </form>
                                     </td>
@@ -276,8 +336,8 @@
 
     <script>
          document.addEventListener("DOMContentLoaded", function () {
-        new TypeIt("#typing", {
-        strings: ["SUPPLIERS"],
+        new TypeIt("#title", {
+        strings: [],
         speed: 50
         }).go();
 
@@ -310,7 +370,6 @@
         strings: [],
         speed: 50
         }).go();
-        
         });
 
 
@@ -322,10 +381,6 @@
                 navbar.classList.replace('nav-color', 'bg-transparent')
             }
         })
-        
-
-       
-
         
         // message with sweetalert
         @if(session('success'))
