@@ -64,27 +64,28 @@
             box-shadow: 0 5px 10px rgba(255, 99, 71, 0.5);
         }
         .card h5 {
-            margin: 0 0 10px;
+            margin: 0 0 20px 0;
             font-size: 1.5rem;
             font-weight: bold;
         }
         .card p {
             font-size: 1.2rem;
-            margin: 10px 0;
         }
-        .card a {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 10px 20px;
-            background-color: #10375C;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 1rem;
-            transition: 0.1s;
+        .transaksi {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
         }
-        .card a:hover {
-            background-color: #FF6347;
+        .canceled {
+            color: #dc3545;
+        }
+        .text-success {
+            color: #28a745;
+        }
+        .text-danger {
+            color: #dc3545;
+        }
+        ul {
+            list-style-type: square;
         }
     </style>
 </head>
@@ -98,6 +99,24 @@
     </section>
 
     <section class="panels">
+        @if(!$lowStockItems->isEmpty())
+        <div class="container">
+            <h3>Need Action</h3>
+            <p>Need Your Attention Quickly</p>
+            <hr>
+            <div class="row">
+                <div class="card" onclick="window.location='{{ route('products.index') }}'" style="cursor: pointer;">
+                    <h5>Low Stock Items</h5>
+                    <ul>
+                        @foreach($lowStockItems as $item)
+                            <li><strong>{{ $item->title }}</strong> - Stock: {{ $item->stock }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
+        @endif
+
         <div class="container">
             <h3>This Month</h3>
             <p>Your Recap For This Month</p>
@@ -113,14 +132,19 @@
                 </div>
                 <div class="card" onclick="window.location='{{ route('transaksi.index') }}'" style="cursor: pointer;">
                     <h5>This Month Transactions</h5>
-                    <p><strong>On Process:</strong> {{ $statusCounts['On Process'] }}</p>
-                    <p><strong>Delivered:</strong> {{ $statusCounts['Delivered'] }}</p>
-                    <p><strong>Arrived:</strong> {{ $statusCounts['Arrived'] }}</p>
-                    <p><strong>Canceled:</strong> {{ $statusCounts['Canceled'] }}</p>
+                    <div class="col md-3 transaksi">
+                        <div class="on-process"><p><strong>On Process:</strong> {{ $statusCounts['On Process'] }}</p></div>
+                        <div class="arrived"><p><strong>Arrived:</strong> {{ $statusCounts['Arrived'] }}</p></div>
+                    </div> 
+                    <div class="col md-3 transaksi">
+                        <div class="delivered"><p><strong>Delivered:</strong> {{ $statusCounts['Delivered'] }}</p></div>
+                        <div class="canceled"><p><strong>Canceled:</strong> {{ $statusCounts['Canceled'] }}</p></div>
+                    </div>
                 </div>
                 <div class="card">
                     <h5>This Month Revenue</h5>
-                    <p>Rp {{ number_format($monthlyRevenue, 2, ",", ".") }}</p>
+                    <p>Rp {{ number_format($monthlyRevenue, 2, ",", ".") }} 
+                    <span class="{{ $revenueChangeClass }}">({{ $percentageSign }}{{ $formattedPercentage }}%)</span></p>
                 </div>
             </div>
         </div>
@@ -142,10 +166,14 @@
                 </div>
                 <div class="card" onclick="window.location='{{ route('transaksi.index') }}'" style="cursor: pointer;">
                     <h5>Transactions</h5>
-                    <p><strong>On Process:</strong> {{ $statusCountsOverall['On Process'] }}</p>
-                    <p><strong>Delivered:</strong> {{ $statusCountsOverall['Delivered'] }}</p>
-                    <p><strong>Arrived:</strong> {{ $statusCountsOverall['Arrived'] }}</p>
-                    <p><strong>Canceled:</strong> {{ $statusCountsOverall['Canceled'] }}</p>
+                    <div class="col md-3 transaksi">
+                        <div class="on-process"><p><strong>On Process:</strong> {{ $statusCountsOverall['On Process'] }}</p></div>
+                        <div class="arrived"><p><strong>Arrived:</strong> {{ $statusCountsOverall['Arrived'] }}</p></div>
+                    </div> 
+                    <div class="col md-3 transaksi">
+                        <div class="delivered"><p><strong>Delivered:</strong> {{ $statusCountsOverall['Delivered'] }}</p></div>
+                        <div class="canceled"><p><strong>Canceled:</strong> {{ $statusCountsOverall['Canceled'] }}</p></div>
+                    </div>
                 </div>
 
                 <div class="card">

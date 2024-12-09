@@ -54,6 +54,8 @@
             font-weight: bold;
             padding: 10px 20px;
             border: none;
+            width: fit-content;
+            margin-left: 10px;
         }
 
         .btn-primary:hover {
@@ -63,13 +65,18 @@
         }
 
         .btn-warning {
+            background-color: #FF6347;
+            color: white;
             font-weight: bold;
             padding: 10px 20px;
             border: none;
+            width: fit-content;
         }
 
-        .btn-primary:hover {
+        .btn-warning:hover {
             border: none;
+            background-color: #980000;
+            color: white;
         }
     </style>
 </head>

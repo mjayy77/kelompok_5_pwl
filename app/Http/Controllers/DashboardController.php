@@ -13,6 +13,7 @@ class DashboardController extends Controller
     
     public function index()
     {
+        // Overall
         $productCount = Product::count();
         $supplierCount = Supplier::count();
         $transactionCount = TransaksiPenjualan::count();
@@ -30,6 +31,7 @@ class DashboardController extends Controller
             'Canceled' => $transactionsByStatusOverall[4] ?? 0,
         ];
 
+        // Monthly
         $startOfMonth = Carbon::now()->startOfMonth();
         $endOfMonth = Carbon::now()->endOfMonth();
 
@@ -52,6 +54,29 @@ class DashboardController extends Controller
         $newProducts = Product::whereBetween('created_at', [$startOfMonth, $endOfMonth])->count();
         $newSuppliers = Supplier::whereBetween('created_at', [$startOfMonth, $endOfMonth])->count();
 
+        // Past month
+        $startOfLastMonth = Carbon::now()->subMonth()->startOfMonth();
+        $endOfLastMonth = Carbon::now()->subMonth()->endOfMonth();
+
+        $lastMonthRevenue = TransaksiPenjualan::whereBetween('tanggal_transaksi', [$startOfLastMonth, $endOfLastMonth])
+            ->where('status_pemesanan_id', '!=', 4)
+            ->sum('total');
+
+        $percentageChange = 0;
+        if ($lastMonthRevenue > 0) {
+            $percentageChange = (($monthlyRevenue - $lastMonthRevenue) / $lastMonthRevenue) * 100;
+        }
+
+        $revenueChangeClass = ($percentageChange >= 0) ? 'text-success' : 'text-danger';
+        $formattedPercentage = number_format(abs($percentageChange), 2);
+        $percentageSign = $percentageChange >= 0 ? '+' : '-';
+
+        // Need attention
+        $lowStockItems = Product::where('stock', '<', 10)
+            ->orderBy('stock', 'asc')
+            ->get(['id', 'title', 'stock']);
+
+
         return view('dashboard.index', compact(
             'productCount',
             'supplierCount',
@@ -62,6 +87,11 @@ class DashboardController extends Controller
             'monthlyRevenue',
             'newProducts',
             'newSuppliers',
+            'lastMonthRevenue',
+            'formattedPercentage',
+            'percentageSign',
+            'revenueChangeClass',
+            'lowStockItems',
         ));
     }
 }
