@@ -6,109 +6,108 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Add New Suppliers</title>
+    <link rel="icon" href="{{ asset('storage/public/images/favicon.ico') }}" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,200;0,300;0,400;1,300;1,500;1,800;1,900&family=Poppins:wght@400;600&family=Rancho&display=swap');
-body {
-    background: #DDDDDD;
-}
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,200;0,300;0,400;1,300;1,500;1,800;1,900&family=Poppins:wght@400;600&family=Rancho&display=swap');
+        body {
+            background: #DDDDDD
+        }
 
-/* Container styling */
-.container {
-    max-width: 900px;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-}
+        /* Container styling */
+        .container {
+            max-width: 900px;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
 
-/* Card styling */
-.card {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
-}
+        /* Card styling */
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+        }
 
-/* Heading styling */
-h4 {
-    font-size: 28px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 20px;
-}
+        /* Heading styling */
+        h3 {
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
 
-/* Label styling */
-label {
-    font-weight: bold;
-    color: #333;
-}
+        /* Label styling */
+        label {
+            font-weight: bold;
+            color: #333;
+        }
 
-/* Form controls */
-.form-control {
-    border: 1px solid #ced4da;
-    padding: 10px;
-    font-size: 14px;
-    margin-bottom: 15px;
-}
+        /* Form controls */
+        .form-control {
+            border: 1px solid #ced4da;
+            padding: 10px;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
 
-/* Primary button styling */
-.btn-primary {
-    background-color: #333;
-    border-color: #333;
-    color: #FFFFFF;
-    font-weight: bold;
-    padding: 10px 20px;
-    border: none;
-}
+        /* Primary button styling */
+        .btn-primary {
+            background-color: #333;
+            border-color: #333;
+            color: #FFFFFF;
+            font-weight: bold;
+            padding: 10px 20px;
+            border: none;
+        }
 
-/* Hover effect for primary button */
-.btn-primary:hover {
-    background-color: #555;
-    color: #FFFFFF;
-    border: none;
-}
+        /* Hover effect for primary button */
+        .btn-primary:hover {
+            background-color: #555;
+            color: #FFFFFF;
+            border: none;
+        }
 
-/* Form group margin */
-.form-group {
-    margin-bottom: 15px;
-}
+        /* Form group margin */
+        .form-group {
+            margin-bottom: 15px;
+        }
 
-/* Image preview styling */
-.image-preview {
-    width: 100%;
-    height: auto;
-    margin-bottom: 15px;
-}
+        /* Image preview styling */
+        .image-preview {
+            width: 100%;
+            height: auto;
+            margin-bottom: 15px;
+        }
 
-/* Additional styling if required */
-.btn-warning {
-    color: #ffffff;
-    background-color: #f0ad4e;
-    font-weight: bold;
-    padding: 10px 20px;
-}
+        /* Additional styling if required */
+        .btn-warning {
+            color: #ffffff;
+            background-color: #f0ad4e;
+            font-weight: bold;
+            padding: 10px 20px;
+        }
 
-.btn-warning:hover {
-    background-color: #ec971f;
-}
-.text-add {
-    color: #ff6347;
-}
+        .btn-warning:hover {
+            background-color: #ec971f;
+        }
+        .text-add {
+            color: #ff6347;
+        }
 
-.text-supplier {
-    color: #000000;
-}
-
-
+        .text-supplier {
+            color: #000000;
+        }
     </style>
 </head>
 
 <body>
+<x-scrollbar />
     <div class="container mt-5 mb-5">
         <div class="row">
             <div class="col-md-12">
                 <h3 class="title">
-                    <span class="text-add">Add</span> 
-                    <span class="text-supplier">Supplier</span>
+                    Add Supplier
                 </h3>                
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">

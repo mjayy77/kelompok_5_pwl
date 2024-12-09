@@ -15,7 +15,8 @@ class TransaksiPenjualan extends Model
     protected $fillable = [
         'tanggal_transaksi',
         'total',
-        'email_pembeli'
+        'email_pembeli',
+        'status_pemesanan_id'
     ];
 
 
@@ -23,5 +24,10 @@ class TransaksiPenjualan extends Model
     public function details()
     {
         return $this->hasMany(DetailTransaksiPenjualan::class, 'transaksi_penjualan_id');
+    }
+
+    public function statusPemesanan()
+    {
+        return $this->belongsTo(StatusPemesanan::class, 'status_pemesanan_id');
     }
 }

@@ -5,112 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Data Suppliers</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+    <link rel="icon" href="{{ asset('storage/public/images/favicon.ico') }}" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,700;1,200&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"></head>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,200;0,300;0,400;1,300;1,500;1,800;1,900&family=Poppins:wght@400;600&family=Rancho&display=swap');
-
     body {
           font-family: "Poppins", sans-serif;
           background: #DDDDDD;
         }
-
-    /* Navbar */
-    .navbar {
-            padding: 5px 5%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            color: black;
-        }
-
-        .nav-color {
-            background-color: white;
-            transition: all ease-in-out 0.3s;
-        }
-
-        .bg-transparent {
-            transition: all ease-in-out 0.3s;
-        }
-
-        .navbar-brand:hover {
-            color: black;
-            text-decoration: none;
-        }
-
-        .nav-link {
-            color: black;
-            margin: 16px;
-            font-size: 1.2rem;
-        }
-
-        .nav-link:hover {
-            color: #FF6347;
-            margin: 16px;
-            font-size: 1.2rem;
-        }
-
-        #btn {
-            background: #10375C;
-            color: white;
-            transition: 0.1s;
-        }
-
-        #btn:hover {
-            background: #FF6347;
-        }
-
-        #show {
-            background: #394867;
-            color: white;
-            transition: 0.2s;
-        }
-
-        #show:hover {
-            background: #212A3E;
-        }
-
-        /* Sidebar */
-        .sidebar {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 250px;
-                background-color: #FF6347;
-                height: 100%;
-                padding-top: 20px;
-                z-index: 1000;
-            }
-
-            .sidebar .navbar-brand {
-                font-weight: bold;
-                font-size: 1.8rem;
-                padding: 15px 20px;
-                color: black;
-                text-align: center;
-            }
-
-            .sidebar .navbar-brand span {
-                color: white;
-            }
-
-            .sidebar .navbar-brand:hover {
-                color: white;
-            }
-
-            .sidebar .nav-link {
-                display: block;
-                padding: 10px 20px;
-                font-size: 1.2rem;
-                color: white;
-            }
-
-            .sidebar .nav-link:hover {
-                background-color: #ffffff;
-                color: black;
-            }
 
         #hero {
         background-image: url(storage/public/images/suppliers.jpg);
@@ -147,12 +51,16 @@
     }
    
     .supplier-list {
-            padding: 0 80px 0 300px;
-        }
+        padding: 50px 80px 0 300px;
+    }
+
+    #supplier-list {
+        font-weight: bold;
+    }
 
     #list-supplier {
-            padding: 0 0 0 200px;
-        }
+        padding: 0 0 0 200px;
+    }
 
     #title {
         color: white;
@@ -196,16 +104,18 @@
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     }
 
-    #btn{
-        color: white;
-        border: none;
-        margin-bottom: 10px;
-        transition: 0.2s;
+    #type5 {
+    text-align: center;
     }
 
-    #btn:hover{
+    #btn {
+        background: #10375C;
         color: white;
-        background: black;
+        transition: 0.1s;
+    }
+
+    #btn:hover {
+        background: #FF6347;
     }
 
     #show {
@@ -251,37 +161,21 @@
     
 </style>
 <body>
-
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-transparent" id="navbar">
-        <div class="container-fluid">
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Sign Up</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <!-- Navbar -->
+    <x-navbar />
 
     <!-- Sidebar -->
-    <div class="sidebar">
-        <a class="navbar-brand" href="{{ route('products.index') }}">5th <span>Apparel</span></a>
-        <a class="nav-link" href="{{ route('products.index') }}">Product</a>
-        <a class="nav-link" href="{{ route('suppliers.index') }}">Supplier</a>
-        <a class="nav-link" href="{{ route('transaksi.index') }}">Transaksi</a>
-    </div>
+    <x-sidebar />
+
+    <!-- Scrollbar -->
+    <x-scrollbar />
 
     <section id="hero">
         <h3 id="title">SUPPLIERS</h3>
     </section>
 
     <section class="supplier-list">
-        <h3>Our Suppliers List</h3>
+        <h3 id="supplier-list">Your Suppliers List</h3>
     </section>
 
     <div class="container mt-5" id="list-supplier">
@@ -308,11 +202,13 @@
                                     <td>{{ $supplier->pic_supplier }}</td>
                                     <td>{{ $supplier->no_hp_pic_supplier }}</td>
                                     <td class="text-center">
-                                        <form>
+                                        <form action="{{ route('suppliers.destroy', $supplier->id) }}" method="POST" onsubmit="return confirm('Apakah Anda Yakin ?')">
+                                            @csrf
+                                            @method('DELETE')
+
                                             <a href="{{ route('suppliers.show', $supplier->id) }}" class="btn btn-sm btn-dark" id="show">SHOW</a><br>
                                             <a href="{{ route('suppliers.edit', $supplier->id) }}" class="btn btn-sm btn-primary" id="edit">EDIT</a><br>
-                                            @csrf
-                                            <button type="submit" class="btn btn-sm" id="hapus">HAPUS</button>
+                                            <button type="submit" class="btn btn-sm btn-danger" id="hapus">HAPUS</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -335,7 +231,7 @@
 
 
     <script>
-         document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function () {
         new TypeIt("#title", {
         strings: [],
         speed: 50
@@ -366,7 +262,7 @@
         speed: 200
         }).go();
 
-        new TypeIt(".supplier-list", {
+        new TypeIt("#supplier-list", {
         strings: [],
         speed: 50
         }).go();

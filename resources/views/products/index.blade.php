@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Data Products</title>
+    <link rel="icon" href="{{ asset('storage/public/images/favicon.ico') }}" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,700;1,200&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
@@ -17,27 +18,49 @@
 
         /* Style for hero section */
         #hero {
-            background-image: url(storage/public/images/hero4.png);
-            height: 90vh;
+            background-image: url(storage/public/images/products.png);
+            height: 60vh;
             width: 100%;
             background-size: cover;
             background-position: top 25% right 0;
-            padding: 0 0 0 330px;
+            padding: 0 330px;
             justify-content: center;
-            align-items: flex-start;
+            align-items: center; 
             display: flex;
             flex-direction: column;
             color: black;
+            text-align: center;
         }
 
-        #hero h2 {
+        #hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height:60vh;
+            background-color: rgba(0, 0, 0, 0.2); 
+            z-index: 1; 
+
+        }
+
+        #hero h3 {
+            position: absolute;
+            font-size: 80px;
+            z-index: 2;
+            color: white;
             font-weight: 700;
-            font-size: 50px;
-            color: #FF6347;
+            padding-left: 250px
         }
 
         #list-product {
-            padding: 0 80px 0 300px;
+            padding: 50px 80px 0 300px;
+        }
+
+        #our-product {
+            font-weight: bold;
+            padding: 20px 0;
         }
        
         /* Card styling */
@@ -51,7 +74,7 @@
 
         .product-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 10px rgba(255, 99, 71, 0.5);
         }
 
         .product-card img {
@@ -70,9 +93,10 @@
         }
 
         .product-card .product-price {
-            font-size: 1rem;
+            font-size: 1.2rem;
             color: #FF6347;
             margin-bottom: 5px;
+            font-weight: bold;
         }
 
         .product-card .product-stock {
@@ -85,7 +109,6 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
-            padding: 20px;
         }
 
         @media (min-width: 992px) {
@@ -94,108 +117,21 @@
             }
         }
 
-        /* Navbar */
-        .navbar {
-            padding: 5px 5%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            color: black;
-        }
-
-        .nav-color {
-            background-color: white;
-            transition: all ease-in-out 0.3s;
-        }
-
-        .bg-transparent {
-            transition: all ease-in-out 0.3s;
-        }
-
-        .navbar-brand:hover {
-            color: black;
-            text-decoration: none;
-        }
-
-        .nav-link {
-            color: black;
-            margin: 16px;
-            font-size: 1.2rem;
-        }
-
-        .nav-link:hover {
-            color: #FF6347;
-            margin: 16px;
-            font-size: 1.2rem;
-        }
-
-        #btn {
-            background: #10375C;
-            color: white;
-            transition: 0.1s;
-        }
-
-        #btn:hover {
-            background: #FF6347;
-        }
-
-        #show {
-            background: #394867;
-            color: white;
-            transition: 0.2s;
-        }
-
-        #show:hover {
-            background: #212A3E;
-        }
-
-    /* Sidebar */
-    .sidebar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 250px;
-            background-color: #FF6347;
-            height: 100%;
-            padding-top: 20px;
-            z-index: 1000;
-        }
-
-        .sidebar .navbar-brand {
-            font-weight: bold;
-            font-size: 1.8rem;
-            padding: 15px 20px;
-            color: black;
-            text-align: center;
-        }
-
-        .sidebar .navbar-brand span {
-            color: white;
-        }
-
-        .sidebar .navbar-brand:hover {
-            color: white;
-        }
-
-        .sidebar .nav-link {
-            display: block;
-            padding: 10px 20px;
-            font-size: 1.2rem;
-            color: white;
-        }
-
-        .sidebar .nav-link:hover {
-            background-color: #ffffff;
-            color: black;
-        }
-
     /* Button */
+    #btn {
+        background: #10375C;
+        color: white;
+        transition: 0.1s;
+    }
+
+    #btn:hover {
+        background: #FF6347;
+    }
+    
     #edit {
         color: white;
         background-color: #6A5ACD;
-        transition: 0.2s;
+        t,ransition: 0.2s;
         margin-left:10px;
         transition: 0.2s;
     }
@@ -222,51 +158,32 @@
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-transparent" id="navbar">
-        <div class="container-fluid">
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Sign Up</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <x-navbar />
 
     <!-- Sidebar -->
-    <div class="sidebar">
-        <a class="navbar-brand" href="{{ route('products.index') }}">5th <span>Apparel</span></a>
-        <a class="nav-link" href="{{ route('products.index') }}">Product</a>
-        <a class="nav-link" href="{{ route('suppliers.index') }}">Supplier</a>
-        <a class="nav-link" href="{{ route('transaksi.index') }}">Transaksi</a>
-    </div>
+    <x-sidebar />
 
+    <!-- Scrollbar -->
+    <x-scrollbar />
     
-    <!-- Hero Section -->
     <section id="hero">
-        <h2 id="typing1">Temukan Gaya Unikmu di <br>Setiap Langkah!</h2>
-        <p id="typing2">Jaket dan T-Shirt Berkualitas untuk Setiap Kesempatan!</p>
+        <h3 id="title">PRODUCTS</h3>
     </section>
     
     <!-- Product List Section -->
     <section id="list-product">
         <div class="container">
             <div class="d-flex justify-content-between align-items-center mb-3">
-                <h1 class="our-product">Our Products</h1>
+                <h3 id="our-product">Your Products</h3>
                 <a href="{{ route('products.create') }}" class="btn btn-md font-semibold" id="btn">ADD PRODUCT</a>
             </div>
             <div class="product-grid" >
-                <!-- Looping Products -->
-                @foreach($products as $product)
-                <div class="product-card" data-aos="flip-left" data-aos-duration="1000" onclick="window.location='{{ route('products.show', $product->id) }}'" style="cursor: pointer;">
+                @forelse($products as $product)
+                <div class="product-card" onclick="window.location='{{ route('products.show', $product->id) }}'" style="cursor: pointer;">
                     <img src="{{ 'storage/public/images/' . $product->image }}" alt="Product Image">
                     <div class="card-body">
                         <h3 class="product-title">{{ $product->title }}</h3>
-                        <p class="product-price">Rp. {{ number_format($product->price, 2, ',', '.') }}</p>
+                        <p class="product-price">Rp. {{ number_format($product->final_price, 2, ',', '.') }}</p>
                         <p class="product-stock">Stock: {{ $product->stock }}</p>
 
                         <form onsubmit="return confirm('Apakah Anda Yakin ?')" action="{{ route('products.destroy', $product->id) }}" method="POST">
@@ -277,7 +194,11 @@
                         </form>
                     </div>
                 </div>
-                @endforeach
+                @empty
+                    <div class="alert alert-danger">
+                        Data Produk belum Tersedia.
+                    </div>
+                @endforelse
             </div>
         </div>
     </section>
@@ -289,23 +210,18 @@
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 
     <script>
-          document.addEventListener("DOMContentLoaded", function () {
-        new TypeIt("#typing1", {
+    document.addEventListener("DOMContentLoaded", function () {
+        new TypeIt("#title", {
         strings: [],
         speed: 40
         }).go();
 
-        new TypeIt("#typing2", {
+        new TypeIt("#our-product", {
         strings: [],
         speed: 60
         }).go();
 
-        new TypeIt(".our-product", {
-        strings: [],
-        speed: 60
-        }).go();
-
-         });
+    });
 
 
         // message with sweetalert

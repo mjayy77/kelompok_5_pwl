@@ -4,12 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Show Product</title>
+    <link rel="icon" href="{{ asset('storage/public/images/favicon.ico') }}" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <style>
     .bg {
-        background: #f8f9fa;
+        background: #DDDDDD;
     }
+
+    h3 {
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
 
     #card-img  {
         background: white;
@@ -33,11 +41,10 @@
     }
 </style>
 <body class="bg">
-    
+<x-scrollbar />
     <div class="container mt-5 mb-5">
         <div class="row">
             <h3 style="color: black">Show Product</h3>
-            <hr>
             <div class="col-md-4">
                 <div class="card border-0 shadow-5m rounded">
                     <div class="card-body">
@@ -54,14 +61,17 @@
                             <hr/>
                             <p id="typing3">Supplier : {{ $product->nama_supplier }}</p>
                             <hr/>
-                            <p id="typing4">{{ "Rp " . number_format($product->price,2,',','.') }}</p>
-                            <code id="typing5">
-                                <p>{!! $product->description !!}</p>
-                            </code>
+                            <p id="typing5">Description : {!! $product->description !!}</p>
+                            <hr/>
+                            <p id="typing4">Price : {{ "Rp " . number_format($product->price,2,',','.') }}</p>
+                            <hr/>
+                            <p id="typing7">Discount : {{ $product->discount }}%</p>
+                            <hr/>
+                            <p id="typing8">Final Price : {{ "Rp " . number_format($product->final_price,2,',','.') }}</p>
                             <hr/>
                             <p id="typing6">Stock : {{ $product->stock }}</p>
                             <hr/>
-                            <a href="{{ route('products.index') }}" class="btn ">Kembali</a>
+                            <a href="{{ route('products.index') }}" class="btn">Kembali</a>
                         </div>
                     </div>
                 </div>
@@ -106,8 +116,17 @@
         strings: [],
         speed: 50
         }).go();
-
         
+        new TypeIt("#typing7", {
+        strings: [],
+        speed: 50
+        }).go();
+
+        new TypeIt("#typing8", {
+        strings: [],
+        speed: 50
+        }).go();
+
         });
     </script>
 </body>
