@@ -79,6 +79,14 @@
         color: white;
     }
 
+    .navbar-brand:hover {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .navbar-brand:hover span {
+        text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
+    }
+
     #navbarDropdown {
         background: none;
         border: none;
@@ -121,7 +129,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light">
             <div class="container" id="nav-container">
-                <a class="navbar-brand" id="current-page-link">5th <span>Apparel</span></a>
+                <a class="navbar-brand" href="{{ route('home.index') }}">5th <span>Admin</span></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>

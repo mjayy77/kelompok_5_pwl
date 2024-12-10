@@ -52,7 +52,7 @@
 </style>
 
 <div class="sidebar">
-    <a class="navbar-brand" href="{{ route('dashboard') }}">5th <span>Apparel</span></a>
+    <a class="navbar-brand" href="{{ route('dashboard') }}">5th <span>Admin</span></a>
     <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
     <a class="nav-link" href="{{ route('products.index') }}">Product</a>
     <a class="nav-link" href="{{ route('categories.index') }}">Category</a>
