@@ -42,14 +42,14 @@
         background: none;
         border: none;
         padding: 0;
-        color: black;
+        color: #FF6347;
         margin: 16px 0;
         font-size: 1.2rem;
         font-weight: bold;
     }
 
     #navbarDropdown:hover {
-        color: #FF6347;
+        color: #FF5030;
         font-size: 1.2rem;
     }
 

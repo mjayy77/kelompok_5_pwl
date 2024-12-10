@@ -18,7 +18,7 @@
 
         /* Style for hero section */
         #hero {
-            background-image: url(storage/public/images/products.png);
+            background-image: url(storage/public/images/product.jpg);
             height: 60vh;
             width: 100%;
             background-size: cover;

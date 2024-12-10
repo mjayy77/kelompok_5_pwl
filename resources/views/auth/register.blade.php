@@ -3,78 +3,81 @@
 <title>Register</title>
 
 <style>
-    /* background */
-    #main-content {
-        background-image: url(storage/public/images/register.jpg);
-        background-size: cover;
-        background-position: center center;
-        z-index: 0;
-    }
-
+    /* Background */
     .bg {
         margin: 0;
         padding: 0;
         width: 100%;
-        height: 100%;
+        height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
+        position: relative;
+        background-image: url(storage/public/images/login.jpg);
+        background-size: cover;
+        background-position: center;
         background-color: rgba(0, 0, 0, 0.5);
     }
 
-    /* form */
+    /* Overlay Hitam */
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        z-index: 1;
+    }
+
+    /* Box */
     .box {
         width: 50%;
-        height: 65vh;
-        justify-content: center;
-        margin: 25%;
-        padding: 0;
+        max-width: 600px;
+        padding: 20px;
         border-radius: 10px;
         box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
         background-color: rgba(243, 243, 243, 0.85);
+        z-index: 2;
+        position: relative;
+        height: auto; 
+        min-height: 450px;
     }
 
+    /* Header */
     .header {
-        display: block;
         text-align: center;
         font-weight: bolder;
         font-size: 1.5rem;
-        border: none;
-        padding-top: 30px;
+        padding-top: 35px;
     }
 
     .subtitle {
-        display: block;
         text-align: center;
         color: #666666;
-        border: none;
-        margin-bottom: 30px;
+        margin-bottom: 35px;
     }
 
     .form {
-        display: block;
-        justify-content: center;
-        align-items: center;
-        border: none;
         padding: 0 5vh;
     }
 
+    /* Button */
     #btn {
         background-color: #10375C;
         border: none;
         color: white;
         transition: 0.1s;
         padding: 7.5px 15px;
-        margin: 0;
+        margin: 7.5px 0;
     }
 
     #btn:hover {
         background-color: #FF6347;
     }
 
+    /* Link */
     #link {
-        padding: 0;
-        margin: 0;
         color: #a0210a;
     }
 
@@ -82,80 +85,111 @@
         color: #10375C;
     }
 
-    #form-group {
+    /* Form group */
+    .form-group {
         display: flex;
         justify-content: space-between;
-        align-items: baseline;
+        align-items: center;
+    }
+
+    .text-end {
+    text-align: right; /* Mengarahkan teks link ke kanan */
+    }
+
+    .form-group .col-md-6 {
+        flex: 1; /* Membuat kedua input memiliki lebar sama */
+        display: flex;
+        flex-direction: column; /* Pesan error di bawah input */
+    }
+
+    .invalid-feedback {
+        font-size: 0.85rem;
+        color: red;
+        margin-top: 5px;
+    }
+
+    .w-100 {
+        width: 100%;
+    }
+
+    .text-end {
+        text-align: right;
     }
 </style>
 
 @section('content')
 <div class="bg">
-    <div class="container">
-        <div class="box">
-            <div class="header">{{ __('REGISTER') }}</div>
-            <div class="subtitle">Please fill in the registration information in the form below</div>
+    <div class="overlay"></div>
+    <div class="box">
+        <div class="header">{{ __('REGISTER') }}</div>
+        <div class="subtitle">Please fill in the registration information in the form below</div>
 
-            <div class="form">
-                <form method="POST" action="{{ route('register') }}">
-                    @csrf
+        <div class="form">
+            <form method="POST" action="{{ route('register') }}">
+                @csrf
 
-                    <div class="row mb-3">
-                        <div class="col-md-12">
-                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Name">
+                <!-- Field Name -->
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Name">
+                        @error('name')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
 
-                            @error('name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
+                <!-- Field Email -->
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Email">
+                        @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+
+                <!-- Field Password & Confirm Password -->
+                <div class="form-group mb-4 d-flex justify-content-between align-items-center">
+                    <!-- Password -->
+                    <div class="col-md-6 pe-3">
+                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password">
+                        @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
 
-                    <div class="row mb-3">
-                        <div class="col-md-12">
-                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Email">
-
-                            @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
+                    <!-- Confirm Password -->
+                    <div class="col-md-6 ">
+                        <input id="password-confirm" type="password" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm Password">
+                        @error('password_confirmation')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
+                </div>
 
-                    <div class="form-group mb-4" id="form-group">
-                        <div class="col-md-6">
-                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password">
-
-                            @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    
-                        <div class="col-md-6">
-                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm Password">
-                        </div>
+                <!-- Register Button & Link -->
+                <div class="form-group mb-4">
+                    <div class="col-md-6">
+                        <button type="submit" class="btn btn-primary w-100" id="btn">
+                            {{ __('REGISTER') }}
+                        </button>
                     </div>
-
-                    <div class="form-group mb-4" id="form-group">
-                        <div class="col-md-7">
-                            <button type="submit" class="btn btn-primary" id="btn">
-                                {{ __('REGISTER') }}
-                            </button>
-                        </div>
-
-                        <div class="col-md-6">
-                            <a class="btn btn-link" id="link" href="{{ route('login') }}">
-                                {{ __('Have an account already?') }}
-                            </a>
-                        </div>
+                    <div class="col-md-6 text-end">
+                        <a class="btn btn-link" id="link" href="{{ route('login') }}">
+                            {{ __('Have an account already?') }}
+                        </a>
                     </div>
-                </form>
-            </div>
-        </div>  
-    </div>
+                </div>
+            </form>
+        </div>
+    </div>  
 </div>
 @endsection
