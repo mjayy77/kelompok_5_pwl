@@ -186,6 +186,15 @@
                             </select>
                         </div>
                         <div class="col">
+                            <label for="metode_pembayaran_id">Metode Pembayaran</label>
+                            <select name="metode_pembayaran_id" id="metode_pembayaran_id" class="form-control" required>
+                                <option value="">Pilih Metode Pembayaran</option>
+                                @foreach($metodePembayarans as $metode)
+                                    <option value="{{ $metode->id }}">{{ $metode->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>                        
+                        <div class="col">
                             <label>Jumlah Pembelian</label>
                             <input type="number" name="details[0][jumlah_pembelian]" class="form-control" min="1" required>
                         </div>
@@ -231,6 +240,16 @@
                         @endforeach
                     </select>
                 </div>
+
+                <div class="col">
+                    <label for="metode_pembayaran_id">Metode Pembayaran</label>
+                    <select name="metode_pembayaran_id" id="metode_pembayaran_id" class="form-control">
+                    @foreach($metodePembayarans as $metodePembayaran)
+                        <option value="{{ $metodePembayaran->id }}">{{ $metodePembayaran->name }}</option>
+                    @endforeach 
+                    </select>
+                </div>
+
                 <div class="col">
                     <label>Jumlah Pembelian</label>
                     <input type="number" name="details[${detailIndex}][jumlah_pembelian]" class="form-control" min="1" required>

@@ -43,6 +43,7 @@ return new class extends Migration
         Schema::create('transaksi_penjualans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('status_pemesanan_id')->nullable()->index();
+            $table->foreignId('metode_pembayaran_id')->nullable()->index()->constrained('metode_pembayarans')->cascadeOnDelete();
             $table->date('tanggal_transaksi'); 
             $table->string('email_pembeli');
             $table->decimal('total')->default(0);

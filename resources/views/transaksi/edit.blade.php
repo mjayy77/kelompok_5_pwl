@@ -206,6 +206,19 @@
                 </div>
             @endforeach
         </div>
+        <div class="form-group mb-3">
+            <label for="metode_pembayaran">Metode Pembayaran</label>
+            <select name="metode_pembayaran_id" id="metode_pembayaran" class="form-control" required>
+                <option value="">Pilih Metode Pembayaran</option>
+                @foreach($metodePembayarans as $metode)
+                    <option value="{{ $metode->id }}" 
+                        {{ $transaksi->metode_pembayaran_id == $metode->id ? 'selected' : '' }}>
+                        {{ $metode->name }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+        
         <button type="button" id="add-detail" class="btn">Tambah Detail</button>
         <button type="submit" id="simpan" class="btn">Simpan</button>
     </form>

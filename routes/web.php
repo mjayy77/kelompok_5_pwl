@@ -8,6 +8,7 @@ use App\Http\Controllers\CategoryProductController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MetodePembayaranController;
 
 Route::get('/', function () {
     return redirect('/login');
@@ -18,6 +19,7 @@ Route::resource('/products', ProductController::class);
 Route::resource('/suppliers', SupplierController::class);
 Route::resource('/transaksi', TransaksiPenjualanController::class);
 Route::resource('/categories', CategoryProductController::class);
+Route::resource('metodePembayarans', MetodePembayaranController::class);
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 

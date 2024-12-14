@@ -12,6 +12,7 @@ use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\TransaksiEmail;
+use App\Models\MetodePembayaran;
 
 class TransaksiPenjualanController extends Controller
 {
@@ -22,7 +23,7 @@ class TransaksiPenjualanController extends Controller
      */
     public function index(): View
     {
-        $transaksi = TransaksiPenjualan::with('details.product')
+        $transaksi = TransaksiPenjualan::with('details.product','metodePembayaran')
                     ->orderBy('tanggal_transaksi', 'desc')
                     ->get();
         return view('transaksi.index', compact('transaksi'));
@@ -37,7 +38,8 @@ class TransaksiPenjualanController extends Controller
     {
         $products = Product::all();
         $statuses = StatusPemesanan::all();
-        return view('transaksi.create', compact('products', 'statuses'));
+        $metodePembayarans = MetodePembayaran::all();
+        return view('transaksi.create', compact('products', 'statuses','metodePembayarans'));
     }
 
     /**
@@ -57,6 +59,7 @@ class TransaksiPenjualanController extends Controller
                 'email_pembeli' => $validatedData['email_pembeli'],
                 'total' => 0,
                 'status_pemesanan_id' => $validatedData['status_pemesanan_id'],
+                'metode_pembayaran_id' => $validatedData['metode_pembayaran_id']
             ]);
 
             $total = 0;
@@ -95,7 +98,7 @@ class TransaksiPenjualanController extends Controller
      */
     public function show(TransaksiPenjualan $transaksi): View
     {
-        $transaksi->load('details.product');
+        $transaksi->load('details.product','metodePembayaran');
         return view('transaksi.show', compact('transaksi'));
     }
 
@@ -107,10 +110,11 @@ class TransaksiPenjualanController extends Controller
      */
     public function edit(TransaksiPenjualan $transaksi): View
     {
-        $transaksi->load('details');
+        $transaksi->load('details','metodePembayaran');
         $products = Product::all();
         $statuses = StatusPemesanan::all();
-        return view('transaksi.edit', compact('transaksi', 'products', 'statuses'));
+        $metodePembayarans = MetodePembayaran::all();
+        return view('transaksi.edit', compact('transaksi', 'products', 'statuses','metodePembayarans'));
     }
 
     /**
@@ -132,6 +136,7 @@ class TransaksiPenjualanController extends Controller
                 'tanggal_transaksi' => $validatedData['tanggal_transaksi'],
                 'email_pembeli' => $validatedData['email_pembeli'],
                 'status_pemesanan_id' => $validatedData['status_pemesanan_id'],
+                'metode_pembayaran_id' => $validatedData['metode_pembayaran_id']
             ]);
     
             // Clear existing details
@@ -189,6 +194,7 @@ class TransaksiPenjualanController extends Controller
             'tanggal_transaksi' => 'required|date',
             'email_pembeli' => 'required|min:1',
             'status_pemesanan_id' => 'required|integer|exists:status_pemesanan,id',
+            'metode_pembayaran_id' => 'required|integer|exists:metode_pembayarans,id',
             'details.*.product_id' => 'required|integer|exists:products,id',
             'details.*.jumlah_pembelian' => 'required|integer|min:1',
         ]);

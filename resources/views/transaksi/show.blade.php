@@ -65,6 +65,7 @@
                             <th>Harga</th>
                             <th>Diskon</th>
                             <th>Jumlah Pembelian</th>
+                            <th>Metode Pembayaran</th>
                             <th>Subtotal</th>
                         </tr>
                     </thead>
@@ -76,6 +77,7 @@
                             <td>Rp{{ number_format($detail->product->price, 2, ',', '.') }}</td>
                             <td>{{ $detail->product->discount }}%</td>
                             <td>{{ $detail->jumlah_pembelian }}</td>
+                            <td>{{ $transaksi->metodePembayaran->name ?? 'N/A' }}</td>
                             <td>Rp{{ number_format($detail->jumlah_pembelian*$detail->harga, 2, ',', '.') }}</td>
                         </tr>
                         @endforeach
