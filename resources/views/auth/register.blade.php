@@ -152,28 +152,33 @@
                     </div>
                 </div>
 
-                <!-- Field Password & Confirm Password -->
-                <div class="form-group mb-4 d-flex justify-content-between align-items-center">
-                    <!-- Password -->
-                    <div class="col-md-6 pe-3">
-                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password">
-                        @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
+                <div class="form-group mb-4">
+                    <!-- Password Input -->
+                    <div class="d-flex">
+                        <div class="col-md-6 pe-2">
+                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password">
 
-                    <!-- Confirm Password -->
-                    <div class="col-md-6 ">
-                        <input id="password-confirm" type="password" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm Password">
-                        @error('password_confirmation')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <!-- Confirm Password Input -->
+                        <div class="col-md-6 ps-2">
+                            <input id="password-confirm" type="password" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm Password">
+
+                            @error('password_confirmation')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
                     </div>
                 </div>
+
+
 
                 <!-- Register Button & Link -->
                 <div class="form-group mb-4">

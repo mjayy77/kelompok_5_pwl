@@ -46,7 +46,7 @@
 
     .nav-link:hover {
         background-color: #ffffff;
-        color: black;
+        color: #FF6347;
         font-weight: bold;
     }
 </style>
