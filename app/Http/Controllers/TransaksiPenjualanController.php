@@ -190,6 +190,7 @@ class TransaksiPenjualanController extends Controller
         ]);
     }
 
+<<<<<<< HEAD
     // send email transaksi
     public function sendTransaksiEmail($to, $id)
 {
@@ -207,3 +208,17 @@ class TransaksiPenjualanController extends Controller
 }
 
 }
+=======
+    public function sendEmail($to, $id)
+     {
+         $transaksi = TransaksiPenjualan::with('details.product')->findOrFail($id);
+ 
+         Mail::send('transaksi.show', ['transaksi' => $transaksi], function ($message) use ($to, $transaksi) {
+             $message->to($to)
+                     ->subject("Detail Transaksi: {$transaksi->id} - Total Tagihan Rp " . number_format($transaksi->total, 2, ',', '.'));
+         });
+ 
+         return response()->json(['message' => 'Email sent successfully!']);
+     }
+}
+>>>>>>> 550039922034fc10efa7f09afd8dded81574e0d1
