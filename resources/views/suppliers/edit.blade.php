@@ -6,19 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Edit Suppliers</title>
+    <link rel="icon" href="{{ asset('storage/public/images/favicon.ico') }}" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,200;0,300;0,400;1,300;1,500;1,800;1,900&family=Poppins:wght@400;600&family=Rancho&display=swap');
         body {
-            background: #9ba1a7;
+            background: #DDDDDD
         }
 
+        /* Container styling */
         .container {
             max-width: 900px;
             margin-top: 2rem;
             margin-bottom: 2rem;
         }
 
+        /* Card styling */
         .card {
             background: white;
             padding: 20px;
@@ -26,25 +29,21 @@
             box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
         }
 
-        h4 {
+        /* Heading styling */
+        h3 {
             font-size: 28px;
             font-weight: bold;
+            color: #333;
             margin-bottom: 20px;
         }
 
-        .text-edit {
-            color: #ff6347;
-        }
-
-        .text-suppliers {
-            color: #000000;
-        }
-
+        /* Label styling */
         label {
             font-weight: bold;
             color: #333;
         }
 
+        /* Form controls */
         .form-control {
             border: 1px solid #ced4da;
             padding: 10px;
@@ -52,6 +51,7 @@
             margin-bottom: 15px;
         }
 
+        /* Primary button styling */
         .btn-primary {
             background-color: #333;
             border-color: #333;
@@ -61,16 +61,29 @@
             border: none;
         }
 
+        /* Hover effect for primary button */
         .btn-primary:hover {
             background-color: #555;
             color: #FFFFFF;
             border: none;
         }
 
+        /* Form group margin */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        /* Image preview styling */
+        .image-preview {
+            width: 100%;
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        /* Additional styling if required */
         .btn-warning {
-            background-color: #FF7F50;
-            border-color: #ffc107;
-            color: #FFFFFF;
+            color: #ffffff;
+            background-color: #b70000;
             font-weight: bold;
             padding: 10px 20px;
             border: none;
@@ -78,26 +91,26 @@
 
         .btn-warning:hover {
             background-color: #FF6347;
-            color: #FFFFFF;
-            border: none;
+            color: white;
+        }
+        .text-add {
+            color: #ff6347;
         }
 
-        .alert-danger {
-            font-size: 12px;
-            padding: 5px;
-            margin-top: 10px;
+        .text-supplier {
+            color: #000000;
         }
     </style>
 </head>
 
 <body>
+<x-scrollbar />
     <div class="container mt-5 mb-5">
         <div class="row">
             <div class="col-md-12">
-                <h4 class="title">
-                    <span class="text-edit">Edit</span> 
-                    <span class="text-suppliers">Suppliers</span>
-                </h4>
+                <h3 class="title">
+                    Edit Supplier
+                </h3>
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">
                         <form action="{{ route('suppliers.update', $supplier->id) }}" method="POST" enctype="multipart/form-data">

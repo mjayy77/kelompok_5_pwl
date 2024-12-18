@@ -20,13 +20,13 @@ class ProductController extends Controller
     {
         //get all products
         // $products = Product::select("products.*", "category_product.product_category_name as product_category_name")
-        //                      ->join('category_product', 'category_product.id', '=', 'products.product_category_id')
+        //                      ->join('category_product', 'category_product.id', '=', 'products.category_product_id')
         //                      ->latest()
         //                      ->paginate(10);
 
         $product = new Product;
         $products = $product->get_product()
-                            ->latest()
+                            ->orderBy('title', 'asc')
                             ->paginate(10);
 
         //render view with products
@@ -48,7 +48,7 @@ class ProductController extends Controller
         return view('products.create', compact('data'));
     }
 
-    /**\
+    /*
      * store
      * 
      * @param mixed $request
@@ -59,11 +59,12 @@ class ProductController extends Controller
         $validateData = $request -> validate([
             'image'                 => 'required|image|mimes:jpeg,jpg,png|max:2048',
             'title'                 => 'required|min:5',
-            'product_category_id'   => 'required|integer',
+            'category_product_id'   => 'required|integer',
             'supplier_id'           => 'required|integer',
             'description'           => 'required|min:10',
             'price'                 => 'required|numeric',
             'stock'                 => 'required|numeric',
+            'discount'              => 'required|numeric|min:0|max:100',
         ]);
 
         //Menghandle upload file gambar
@@ -74,11 +75,12 @@ class ProductController extends Controller
             Product::create([
                 'image'                 => $image->hashName(),
                 'title'                 => $request->title,
-                'product_category_id'   => $request->product_category_id,
+                'category_product_id'   => $request->category_product_id,
                 'supplier_id'           => $request->supplier_id,
                 'description'           => $request->description,
                 'price'                 => $request->price,
                 'stock'                 => $request->stock,
+                'discount'              => $request->discount,
             ]);
         
             // Redirect to the index route with a success message
@@ -142,6 +144,7 @@ class ProductController extends Controller
                 'description' => 'required|min:10',
                 'price'       => 'required|numeric',
                 'stock'       => 'required|numeric',
+                'discount'    => 'required|numeric|min:0|max:100',
             ]);
 
             //get product by ID
@@ -161,21 +164,23 @@ class ProductController extends Controller
                 $product->update([
                     'image'                 => $image->hashName(),
                     'title'                 => $request->title,
-                    'product_category_id'   => $request->product_category_id,
+                    'category_product_id'   => $request->category_product_id,
                     'supplier_id'           => $request->supplier_id,
                     'description'           => $request->description,
                     'price'                 => $request->price,
                     'stock'                 => $request->stock,
+                    'discount'              => $request->discount,
                 ]);        
         } else {
 
             $product->update([
                     'title'                 => $request->title,
-                    'product_category_id'   => $request->product_category_id,
+                    'category_product_id'   => $request->category_product_id,
                     'supplier_id'           => $request->supplier_id,
                     'description'           => $request->description,
                     'price'                 => $request->price,
                     'stock'                 => $request->stock,
+                    'discount'              => $request->discount,
             ]);
 
         }

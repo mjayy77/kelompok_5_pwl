@@ -5,61 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Data Suppliers</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+    <link rel="icon" href="{{ asset('storage/public/images/favicon.ico') }}" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,700;1,200&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"></head>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,200;0,300;0,400;1,300;1,500;1,800;1,900&family=Poppins:wght@400;600&family=Rancho&display=swap');
-
     body {
           font-family: "Poppins", sans-serif;
           background: #DDDDDD;
-        }
-
-    .navbar {
-            padding: 10px 5%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            color: black;
-        }
-
-        .supplier-list {
-            padding: 10px 7%;
-
-        }
-
-        .nav-color {
-            background-color: white;
-            transition: all ease-in-out 0.3s;
-        }
-
-        .navbar-brand {
-            font-weight: bold;
-            font-size: 2rem;
-            color: black;
-        }
-
-        .navbar-brand span {
-            color: #FF6347;
-        }
-
-        .navbar-brand:hover {
-        color: black; 
-        text-decoration: none;
-        }
-
-        .nav-link {
-            color: black;
-            margin: 16px;
-            font-size: 1.2rem;
-        }
-
-        .nav-link:hover {
-            color: #FF6347;
-            margin: 16px;
-            font-size: 1.2rem;
         }
 
         #hero {
@@ -68,7 +22,7 @@
         width: 100%;
         background-size: cover;
         background-position: top 25% right 0;
-        padding: 0 80px;
+        padding: 0 330px;
         justify-content: center;
         align-items: center; 
         display: flex;
@@ -91,14 +45,28 @@
     }
 
     #hero h3 {
-        position: relative;
+        position: absolute;
         font-size: 80px;
         z-index: 2; /* Agar teks muncul di atas overlay */
     }
-
-        
    
+    .supplier-list {
+        padding: 50px 80px 0 300px;
+    }
 
+    #supplier-list {
+        font-weight: bold;
+    }
+
+    #list-supplier {
+        padding: 0 0 0 200px;
+    }
+
+    #title {
+        color: white;
+        font-weight: 700;
+        padding-left: 250px
+    }
 
     #card {
         background-color: white;
@@ -136,16 +104,18 @@
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     }
 
-    #btn{
-        color: black;
-        border: 2px solid black;
-        margin-bottom: 10px;
-        transition: 0.2s;
+    #type5 {
+    text-align: center;
     }
 
-    #btn:hover{
+    #btn {
+        background: #10375C;
         color: white;
-        background: black;
+        transition: 0.1s;
+    }
+
+    #btn:hover {
+        background: #FF6347;
     }
 
     #show {
@@ -164,7 +134,7 @@
         color: white;
         background-color: #6A5ACD;
         transition: 0.2s;
-        margin-left:10px;
+        margin-top:3px;
         transition: 0.2s;
         border:none;
     }
@@ -179,49 +149,36 @@
         color: white;
         background: #FF7F50;
         transition: 0.2s;
-        margin-left: 10px;
+        margin-top: 3px;
         border:none;
         
     }
 
     #hapus:hover {
         border: none;
-        background:  #FF6347;
+        background: #FF6347;
     }
     
 </style>
 <body>
+    <!-- Navbar -->
+    <x-navbar />
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-transparent" id="navbar">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">5th <span>Apparrel</span></a>
-           
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link " aria-current="page" href="{{ route('products.index') }}">Product</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('suppliers.index') }}">Supplier</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('transaksi.index') }}">Transaksi</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <!-- Sidebar -->
+    <x-sidebar />
+
+    <!-- Scrollbar -->
+    <x-scrollbar />
 
     <section id="hero">
-        <h3 id="typing" style="color:white; font-weight: 700;"></h3>
+        <h3 id="title">SUPPLIERS</h3>
     </section>
-
 
     <section class="supplier-list">
-        <h3>Our Suppliers List</h3>
+        <h3 id="supplier-list">Your Suppliers List</h3>
     </section>
 
-    <div class="container mt-5">
+    <div class="container mt-5" id="list-supplier">
         <div class="row">
             <div class="col-md-12">
                 <div class="card border-0 shadow-sm rounded" id="card">
@@ -230,7 +187,6 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    
                                     <th scope="col" id="type1">Nama Supplier</th>
                                     <th scope="col" id="type2">Alamat Supplier</th>
                                     <th scope="col" id="type3">PIC SUPPLIER</th>
@@ -246,13 +202,13 @@
                                     <td>{{ $supplier->pic_supplier }}</td>
                                     <td>{{ $supplier->no_hp_pic_supplier }}</td>
                                     <td class="text-center">
-                                    
-                                        <form>
-                                            <a href="{{ route('suppliers.show', $supplier->id) }}" class="btn btn-sm btn-dark" id="show">SHOW</a>
-                                            <a href="{{ route('suppliers.edit', $supplier->id) }}" class="btn btn-sm btn-primary" id="edit">EDIT</a>
+                                        <form action="{{ route('suppliers.destroy', $supplier->id) }}" method="POST" onsubmit="return confirm('Apakah Anda Yakin ?')">
                                             @csrf
+                                            @method('DELETE')
 
-                                            <button type="submit" class="btn btn-sm" id="hapus">HAPUS</button>
+                                            <a href="{{ route('suppliers.show', $supplier->id) }}" class="btn btn-sm btn-dark" id="show">SHOW</a><br>
+                                            <a href="{{ route('suppliers.edit', $supplier->id) }}" class="btn btn-sm btn-primary" id="edit">EDIT</a><br>
+                                            <button type="submit" class="btn btn-sm btn-danger" id="hapus">HAPUS</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -275,9 +231,9 @@
 
 
     <script>
-         document.addEventListener("DOMContentLoaded", function () {
-        new TypeIt("#typing", {
-        strings: ["SUPPLIERS"],
+        document.addEventListener("DOMContentLoaded", function () {
+        new TypeIt("#title", {
+        strings: [],
         speed: 50
         }).go();
 
@@ -306,11 +262,10 @@
         speed: 200
         }).go();
 
-        new TypeIt(".supplier-list", {
+        new TypeIt("#supplier-list", {
         strings: [],
         speed: 50
         }).go();
-        
         });
 
 
@@ -322,10 +277,6 @@
                 navbar.classList.replace('nav-color', 'bg-transparent')
             }
         })
-        
-
-       
-
         
         // message with sweetalert
         @if(session('success'))

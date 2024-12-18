@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\StatusPemesanan;
 use Illuminate\Http\Request;
 use App\Models\TransaksiPenjualan;
 use App\Models\DetailTransaksiPenjualan;
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\TransaksiEmail;
 
 class TransaksiPenjualanController extends Controller
 {
@@ -20,7 +22,9 @@ class TransaksiPenjualanController extends Controller
      */
     public function index(): View
     {
-        $transaksi = TransaksiPenjualan::with('details.product')->get();
+        $transaksi = TransaksiPenjualan::with('details.product')
+                    ->orderBy('tanggal_transaksi', 'desc')
+                    ->get();
         return view('transaksi.index', compact('transaksi'));
     }
 
@@ -32,7 +36,8 @@ class TransaksiPenjualanController extends Controller
     public function create(): View
     {
         $products = Product::all();
-        return view('transaksi.create', compact('products'));
+        $statuses = StatusPemesanan::all();
+        return view('transaksi.create', compact('products', 'statuses'));
     }
 
     /**
@@ -45,32 +50,41 @@ class TransaksiPenjualanController extends Controller
     {
         $validatedData = $this->validateTransaction($request);
 
-        DB::transaction(function () use ($validatedData) {
+        $transaksi = DB::transaction(function () use ($validatedData) {
+            // Create transaction with status_pemesanan_id
             $transaksi = TransaksiPenjualan::create([
                 'tanggal_transaksi' => $validatedData['tanggal_transaksi'],
-                'email' => 'required|email',
+                'email_pembeli' => $validatedData['email_pembeli'],
                 'total' => 0,
+                'status_pemesanan_id' => $validatedData['status_pemesanan_id'],
             ]);
 
             $total = 0;
 
-            foreach ($validatedData['details'] as $detail) {
-                $product = Product::findOrFail($detail['product_id']);
-                $subtotal = $product->price * $detail['jumlah_pembelian'];
-                $total += $subtotal;
+            // Create details for the transaction
+                foreach ($validatedData['details'] as $detail) {
+                    $product = Product::findOrFail($detail['product_id']);
+                    $finalPrice = $product->price * (1 - ($product->discount / 100));
+                    $subtotal = $finalPrice * $detail['jumlah_pembelian'];
+                    $total += $subtotal;
 
-                DetailTransaksiPenjualan::create([
-                    'transaksi_penjualan_id' => $transaksi->id,
-                    'product_id' => $detail['product_id'],
-                    'harga' => $product->price,             
-                    'jumlah_pembelian' => $detail['jumlah_pembelian'],
-                ]);
-            }
+                    DetailTransaksiPenjualan::create([
+                        'transaksi_penjualan_id' => $transaksi->id,
+                        'product_id' => $detail['product_id'],
+                        'harga' => $finalPrice,
+                        'jumlah_pembelian' => $detail['jumlah_pembelian'],
+                    ]);
+                }
+
             $transaksi->update(['total' => $total]);
+
+            return $transaksi;
         });
 
+        $this->sendTransaksiEmail($transaksi->email_pembeli, $transaksi->id);
+
         return redirect()->route('transaksi.index')
-                         ->with('success', 'Transaksi penjualan berhasil ditambahkan.');
+                        ->with('success', 'Transaksi penjualan berhasil ditambahkan dan email telah dikirim.');
     }
 
     /**
@@ -95,7 +109,8 @@ class TransaksiPenjualanController extends Controller
     {
         $transaksi->load('details');
         $products = Product::all();
-        return view('transaksi.edit', compact('transaksi', 'products'));
+        $statuses = StatusPemesanan::all();
+        return view('transaksi.edit', compact('transaksi', 'products', 'statuses'));
     }
 
     /**
@@ -105,46 +120,45 @@ class TransaksiPenjualanController extends Controller
      * @param TransaksiPenjualan $transaksi
      * @return RedirectResponse
      */
-    
     public function update(Request $request, TransaksiPenjualan $transaksi): RedirectResponse
     {
-        // Validate the incoming request
         $validatedData = $this->validateTransaction($request);
-    
+
         DB::transaction(function () use ($validatedData, $transaksi) {
-            // Update the transaction and include the buyer's email
             $transaksi->update([
                 'tanggal_transaksi' => $validatedData['tanggal_transaksi'],
-                'email' => $validatedData['email'], // Update email from validated data
+                'email_pembeli' => $validatedData['email_pembeli'],
+                'status_pemesanan_id' => $validatedData['status_pemesanan_id'],
             ]);
-    
+
             // Clear existing details
             $transaksi->details()->delete();
-    
+
             $total = 0;
-    
+
             // Add updated details
             foreach ($validatedData['details'] as $detail) {
                 $product = Product::findOrFail($detail['product_id']);
-                $subtotal = $product->price * $detail['jumlah_pembelian'];
+                $finalPrice = $product->price * (1 - ($product->discount / 100));
+                $subtotal = $finalPrice * $detail['jumlah_pembelian'];
                 $total += $subtotal;
-    
+
                 DetailTransaksiPenjualan::create([
                     'transaksi_penjualan_id' => $transaksi->id,
                     'product_id' => $detail['product_id'],
-                    'harga' => $product->price,
+                    'harga' => $finalPrice,
                     'jumlah_pembelian' => $detail['jumlah_pembelian'],
                 ]);
             }
-    
-            // Update the total in the transaction
+
             $transaksi->update(['total' => $total]);
         });
-    
+
+        $this->sendTransaksiEmail($transaksi->email_pembeli, $transaksi->id);
+
         return redirect()->route('transaksi.index')
-                         ->with('success', 'Transaksi penjualan berhasil diperbarui.');
+                        ->with('success', 'Transaksi penjualan berhasil diperbarui dan email telah dikirim.');
     }
-    
 
     /**
      * Remove the specified transaction from storage.
@@ -169,23 +183,27 @@ class TransaksiPenjualanController extends Controller
     {
         return $request->validate([
             'tanggal_transaksi' => 'required|date',
-            'email' => 'required|email',
+            'email_pembeli' => 'required|min:1',
+            'status_pemesanan_id' => 'required|integer|exists:status_pemesanan,id',
             'details.*.product_id' => 'required|integer|exists:products,id',
             'details.*.jumlah_pembelian' => 'required|integer|min:1',
         ]);
     }
 
-    public function sendEmail($to , $id)
-    {
-        // Get transaksi by ID
-        $transaksi = TransaksiPenjualan::with('details.product')->findOrFail($id);
+    // send email transaksi
+    public function sendTransaksiEmail($to, $id)
+{
+    $transaksi = TransaksiPenjualan::with('details.product', 'statusPemesanan')->findOrFail($id);
 
-    // Mengirim email
-    Mail::send('transaksi.show', ['transaksi' => $transaksi], function ($message) use ($to, $transaksi) {
-        $message->to($to)
-                ->subject("Detail Transaksi: {$transaksi->id} - Total Tagihan Rp " . number_format($transaksi->total, 2, ',', '.'));
-    });
+    foreach ($transaksi->details as $detail) {
+        $product = $detail->product;
+        $detail->final_price = $product->price * (1 - ($product->discount / 100)); // Calculate the final price after discount
+        $detail->discount = $product->discount; // Store discount
+    }
+
+    Mail::to($to)->send(new TransaksiEmail($transaksi));
 
     return response()->json(['message' => 'Email sent successfully!']);
-    }
+}
+
 }

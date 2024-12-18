@@ -4,10 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Show Transaction </title>
+    <title>Show Transaction</title>
+    <link rel="icon" href="{{ asset('storage/public/images/favicon.ico') }}" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <style>
+    body {
+        background:  #f8f9fa
+    }
+
+    h3 {
+        font-size: 28px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    h4 {
+        font-weight: bold;
+        color: #333;
+    }
+
    #kembali {
         background: #394867;
         color: white;
@@ -20,19 +37,22 @@
         border:none;
     }
 </style>
-<body style="background:  #f8f9fa">
 
+
+<body>
+<x-scrollbar />
 
 <div class="container mt-5 mb-5">
 <div class="container">
-    <h1>Detail Transaksi Penjualan</h1>
+    <h3>Detail Transaksi</h3>
     <div class="card">
         <div class="card-header">
             Transaksi ID: {{ $transaksi->id }}
         </div>
         <div class="card-body">
             <p><strong>Tanggal:</strong> {{ $transaksi->tanggal_transaksi }}</p>
-            <p><strong>Total:</strong> {{ number_format($transaksi->total, 0, ',', '.') }}</p>
+            <p><strong>Total:</strong> Rp{{ number_format($transaksi->total, 2, ',', '.') }}</p>
+            <p><strong>Status Pemesanan:</strong> {{ $transaksi->statusPemesanan->status_pemesanan ?? 'N/A' }}</p>
 
             <h4>Detail Produk</h4>
             @if($transaksi->details->isEmpty())
@@ -43,6 +63,7 @@
                         <tr>
                             <th>Produk</th>
                             <th>Harga</th>
+                            <th>Diskon</th>
                             <th>Jumlah Pembelian</th>
                             <th>Subtotal</th>
                         </tr>
@@ -53,8 +74,9 @@
                         <tr>
                             <td>{{ $detail->product->title }}</td>
                             <td>Rp{{ number_format($detail->product->price, 2, ',', '.') }}</td>
+                            <td>{{ $detail->product->discount }}%</td>
                             <td>{{ $detail->jumlah_pembelian }}</td>
-                            <td>Rp{{ number_format($detail->jumlah_pembelian*$detail->product->price, 2, ',', '.') }}</td>
+                            <td>Rp{{ number_format($detail->jumlah_pembelian*$detail->harga, 2, ',', '.') }}</td>
                         </tr>
                         @endforeach
                     </tbody>
