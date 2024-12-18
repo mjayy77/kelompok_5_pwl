@@ -21,7 +21,6 @@
             height: 60vh;
             width: 100%;
             overflow: hidden;
-            margin-bottom: 25px;
         }
 
         #hero .carousel-item img {
@@ -54,6 +53,12 @@
             margin: 0 auto;
             max-width: 70%;
             font-family: "Poppins", sans-serif;
+        }
+
+        #hero .carousel-caption h3:hover {
+            color: #FF6347;
+            transition: all ease-in-out 0.1s;
+            
         }
 
         .carousel-control-prev,
@@ -134,6 +139,13 @@
         }
 
         .product-card .product-price {
+            font-size: 1rem;
+            color: gray;
+            margin: 0;
+            text-decoration: line-through;
+        }
+        
+        .product-card .product-final-price {
             font-size: 1.2rem;
             color: #FF6347;
             margin-bottom: 5px;
@@ -194,6 +206,18 @@
         border: none;
         background: #FF6347;
     }
+    
+    #search-bar .form-select {
+        max-width: max-content;
+        cursor: pointer;
+        margin-bottom: 10px;
+    }
+
+    #search-bar .form-control {
+        margin: 10px auto;
+        border-radius: 10px;
+        height: 50px;
+    }
     </style>
 </head>
 <body>
@@ -208,7 +232,7 @@
         <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 @foreach($products as $key => $product)
-                <div class="carousel-item {{ $key === 0 ? 'active' : '' }}">
+                <div class="carousel-item {{ $key === 0 ? 'active' : '' }}" onclick="window.location='{{ route('home.show', $product->id) }}'" style="cursor: pointer;">
                     <img src="{{ 'storage/public/images/' . $product->image }}" class="d-block w-100" alt="{{ $product->title }}" style="height: 60vh; object-fit: cover;">
                     <div class="carousel-caption d-none d-md-block">
                         <h3>{{ $product->title }}</h3>
@@ -227,6 +251,28 @@
             </button>
         </div>
     </section>
+
+    <section id="search-bar" class="py-3">
+        <div class="container">
+            <form id="searchForm" action="{{ route('home.index') }}" method="GET">
+                <div class="input-group" id="search">
+                    <input type="text" class="form-control" name="query" id="searchQuery" placeholder="Search for something here..." value="{{ request('query') }}">
+                    <!-- <button class="btn btn-primary" type="submit">Search</button> -->
+                </div>
+                <div class="input-group" id="sort">
+                    <select name="sort_by" id="sortBy" class="form-select" onchange="document.getElementById('searchForm').submit();">
+                        <option value="title" {{ request('sort_by') == 'title' ? 'selected' : '' }}>Title</option>
+                        <option value="price" {{ request('sort_by') == 'price' ? 'selected' : '' }}>Price</option>
+                        <option value="created_at" {{ request('sort_by') == 'created_at' ? 'selected' : '' }}>Date Added</option>
+                    </select>
+                    <select name="order" id="order" class="form-select" onchange="document.getElementById('searchForm').submit();">
+                        <option value="asc" {{ request('order') == 'asc' ? 'selected' : '' }}>Ascending</option>
+                        <option value="desc" {{ request('order') == 'desc' ? 'selected' : '' }}>Descending</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+    </section>
     
     <!-- Product List Section -->
     <section id="list-product">
@@ -237,7 +283,8 @@
                     <img src="{{ 'storage/public/images/' . $product->image }}" alt="Product Image">
                     <div class="card-body">
                         <h3 class="product-title">{{ $product->title }}</h3>
-                        <p class="product-price">Rp. {{ number_format($product->final_price, 2, ',', '.') }}</p>
+                        <p class="product-price">Rp. {{ number_format($product->price, 2, ',', '.') }}</p>
+                        <p class="product-final-price">Rp. {{ number_format($product->final_price, 2, ',', '.') }}</p>
                         <p class="product-stock">Stock: {{ $product->stock }}</p>
                     </div>
                 </div>
@@ -296,6 +343,28 @@
         })
 
         AOS.init();
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const searchQueryInput = document.getElementById("searchQuery");
+            const productCards = document.querySelectorAll(".product-card");
+
+            searchQueryInput.addEventListener("input", function () {
+                const query = searchQueryInput.value.toLowerCase();
+
+                productCards.forEach((card) => {
+                    const title = card.querySelector(".product-title").textContent.toLowerCase();
+                    const description = card.querySelector(".product-title").textContent.toLowerCase();
+
+                    if (title.includes(query) || description.includes(query)) {
+                        card.style.display = "block";
+                    } else {
+                        card.style.display = "none";
+                    }
+                });
+            });
+        });
+
+        
     </script>
 </body>
 </html>

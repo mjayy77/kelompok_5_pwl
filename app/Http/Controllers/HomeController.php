@@ -13,7 +13,7 @@ class HomeController extends Controller
      * 
      * @return void
      */
-    public function index() : view
+    public function index(Request $request) : view
     {
         //get all products
         // $products = Product::select("products.*", "category_product.product_category_name as product_category_name")
@@ -21,10 +21,24 @@ class HomeController extends Controller
         //                      ->latest()
         //                      ->paginate(10);
 
+        $query = $request->input('query');
+        $sortBy = $request->input('sort_by', 'created_at'); // Default to created_at
+        $order = $request->input('order', 'asc');
+
         $product = new Product;
         $products = $product->get_product()
-                            ->orderBy('title', 'asc')
+                            ->orderBy($sortBy, $order)
+                            ->when($query, function ($q) use ($query) {
+                                  $q->where('title', 'like', "%{$query}%")
+                                    ->orWhere('description', 'like', "%{$query}%");
+                              })
                             ->paginate(10);
+
+        // // Filter products by title or description
+        // $products = Product::when($query, function ($q) use ($query) {
+        //     $q->where('title', 'like', "%{$query}%")
+        //       ->orWhere('description', 'like', "%{$query}%");
+        // })->get();
 
         //render view with products
         return view('home.index', compact('products'));
