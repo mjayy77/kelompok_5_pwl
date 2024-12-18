@@ -191,6 +191,7 @@
                                 <th id="tanggal">Tanggal</th>
                                 <th id="total">Total</th>
                                 <th id="status">Status</th>
+                                <th id="metode_pembayaran">Metode Pembayaran</th>
                                 <th id="aksi">ACTIONS</th>
                             </tr>
                         </thead>
@@ -202,6 +203,7 @@
                             <td>
                                 <span>{{ $t->statusPemesanan->status_pemesanan }}</span>
                             </td>
+                            <td>{{ $t->metodePembayaran->name ?? 'N/A' }}</td>
                             <td class="text-center">
                                 <form action="{{ route('transaksi.destroy', $t->id) }}" method="POST" onsubmit="return confirm('Apakah Anda Yakin ?')">
                                     @csrf
@@ -252,6 +254,11 @@
         }).go();
 
         new TypeIt("#status", {
+        strings: [],
+        speed: 100
+        }).go();
+
+        new TypeIt("#metode_pembayaran", {
         strings: [],
         speed: 100
         }).go();

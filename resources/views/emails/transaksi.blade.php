@@ -42,6 +42,10 @@
             text-align: right;
             margin-top: 20px;
         }
+        #small {
+            font-size: 1em;
+            font-weight: normal;
+        }
         .footer {
             text-align: center;
             font-size: 12px;
@@ -78,6 +82,7 @@
 
         <div class="total">
             <p>Total Amount: Rp {{ number_format($transaksi->total, 2, ',', '.') }}</p>
+            <p id="small">Payment Method: {{ $transaksi->metodePembayaran->name }}</p>
         </div>
 
         <p>Status: <strong>{{ $transaksi->statusPemesanan->status_pemesanan }}</strong></p>

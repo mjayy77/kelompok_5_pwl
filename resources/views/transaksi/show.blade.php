@@ -53,7 +53,8 @@
             <p><strong>Tanggal:</strong> {{ $transaksi->tanggal_transaksi }}</p>
             <p><strong>Total:</strong> Rp{{ number_format($transaksi->total, 2, ',', '.') }}</p>
             <p><strong>Status Pemesanan:</strong> {{ $transaksi->statusPemesanan->status_pemesanan ?? 'N/A' }}</p>
-
+            <p><strong>Metode Pembayaran:</strong> {{ $transaksi->metodePembayaran->name ?? 'N/A' }}</p>
+ 
             <h4>Detail Produk</h4>
             @if($transaksi->details->isEmpty())
                 <p>Tidak ada detail transaksi.</p>
@@ -65,6 +66,7 @@
                             <th>Harga</th>
                             <th>Diskon</th>
                             <th>Jumlah Pembelian</th>
+                            <th>Metode Pembayaran</th>
                             <th>Subtotal</th>
                         </tr>
                     </thead>
@@ -76,6 +78,7 @@
                             <td>Rp{{ number_format($detail->product->price, 2, ',', '.') }}</td>
                             <td>{{ $detail->product->discount }}%</td>
                             <td>{{ $detail->jumlah_pembelian }}</td>
+                            <td>{{ $transaksi->metodePembayaran->name ?? 'N/A' }}</td>
                             <td>Rp{{ number_format($detail->jumlah_pembelian*$detail->harga, 2, ',', '.') }}</td>
                         </tr>
                         @endforeach

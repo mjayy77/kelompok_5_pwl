@@ -49,13 +49,13 @@
         text-align: center;
         font-weight: bolder;
         font-size: 1.5rem;
-        padding-top: 35px;
+        padding-top: 25px;
     }
 
     .subtitle {
         text-align: center;
         color: #666666;
-        margin-bottom: 35px;
+        margin-bottom: 25px;
     }
 
     .form {
@@ -68,8 +68,7 @@
         border: none;
         color: white;
         transition: 0.1s;
-        padding: 7.5px 15px;
-        margin: 7.5px 0;
+        padding: 7.5px;
     }
 
     #btn:hover {
@@ -90,16 +89,11 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        margin-top: 25px;
     }
 
     .text-end {
     text-align: right; /* Mengarahkan teks link ke kanan */
-    }
-
-    .form-group .col-md-6 {
-        flex: 1; /* Membuat kedua input memiliki lebar sama */
-        display: flex;
-        flex-direction: column; /* Pesan error di bawah input */
     }
 
     .invalid-feedback {
@@ -152,10 +146,8 @@
                     </div>
                 </div>
 
-                <div class="form-group mb-4">
-                    <!-- Password Input -->
-                    <div class="d-flex">
-                        <div class="col-md-6 pe-2">
+                <div class="row mb-3">
+                        <div class="col-md-12">
                             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password">
 
                             @error('password')
@@ -164,9 +156,11 @@
                                 </span>
                             @enderror
                         </div>
+                        </div>
 
-                        <!-- Confirm Password Input -->
-                        <div class="col-md-6 ps-2">
+                        <div class="row mb-3">
+
+                        <div class="col-md-12">
                             <input id="password-confirm" type="password" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm Password">
 
                             @error('password_confirmation')
@@ -175,8 +169,7 @@
                                 </span>
                             @enderror
                         </div>
-                    </div>
-                </div>
+                        </div>
 
 
 

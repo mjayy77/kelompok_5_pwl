@@ -8,6 +8,7 @@ use App\Http\Controllers\CategoryProductController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MetodePembayaranController;
 use App\Http\Controllers\HomeController;
 
 Route::get('/', function () {
@@ -19,6 +20,7 @@ Route::resource('/products', ProductController::class);
 Route::resource('/suppliers', SupplierController::class);
 Route::resource('/transaksi', TransaksiPenjualanController::class);
 Route::resource('/categories', CategoryProductController::class);
+Route::resource('/metode-pembayaran', MetodePembayaranController::class);
 Route::resource('/home', HomeController::class);
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 

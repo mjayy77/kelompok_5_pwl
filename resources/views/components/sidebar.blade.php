@@ -58,4 +58,5 @@
     <a class="nav-link" href="{{ route('categories.index') }}">Category</a>
     <a class="nav-link" href="{{ route('suppliers.index') }}">Supplier</a>
     <a class="nav-link" href="{{ route('transaksi.index') }}">Transaksi</a>
+    <a class="nav-link" href="{{ route('metode-pembayaran.index') }}">Metode Pembayaran</a>
 </div>

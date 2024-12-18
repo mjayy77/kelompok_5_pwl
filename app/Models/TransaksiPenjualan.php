@@ -16,7 +16,8 @@ class TransaksiPenjualan extends Model
         'tanggal_transaksi',
         'total',
         'email_pembeli',
-        'status_pemesanan_id'
+        'status_pemesanan_id',
+        'metode_pembayaran_id',
     ];
 
 
@@ -30,4 +31,10 @@ class TransaksiPenjualan extends Model
     {
         return $this->belongsTo(StatusPemesanan::class, 'status_pemesanan_id');
     }
+    public function metodePembayaran()
+    {
+    return $this->belongsTo(MetodePembayaran::class, foreignKey: 'metode_pembayaran_id');
+    }
+
+
 }

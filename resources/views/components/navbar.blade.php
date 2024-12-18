@@ -42,7 +42,7 @@
         background: none;
         border: none;
         padding: 0;
-        color: #FF6347;
+        color: black;
         margin: 16px 0;
         font-size: 1.2rem;
         font-weight: bold;

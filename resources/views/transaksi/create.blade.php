@@ -156,10 +156,20 @@
 
             <div class="form-group mb-3">
                 <label>Email</label>
-                    <input type="email" class="form-control @error('email_pembeli') is-invalid @enderror" id="email_pembeli" name="email_pembeli" placeholder="Masukkan Email Anda">
+                    <input type="email" class="form-control @error('email_pembeli') is-invalid @enderror" id="email_pembeli" name="email_pembeli" placeholder="Masukkan Email Pembeli">
                         @error('email_pembeli')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="metode_pembayaran_id">Metode Pembayaran</label>
+                <select name="metode_pembayaran_id" id="metode_pembayaran_id" class="form-control" required>
+                    <option value="">Pilih Metode Pembayaran</option>
+                        @foreach($metodePembayarans as $metode)
+                            <option value="{{ $metode->id }}">{{ $metode->name }}</option>
+                        @endforeach
+                </select>
             </div>
 
             <div class="form-group mb-3">
@@ -184,7 +194,7 @@
                                     <option value="{{ $product->id }}">{{ $product->title }}</option>
                                 @endforeach
                             </select>
-                        </div>
+                        </div>              
                         <div class="col">
                             <label>Jumlah Pembelian</label>
                             <input type="number" name="details[0][jumlah_pembelian]" class="form-control" min="1" required>
@@ -231,6 +241,7 @@
                         @endforeach
                     </select>
                 </div>
+
                 <div class="col">
                     <label>Jumlah Pembelian</label>
                     <input type="number" name="details[${detailIndex}][jumlah_pembelian]" class="form-control" min="1" required>
