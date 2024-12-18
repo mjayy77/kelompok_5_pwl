@@ -18,7 +18,7 @@
 
     
         #hero {
-        background-image: url(storage/public/images/categories.jpg);
+        background-image: url(storage/public/images/baju.jpg);
         height: 60vh;
         width: 100%;
         background-size: cover;

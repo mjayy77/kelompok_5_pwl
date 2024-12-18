@@ -193,7 +193,7 @@
             {{ $products->links('pagination::bootstrap-5') }}
             <div class="product-grid" >
                 @forelse($products as $product)
-                <div class="product-card" onclick="window.location='{{ route('products.show', $product->id) }}'" style="cursor: pointer;">
+                <div class="product-card"  onclick="window.location='{{ route('products.show', $product->id) }}'" style="cursor: pointer;">
                     <img src="{{ 'storage/public/images/' . $product->image }}" alt="Product Image">
                     <div class="card-body">
                         <h3 class="product-title">{{ $product->title }}</h3>

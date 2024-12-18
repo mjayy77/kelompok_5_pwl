@@ -17,7 +17,7 @@
             }
     
             #hero {
-            background-image: url(storage/public/images/paymentmethod.jpg);
+            background-image: url(storage/public/images/payment_method.jpg);
             height: 60vh;
             width: 100%;
             background-size: cover;

@@ -332,31 +332,31 @@
 
 <section id="card">
     <div class="card-container">
-        <div class="card">
+        <div class="card" data-aos="flip-right"  data-aos-duration="00">
             <div class="card-image">
                 <img src="{{asset('storage/public/images/jacket.jpg') }}" alt="Skin Care">
             </div>
             <div class="card-text">Jacket</div>
         </div>
-        <div class="card">
+        <div class="card" data-aos="flip-right"  data-aos-duration="500">
             <div class="card-image">
                 <img src="{{asset('storage/public/images/t-shirt.jpg') }}" alt="Laptop & PC">
             </div>
             <div class="card-text">T-shirt</div>
         </div>
-        <div class="card">
+        <div class="card" data-aos="flip-right"  data-aos-duration="500">
             <div class="card-image">
                 <img src="{{asset('storage/public/images/saitama.jpg') }}" alt="Smartphone">
             </div>
             <div class="card-text">Hoodie</div>
         </div>
-        <div class="card">
+        <div class="card" data-aos="flip-right"  data-aos-duration="500">
             <div class="card-image">
                 <img src="{{asset('storage/public/images/sweater.jpg') }}" alt="Fashion">
             </div>
             <div class="card-text">Sweater</div>
         </div>
-        <div class="card">
+        <div class="card" data-aos="flip-right"  data-aos-duration="500">
             <div class="card-image">
                 <img src="{{asset('storage/public/images/kemeja.jpg') }}" alt="Fashion">
             </div>
@@ -377,9 +377,9 @@
             {{ $products->links('pagination::bootstrap-5') }}
 
 
-            <div class="product-grid" >
+            <div class="product-grid"  >
                 @foreach($products as $product)
-                <div class="product-card" onclick="window.location='{{ route('home.show', $product->id) }}'" style="cursor: pointer;">
+                <div class="product-card" data-aos="flip-right"  data-aos-duration="500" onclick="window.location='{{ route('home.show', $product->id) }}'" style="cursor: pointer;">
                     <img src="{{ 'storage/public/images/' . $product->image }}" alt="Product Image">
                     <div class="card-body">
                         <h3 class="product-title">{{ $product->title }}</h3>
@@ -398,6 +398,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    
 
     <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -433,14 +434,9 @@
             });
         @endif
 
-        const navbar = document.getElementsByTagName('nav')[0];
-        window.addEventListener('scroll', function() {
-            if (window.scrollY > 1) {
-                navbar.classList.replace('bg-transparent', 'nav-color')
-            } else if (this.window.scrollY <= 0) {
-                navbar.classList.replace('nav-color', 'bg-transparent')
-            }
-        })
+       
+
+
 
         AOS.init();
     </script>

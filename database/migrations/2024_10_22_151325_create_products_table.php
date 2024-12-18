@@ -78,6 +78,8 @@ return new class extends Migration
             ['status_pemesanan' => 'Arrived'],
             ['status_pemesanan' => 'Canceled'],
         ]);
+
+        
     }
 
     /**
