@@ -1,2 +1,53 @@
-*
-!.gitignore
+<div class="wishlist-container">
+    <h3>Wishlist Saya</h3>
+    <ul id="wishlist-items">
+        <!-- Contoh produk dalam wishlist -->
+        <li>Produk 1 <button onclick="removeWishlist(this)">Hapus</button></li>
+        <li>Produk 2 <button onclick="removeWishlist(this)">Hapus</button></li>
+    </ul>
+</div>
+
+<style>
+.wishlist-container {
+    padding: 10px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.wishlist-container h3 {
+    color: #333;
+}
+
+.wishlist-container ul {
+    list-style: none;
+    padding: 0;
+}
+
+.wishlist-container li {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+}
+
+.wishlist-container button {
+    background-color: #FF6347;
+    color: white;
+    border: none;
+    padding: 5px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.wishlist-container button:hover {
+    background-color: #E5533D;
+}
+</style>
+
+<script>
+function removeWishlist(element) {
+    element.parentElement.remove();
+    alert("Produk dihapus dari wishlist!");
+}
+</script>
