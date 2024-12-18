@@ -42,13 +42,10 @@
             text-align: right;
             margin-top: 20px;
         }
-<<<<<<< Updated upstream
-=======
         #small {
             font-size: 1em;
             font-weight: normal;
         }
->>>>>>> Stashed changes
         .footer {
             text-align: center;
             font-size: 12px;
@@ -85,10 +82,7 @@
 
         <div class="total">
             <p>Total Amount: Rp {{ number_format($transaksi->total, 2, ',', '.') }}</p>
-<<<<<<< Updated upstream
-=======
             <p id="small">Payment Method: {{ $transaksi->metodePembayaran->name }}</p>
->>>>>>> Stashed changes
         </div>
 
         <p>Status: <strong>{{ $transaksi->statusPemesanan->status_pemesanan }}</strong></p>

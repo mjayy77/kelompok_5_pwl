@@ -117,7 +117,7 @@
                             @csrf
 
                             <div class="form-group">
-                                <label for="name">Payment Method Name</label>
+                                <label for="name">Payment Method</label>
                                 <input type="text" name="name" class="form-control" id="name" required>
                             </div>
                             <button type="submit" id="simpan" class="btn">Save</button>

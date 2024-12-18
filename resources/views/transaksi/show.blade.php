@@ -53,7 +53,8 @@
             <p><strong>Tanggal:</strong> {{ $transaksi->tanggal_transaksi }}</p>
             <p><strong>Total:</strong> Rp{{ number_format($transaksi->total, 2, ',', '.') }}</p>
             <p><strong>Status Pemesanan:</strong> {{ $transaksi->statusPemesanan->status_pemesanan ?? 'N/A' }}</p>
-
+            <p><strong>Metode Pembayaran:</strong> {{ $transaksi->metodePembayaran->name ?? 'N/A' }}</p>
+ 
             <h4>Detail Produk</h4>
             @if($transaksi->details->isEmpty())
                 <p>Tidak ada detail transaksi.</p>

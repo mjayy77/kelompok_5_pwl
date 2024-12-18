@@ -52,18 +52,11 @@
 </style>
 
 <div class="sidebar">
-<<<<<<< Updated upstream
     <a class="navbar-brand" href="{{ route('dashboard') }}">5th <span>Admin</span></a>
-=======
-    <a class="navbar-brand" href="{{ route('dashboard') }}">5th <span>Apparel</span></a>
->>>>>>> Stashed changes
     <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
     <a class="nav-link" href="{{ route('products.index') }}">Product</a>
     <a class="nav-link" href="{{ route('categories.index') }}">Category</a>
     <a class="nav-link" href="{{ route('suppliers.index') }}">Supplier</a>
     <a class="nav-link" href="{{ route('transaksi.index') }}">Transaksi</a>
-<<<<<<< Updated upstream
-=======
     <a class="nav-link" href="{{ route('metode-pembayaran.index') }}">Metode Pembayaran</a>
->>>>>>> Stashed changes
 </div>

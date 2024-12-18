@@ -43,6 +43,7 @@ return new class extends Migration
         Schema::create('transaksi_penjualans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('status_pemesanan_id')->nullable()->index();
+            $table->foreignId('metode_pembayaran_id')->nullable()->index()->constrained('metode_pembayarans')->cascadeOnDelete();
             $table->date('tanggal_transaksi'); 
             $table->string('email_pembeli');
             $table->decimal('total')->default(0);
@@ -61,6 +62,12 @@ return new class extends Migration
         Schema::create('status_pemesanan', function (Blueprint $table) {
             $table->id();
             $table->string('status_pemesanan');
+            $table->timestamps();
+        });
+
+        Schema::create('metode_pembayarans', function (Blueprint $table) {
+            $table->id();
+            $table->string('name')->unique();
             $table->timestamps();
         });
 
@@ -83,5 +90,6 @@ return new class extends Migration
         Schema::dropIfExists('status_pemesanan');
         Schema::dropIfExists('category_product');
         Schema::dropIfExists('suppliers');
+        Schema::dropIfExists('metode_pembayarans');
     }
 };
