@@ -24,7 +24,7 @@ class HomeController extends Controller
         $product = new Product;
         $products = $product->get_product()
                             ->orderBy('title', 'asc')
-                            ->paginate(10);
+                            ->paginate(12);
 
         //render view with products
         return view('home.index', compact('products'));

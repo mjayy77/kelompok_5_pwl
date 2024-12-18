@@ -265,7 +265,7 @@
 
     
     .pagination .page-item.active .page-link {
-    background-color: #FF6347; /* Hijau untuk tombol aktif */
+    background-color: #FF6347; 
     color: white;
     border:none;
     }

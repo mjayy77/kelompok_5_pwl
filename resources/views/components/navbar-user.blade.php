@@ -14,17 +14,17 @@
     color: #FF6347;
   }
 
+  
   .nav-link {
     font-size: 16px;
+    transition: 0.5s;
   }
 
-  .nav-link.active {
-    font-weight: 700;
-    color: #FF6347 !important;
-  }
+
 
   .nav-link:hover {
     color: #FF6347;
+    font-weight:700;
   }
 
 
@@ -37,10 +37,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item mx-2 ">
-                    <a class="nav-link active" aria-current="page" href="{{ route('home.index') }}">Home</a>
+                    <a class="nav-link " aria-current="page" href="{{ route('home.index') }}">Home</a>
                     </li>
                     <li class="nav-item mx-2">
-                    <a class="nav-link" href="#">Product</a>
+                    <a class="nav-link" href="#list-product">Product</a>
                     </li>
                     <li class="nav-item mx-2">
                     <a class="nav-link" href="#"><i class="fa-solid fa-cart-shopping"></i></a>
