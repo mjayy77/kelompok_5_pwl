@@ -49,7 +49,7 @@
     }
 
     #navbarDropdown:hover {
-        color: #FF6347;
+        color: #FF5030;
         font-size: 1.2rem;
     }
 

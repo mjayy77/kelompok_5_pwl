@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,700;1,200&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <style>
         body {
@@ -17,16 +18,19 @@
         }
 
         #hero {
+            padding-top: 80px;
             position: relative;
-            height: 60vh;
+            height: 420px;
             width: 100%;
             overflow: hidden;
+            margin-bottom: 25px;
         }
 
         #hero .carousel-item img {
-            height: 60vh;
+            height: 340px;
+            width: 100%;
             object-fit: cover;
-            filter: brightness(65%);
+            
         }
 
         #hero .carousel-caption {
@@ -55,50 +59,53 @@
             font-family: "Poppins", sans-serif;
         }
 
-        #hero .carousel-caption h3:hover {
-            color: #FF6347;
-            transition: all ease-in-out 0.1s;
-            
+        .carousel-item {
+            height: 340px;
+            width: 100%;
+            background: #777;
+            color: white;
+            position: relative
         }
 
         .carousel-control-prev,
-        .carousel-control-next {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 50px;
-            height: 50px;
-            background-color: rgba(0, 0, 0, 0.6);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            z-index: 10;
-        }
+.carousel-control-next {
+    position: absolute;
+    top: 40%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background-color: #ffff; /* Warna hitam untuk background tombol */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    z-index: 10;
+}
 
-        .carousel-control-prev:hover,
-        .carousel-control-next:hover {
-            background-color: rgba(255, 99, 71, 0.8);
-            transform: translateY(-50%) scale(1.1);
-        }
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    background-color: #FF6347; /* Warna orange saat hover */
+    transform: translateY(-50%) scale(1.1);
+}
 
-        .carousel-control-prev-icon,
-        .carousel-control-next-icon {
-            width: 20px;
-            height: 20px;
-            background-size: 100%;
-            background-color: transparent;
-            filter: invert(1);
-        }
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    width: 20px;
+    height: 20px;
+    background-size: 100%;
+    background-color: transparent;
+    filter: invert(1); /* Ikon berwarna putih */
+}
 
-        .carousel-control-prev {
-            left: 30px;
-        }
+.carousel-control-prev {
+    left: 30px;
+}
 
-        .carousel-control-next {
-            right: 30px;
-        }
+.carousel-control-next {
+    right: 30px;
+}
+
 
         @media (max-width: 768px) {
             #hero .carousel-caption h3 {
@@ -139,13 +146,6 @@
         }
 
         .product-card .product-price {
-            font-size: 1rem;
-            color: gray;
-            margin: 0;
-            text-decoration: line-through;
-        }
-        
-        .product-card .product-final-price {
             font-size: 1.2rem;
             color: #FF6347;
             margin-bottom: 5px;
@@ -206,18 +206,79 @@
         border: none;
         background: #FF6347;
     }
+
+    .card-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
     
-    #search-bar .form-select {
-        max-width: max-content;
-        cursor: pointer;
-        margin-bottom: 10px;
+    padding: 20px;
+    background-color: #f8f9fa;
     }
 
-    #search-bar .form-control {
-        margin: 10px auto;
+    .card {
+        margin: 10px;
+        width: 150px;
+        background-color: #ffffff;
         border-radius: 10px;
-        height: 50px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        padding: 15px;
+        transition: transform 0.3s ease;
     }
+
+    .card:hover {
+        transform: scale(1.05);
+    }
+
+    .card-image {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto;
+        border-radius: 50%;
+        background-color: #f2f2f2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    .card-image img {
+        max-width: 80%;
+        max-height: 80%;
+    }
+
+    .card-text {
+        margin-top: 10px;
+        font-size: 14px;
+        font-weight: bold;
+        color: #ffff;
+        background: #FF6347;
+        border-radius: 10px;
+        padding: 5px;
+    }
+
+    .container h1 span {
+        color:#FF6347;
+    }
+
+    
+    .pagination .page-item.active .page-link {
+    background-color: #FF6347; 
+    color: white;
+    border:none;
+    }
+
+    .pagination .page-item .page-link {
+    color:#FF6347 ;
+
+    }
+
+    #card {
+        margin: 50px;
+    }
+
     </style>
 </head>
 <body>
@@ -227,70 +288,89 @@
 
     <!-- Scrollbar -->
     <x-scrollbar />
+
+
     
     <section id="hero">
-        <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                @foreach($products as $key => $product)
-                <div class="carousel-item {{ $key === 0 ? 'active' : '' }}" onclick="window.location='{{ route('home.show', $product->id) }}'" style="cursor: pointer;">
-                    <img src="{{ 'storage/public/images/' . $product->image }}" class="d-block w-100" alt="{{ $product->title }}" style="height: 60vh; object-fit: cover;">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h3>{{ $product->title }}</h3>
-                        <p>{{ $product->description }}</p>
-                    </div>
+    <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <!-- Slide 1 -->
+            <div class="carousel-item active">
+                <img src="{{ asset('storage/public/images/Frame 1.jpg') }}" class="d-block w-100" alt="Gambar 1" style="height: 240; object-fit: cover; width: 1117;">
+                <div class="carousel-caption d-none d-md-block">
+                 
                 </div>
-                @endforeach
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
+            <!-- Slide 2 -->
+            <div class="carousel-item">
+                <img src="{{ asset('storage/public/images/Frame 2.jpg') }}" class="d-block w-100" alt="Gambar 2" style="height: 240; object-fit: cover; width: 1117;">
+                <div class="carousel-caption d-none d-md-block">
+                   
+                </div>
+            </div>
+            <!-- Slide 3 -->
+            <div class="carousel-item">
+                <img src="{{asset('storage/public/images/Frame 3.jpg') }}" class="d-block w-100" alt="Gambar 3" style="height: 240; object-fit: cover; width: 1117;">
+                <div class="carousel-caption d-none d-md-block">
+                    
+                </div>
+            </div>
         </div>
-    </section>
+        <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</section>
 
-    <section id="search-bar" class="py-3">
-        <div class="container">
-            <form id="searchForm" action="{{ route('home.index') }}" method="GET">
-                <div class="input-group" id="search">
-                    <input type="text" class="form-control" name="query" id="searchQuery" placeholder="Search for something here..." value="{{ request('query') }}">
-                    <!-- <button class="btn btn-primary" type="submit">Search</button> -->
-                </div>
-                <div class="input-group" id="sort">
-                    <select name="sort_by" id="sortBy" class="form-select" onchange="document.getElementById('searchForm').submit();">
-                        <option value="title" {{ request('sort_by') == 'title' ? 'selected' : '' }}>Title</option>
-                        <option value="price" {{ request('sort_by') == 'price' ? 'selected' : '' }}>Price</option>
-                        <option value="created_at" {{ request('sort_by') == 'created_at' ? 'selected' : '' }}>Date Added</option>
-                    </select>
-                    <select name="order" id="order" class="form-select" onchange="document.getElementById('searchForm').submit();">
-                        <option value="asc" {{ request('order') == 'asc' ? 'selected' : '' }}>Ascending</option>
-                        <option value="desc" {{ request('order') == 'desc' ? 'selected' : '' }}>Descending</option>
-                    </select>
-                </div>
-            </form>
-        </div>
-    </section>
+<section id="category-product">
+    <div class="container">
+        <h3 style="text-align: center;">Category Product</h3>
+    </div>
+</section>
+
+<section id="card">
+    {{ $categories->links('pagination::bootstrap-5') }}
+    <div class="card-container">
+        @foreach ($categories as $category)
+        <div class="card">
+            <div class="card-image">
+                <img src="{{ 'storage/public/images/' . $category->image }}" alt="Category Image">
+            </div>
+            <div class="card-text">{{ $category->product_category_name }}</div>
+        </div>        
+        @endforeach
+    </div>
+</section>
+
     
     <!-- Product List Section -->
     <section id="list-product">
+    
+        
         <div class="container">
+            <h1 style="text-align: center; margin-top: 30px; font-weight: 700; margin-bottom:20px;">Our <span>Product</span></h1>
+            {{ $products->links('pagination::bootstrap-5') }}
+
+
             <div class="product-grid" >
                 @foreach($products as $product)
                 <div class="product-card" onclick="window.location='{{ route('home.show', $product->id) }}'" style="cursor: pointer;">
                     <img src="{{ 'storage/public/images/' . $product->image }}" alt="Product Image">
                     <div class="card-body">
                         <h3 class="product-title">{{ $product->title }}</h3>
-                        <p class="product-price">Rp. {{ number_format($product->price, 2, ',', '.') }}</p>
-                        <p class="product-final-price">Rp. {{ number_format($product->final_price, 2, ',', '.') }}</p>
+                        <p class="product-price">Rp. {{ number_format($product->final_price, 2, ',', '.') }}</p>
                         <p class="product-stock">Stock: {{ $product->stock }}</p>
                     </div>
                 </div>
                 @endforeach
             </div>
         </div>
+
     </section>
 
 
@@ -343,28 +423,6 @@
         })
 
         AOS.init();
-
-        document.addEventListener("DOMContentLoaded", function () {
-            const searchQueryInput = document.getElementById("searchQuery");
-            const productCards = document.querySelectorAll(".product-card");
-
-            searchQueryInput.addEventListener("input", function () {
-                const query = searchQueryInput.value.toLowerCase();
-
-                productCards.forEach((card) => {
-                    const title = card.querySelector(".product-title").textContent.toLowerCase();
-                    const description = card.querySelector(".product-title").textContent.toLowerCase();
-
-                    if (title.includes(query) || description.includes(query)) {
-                        card.style.display = "block";
-                    } else {
-                        card.style.display = "none";
-                    }
-                });
-            });
-        });
-
-        
     </script>
 </body>
 </html>

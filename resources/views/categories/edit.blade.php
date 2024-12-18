@@ -52,6 +52,12 @@
             margin-bottom: 15px;
         }
 
+        .image-preview {
+            width: 100%;
+            height: auto;
+            margin-bottom: 15px;
+        }
+
         .btn-primary {
             background-color: #333;
             border-color: #333;
@@ -92,37 +98,44 @@
 
 <body>
 <x-scrollbar />
-    <div class="container mt-5 mb-5">
-        <div class="row">
-            <div class="col-md-12">
-                <h4 class="title">Edit Kategori</h4>
-                <div class="card border-0 shadow-sm rounded">
-                    <div class="card-body">
-                        <form action="{{ route('categories.update', $category->id) }}" method="POST"  enctype="multipart/form-data">
-                            @csrf
-                            @method('PUT')
+<div class="container mt-5 mb-5">
+        <h4>Edit Product</h4>
+        <div class="card">
+            <div class="row">
+                <div class="col-md-6">
+                    <!-- Image preview -->
+                    <img src="{{ $data['category']->image ? asset('storage/public/images/' . $data['category']->image) : 'mug.jpeg' }}" class="image-preview" id="imagePreview" alt="Category Image">
+                </div>
+                <div class="col-md-6">
+                    <form action="{{ route('categories.update', $data['category']->id) }}" method="POST" enctype="multipart/form-data" id="productsForm">
+                        @csrf
+                        @method('PUT')
 
-                            <div class="form-group mb-3">
-                                <label class="font-weight-bold">Kategori Produk</label>
-                                <input type="text" class="form-control @error('product_category_name') is-invalid @enderror" name="product_category_name"
-                                value="{{ old('product_category_name', $category->product_category_name) }}" placeholder="Masukkan Kategori Produk">
-
-                                @error('product_category_name')
-                                <div class="alert alert-danger mt-2">
-                                    {{ $message }}
-                                </div>
-                                @enderror
+                        <div class="form-group mb-3">
+                            <label class="font-weight-bold">IMAGE</label>
+                            <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" id="imageInput" accept="image/*">
+                            
+                            <!-- error message untuk image -->
+                            @error('image')
+                            <div class="alert alert-danger mt-2">
+                                {{ $message }}
                             </div>
+                            @enderror
+                        </div>
 
-                            <div class="form-group mb-3">
-                                <label class="font-weight-bold">Deskripsi</label>
-                                <textarea class="form-control @error('description') is-invalid @enderror" name="description" rows="5" id="descriptionEditor" placeholder="Masukkan Deskripsi Product">{{ old('description', $category->description) }}</textarea>
-                            </div>
+                        <div class="form-group mb-3">
+                            <label class="font-weight-bold">CATEGORY NAME</label>
+                            <input type="text" class="form-control @error('product_category_name') is-invalid @enderror" name="product_category_name" value="{{ old('product_category_name', $data['category']->product_category_name) }}" placeholder="Masukkan Judul Product">
+                        </div>
 
-                            <button type="submit" class="btn btn-md btn-primary me-3">UPDATE</button>
-                            <button type="reset" class="btn btn-md btn-warning">RESET</button>
-                        </form>
-                    </div>
+                        <div class="form-group mb-3">
+                            <label class="font-weight-bold">DESCRIPTION</label>
+                            <textarea class="form-control @error('description') is-invalid @enderror" name="description" rows="5" id="descriptionEditor" placeholder="Masukkan Deskripsi Product">{{ old('description', $data['category']->description) }}</textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-md btn-primary me-3">UPDATE</button>
+                        <button type="button" class="btn btn-md btn-warning" onclick="resetform()">RESET</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -137,6 +150,18 @@
             speed: 50
             }).go();
         });
+
+        document.getElementById('imageInput').addEventListener('change', function(event) {
+            const [file] = event.target.files;
+            if (file) {
+                document.getElementById('imagePreview').src = URL.createObjectURL(file);
+            }
+        });
+
+        function resetform() {
+            document.getElementById('categoriesForm').reset();
+            document.getElementById('imagePreview').src = "{{ $data['category']->image ? asset('storage/' . $data['category']->image) : 'mug.jpeg' }}";
+        }
     </script>
 </body>
 </html>

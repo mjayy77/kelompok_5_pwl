@@ -18,7 +18,7 @@
 
         /* Style for hero section */
         #hero {
-            background-image: url(storage/public/images/products.png);
+            background-image: url(storage/public/images/product.jpg);
             height: 60vh;
             width: 100%;
             background-size: cover;
@@ -153,6 +153,18 @@
         border: none;
         background: #FF6347;
     }
+
+    .pagination .page-item.active .page-link {
+    background-color: #FF6347; 
+    color: white;
+    border:none;
+    }
+
+    .pagination .page-item .page-link {
+    color:#FF6347 ;
+
+    }
+    
     </style>
 </head>
 <body>
@@ -177,6 +189,8 @@
                 <h3 id="our-product">Your Products</h3>
                 <a href="{{ route('products.create') }}" class="btn btn-md font-semibold" id="btn">ADD PRODUCT</a>
             </div>
+
+            {{ $products->links('pagination::bootstrap-5') }}
             <div class="product-grid" >
                 @forelse($products as $product)
                 <div class="product-card" onclick="window.location='{{ route('products.show', $product->id) }}'" style="cursor: pointer;">

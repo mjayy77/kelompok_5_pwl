@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\CategoryProduct;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage; 
 
 class CategoryProductController extends Controller
 {
@@ -56,16 +57,25 @@ class CategoryProductController extends Controller
     {
         //validate from
         $validatedData = $request->validate([
+            'image'                      => 'required|image|mimes:jpeg,jpg,png|max:2048',
             'product_category_name'      => 'required|min:1',
             'description'                => 'required|min:5',
         ]);
 
-        CategoryProduct::create([
-            'product_category_name'      => $request->product_category_name,
-            'description'                => $request->description,
-        ]);
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $image->store('public/images');
+            
+            CategoryProduct::create([
+                'image'                      => $image->hashName(),
+                'product_category_name'      => $request->product_category_name,
+                'description'                => $request->description,
+            ]);
+
+            return redirect()->route('categories.index')->with(['success' => 'Data Berhasil Disimpan!']);
+        }   
  
-        return redirect()->route('categories.index')->with(['success' => 'Data berhasil disimpan!']);
+        return redirect()->route('categories.index')->with(['error' => 'Data Gagal Disimpan!']);
     }
 
     /**
@@ -90,9 +100,10 @@ class CategoryProductController extends Controller
 
     public function edit(string $id): View
     {
-        $category = CategoryProduct::findOrFail($id);
+        $categories = new CategoryProduct;
+        $data['category'] = $categories->get_category_product()->where("category_product.id", $id)->firstOrFail();
 
-        return view('categories.edit', compact('category'));
+        return view('categories.edit', compact('data'));
     }
  
     /**
@@ -107,19 +118,36 @@ class CategoryProductController extends Controller
     {
         //validate form
         $request->validate([
+            'image'                      => 'required|image|mimes:jpeg,jpg,png|max:2048',
             'product_category_name'      => 'required|min:1',
             'description'                => 'required|min:5',
         ]);
  
         $category = CategoryProduct::findOrFail($id);
+
+        if ($request->hasFile('image')) {
+
+            //upload new image
+            $image = $request->file('image');
+            $image->storeAs('public/images', $image->hashName());
+        
+            //delete old image
+            Storage::delete('public/images/' . $category->image);
  
+            $category->update([
+                'image'                      => $image->hashName(),
+                'product_category_name'      => $request->product_category_name,
+                'description'                => $request->description,
+            ]);
+        } else {
             $category->update([
                 'product_category_name'      => $request->product_category_name,
                 'description'                => $request->description,
             ]);
-
-            return redirect()->route('categories.index')->with(['success' => 'Data Berhasil Diubah!']);
         }
+
+        return redirect()->route('categories.index')->with(['success' => 'Data Berhasil Diubah!']);
+    }
 
 
     /**

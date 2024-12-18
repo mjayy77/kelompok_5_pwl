@@ -27,8 +27,9 @@ class ProductController extends Controller
         $product = new Product;
         $products = $product->get_product()
                             ->orderBy('title', 'asc')
-                            ->paginate(10);
+                            ->paginate(12);
 
+       
         //render view with products
         return view('products.index', compact('products'));
     }
@@ -88,7 +89,7 @@ class ProductController extends Controller
         }        
 
         //also redirect to index even when failed
-        return redirect()->route('products.index')->with(['error'=>'Data Berhasil Disimpan!']);
+        return redirect()->route('products.index')->with(['error'=>'Data Gagal Disimpan!']);
      }
 
 
