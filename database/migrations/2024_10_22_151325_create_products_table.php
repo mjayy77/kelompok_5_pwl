@@ -28,6 +28,7 @@ return new class extends Migration
             $table->id();
             $table->string('product_category_name');
             $table->text('description');
+            $table->text('description');
             $table->timestamps();
         });
 

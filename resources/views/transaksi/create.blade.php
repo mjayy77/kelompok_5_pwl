@@ -156,7 +156,7 @@
 
             <div class="form-group mb-3">
                 <label>Email</label>
-                    <input type="email" class="form-control @error('email_pembeli') is-invalid @enderror" id="email_pembeli" name="email_pembeli" placeholder="Masukkan Email Anda">
+                    <input type="email" class="form-control @error('email_pembeli') is-invalid @enderror" id="email_pembeli" name="email_pembeli" placeholder="Masukkan Email Pembeli">
                         @error('email_pembeli')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
