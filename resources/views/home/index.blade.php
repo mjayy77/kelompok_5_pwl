@@ -275,6 +275,9 @@
 
     }
 
+    #card {
+        margin: 50px;
+    }
 
     </style>
 </head>
@@ -331,40 +334,17 @@
 </section>
 
 <section id="card">
+    {{ $categories->links('pagination::bootstrap-5') }}
     <div class="card-container">
-        <div class="card" data-aos="flip-right"  data-aos-duration="00">
+        @foreach ($categories as $category)
+        <div class="card" data-aos="flip-right"  data-aos-duration="300">
             <div class="card-image">
-                <img src="{{asset('storage/public/images/jacket.jpg') }}" alt="Skin Care">
+                <img src="{{ 'storage/public/images/' . $category->image }}" alt="Category Image">
             </div>
-            <div class="card-text">Jacket</div>
-        </div>
-        <div class="card" data-aos="flip-right"  data-aos-duration="500">
-            <div class="card-image">
-                <img src="{{asset('storage/public/images/t-shirt.jpg') }}" alt="Laptop & PC">
-            </div>
-            <div class="card-text">T-shirt</div>
-        </div>
-        <div class="card" data-aos="flip-right"  data-aos-duration="500">
-            <div class="card-image">
-                <img src="{{asset('storage/public/images/saitama.jpg') }}" alt="Smartphone">
-            </div>
-            <div class="card-text">Hoodie</div>
-        </div>
-        <div class="card" data-aos="flip-right"  data-aos-duration="500">
-            <div class="card-image">
-                <img src="{{asset('storage/public/images/sweater.jpg') }}" alt="Fashion">
-            </div>
-            <div class="card-text">Sweater</div>
-        </div>
-        <div class="card" data-aos="flip-right"  data-aos-duration="500">
-            <div class="card-image">
-                <img src="{{asset('storage/public/images/kemeja.jpg') }}" alt="Fashion">
-            </div>
-            <div class="card-text">Shirt</div>
-        </div>
-        
+            <div class="card-text">{{ $category->product_category_name }}</div>
+        </div>        
+        @endforeach
     </div>
-
 </section>
 
     

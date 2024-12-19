@@ -89,7 +89,7 @@ class ProductController extends Controller
         }        
 
         //also redirect to index even when failed
-        return redirect()->route('products.index')->with(['error'=>'Data Berhasil Disimpan!']);
+        return redirect()->route('products.index')->with(['error'=>'Data Gagal Disimpan!']);
      }
 
 

@@ -109,6 +109,12 @@
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     }
 
+    .table img {
+        width: 100%;
+        height: 200px;
+        object-fit: contain;
+    }
+
     #btn {
         background: #10375C;
         color: white;
@@ -188,14 +194,16 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th scope="col" id="type1">Nama Kategori</th>
-                                    <th scope="col" id="type2">Deskripsi</th>
-                                    <th scope="col" style="width: 20%" id="type3">ACTIONS</th>
+                                    <th scope="col" id="type1">Image</th>
+                                    <th scope="col" id="type2">Category</th>
+                                    <th scope="col" id="type3">Description</th>
+                                    <th scope="col" style="width: 20%" id="type4">ACTIONS</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @forelse ($categories as $category)
                                 <tr>
+                                    <td><img src="{{ 'storage/public/images/' . $category->image }}"></td>
                                     <td>{{ $category->product_category_name }}</td>
                                     <td>{{ $category->description }}</td>
                                     <td class="text-center">

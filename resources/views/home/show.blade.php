@@ -70,6 +70,7 @@
                             <p id="typing6">Stock : {{ $product->stock }}</p>
                             <hr/>
                             <a href="{{ route('home.index') }}" class="btn">Kembali</a>
+                            <a href="{{ route('cart.add', $product->id) }}" class="btn">Add to Cart</a>
                         </div>
                     </div>
                 </div>

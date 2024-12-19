@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\CategoryProduct;
 use Illuminate\View\View;
 
 class HomeController extends Controller
@@ -26,8 +27,13 @@ class HomeController extends Controller
                             ->orderBy('title', 'asc')
                             ->paginate(12);
 
+        $category = new CategoryProduct;
+        $categories = $category->get_category_product()
+                               ->orderBy('product_category_name', 'asc')
+                               ->paginate(5);
+
         //render view with products
-        return view('home.index', compact('products'));
+        return view('home.index', compact('products', 'categories'));
     }
 
     /**
