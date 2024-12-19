@@ -22,6 +22,7 @@ class CartController extends Controller
     public function addToCart($id)
     {
         $product = Product::findOrFail($id);
+        $finalPrice = $product->price * (1 - ($product->discount / 100));
 
         $cart = session()->get('cart', []);
 
@@ -31,8 +32,11 @@ class CartController extends Controller
             // Add new product to cart
             $cart[$id] = [
                 'id' => $product->id,
+                'image' => $product->image,
                 'title' => $product->title,
                 'price' => $product->price,
+                'discount' => $product->discount,
+                'final_price' => $finalPrice,
                 'quantity' => 1,
             ];
         }
